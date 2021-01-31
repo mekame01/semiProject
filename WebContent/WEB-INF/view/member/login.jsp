@@ -1,28 +1,13 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!doctype html>
+    <%@ include file="/WEB-INF/view/include/head.jsp" %>
+    
+
 <html>
 
   <head>
-    <title>Every붕붕</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
-
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/resources/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/resources/css/jquery.fancybox.min.css">
-    <link rel="stylesheet" href="/resources/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/resources/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
-    <link rel="stylesheet" href="/resources/css/aos.css">
-
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="/resources/css/style.css">
+    
 <style type="text/css">
 *{
   margin: 0;
