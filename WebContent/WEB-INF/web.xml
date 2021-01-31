@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>c_toyProject</display-name>
+  <display-name>semiProject</display-name>
   
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
@@ -8,7 +8,7 @@
   
   <filter>
   	<filter-name>encoding</filter-name>
-  	<filter-class>com.kh.toy.common.filter.EncodingFilter</filter-class>
+  	<filter-class>everyBB.common.filter.EncodingFilter</filter-class>
   </filter>
   <filter-mapping>
   	<filter-name>encoding</filter-name>
@@ -17,7 +17,7 @@
   
   <filter>
   	<filter-name>auth</filter-name>
-  	<filter-class> com.kh.toy.common.filter.AuthFilter</filter-class>
+  	<filter-class> everyBB.common.filter.AuthFilter</filter-class>
   </filter>
   <filter-mapping>
   	<filter-name>auth</filter-name>
@@ -30,7 +30,7 @@
   		indexOutOfBoundsException이 발생하면 b페이지
   		
   		 <error-page>
-  	<exception-type>com.kh.toy.common.exception.DataAccessException</exception-type>
+  	<exception-type>everyBB.common.exception.DataAccessException</exception-type>
   	<location>/WEB-INF/view/common/404.jsp</location>
   </error-page>
   		
@@ -45,7 +45,7 @@
   </error-page>
   
   <error-page>
-  	<exception-type>com.kh.toy.common.exception.CustomException</exception-type>
+  	<exception-type>everyBB.common.exception.CustomException</exception-type>
   	<location>/exception</location>
   </error-page>
  
