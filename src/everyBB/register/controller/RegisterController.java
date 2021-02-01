@@ -32,6 +32,8 @@ public class RegisterController extends HttpServlet {
 		// TODO Auto-generated method stub
 				String[] uriArr = request.getRequestURI().split("/");
 				switch (uriArr[uriArr.length-1]) {
+				case "guide": guide(request,response);
+					break;
 				case "host": host(request,response);
 					break;
 				case "guest": guest(request,response);
@@ -55,6 +57,12 @@ public class RegisterController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	private void guide(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("/WEB-INF/view/register/guide.jsp")
+		.forward(request, response);
 	}
 	
 	private void host(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

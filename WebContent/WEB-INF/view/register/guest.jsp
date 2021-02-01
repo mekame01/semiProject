@@ -48,110 +48,22 @@
             <img src="<%= request.getContextPath() %>/resources/images/hero_2.jpg" alt="Image" class="img-fluid rounded">
           </div>
           <div class="col-lg-4 mr-auto">
-            <h2>guest</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit suscipit, repudiandae similique accusantium eius nulla quam laudantium sequi.</p>
-            <p>Debitis voluptates corporis saepe molestias tenetur ab quae, quo earum commodi, laborum dolore, fuga aliquid delectus cum ipsa?</p>
+            <h2>guest</h2><br>
+            <p>1. 자동차 찾기 <br>
+            	위치와 날짜를 입력하고 현지 호스트가 공유하는 수천 대의 차량을 검색할 수 있습니다.
+            </p>
+             <p>2. 자동차 예약 <br>
+            	온라인에서 예약하고 호스트에게 연락하세요.
+            </p>
+             <p>3. 길을 나서다 <br>
+            	호스트에게서 픽업하십시오. 체크인을 한 후 사용하세요.
+            </p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="site-section bg-light">
-      <div class="container">
-        <div class="row justify-content-center text-center mb-5 section-2-title">
-          <div class="col-md-6">
-            <h2 class="mb-4">Meet Our Team</h2>
-          </div>
-        </div>
-        <div class="row align-items-stretch">
-
-          <div class="col-lg-4 col-md-6 mb-5">
-            <div class="post-entry-1 h-100 person-1">
-              
-                <img src="<%= request.getContextPath() %>/resources/images/person_1.jpg" alt="Image"
-                 class="img-fluid">
-            
-              <div class="post-entry-1-contents">
-                <span class="meta">Founder</span>
-                <h2>James Doe</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, sapiente.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-5">
-            <div class="post-entry-1 h-100 person-1">
-              
-                <img src="<%= request.getContextPath() %>/resources/images/person_2.jpg" alt="Image"
-                 class="img-fluid">
-            
-              <div class="post-entry-1-contents">
-                <span class="meta">Founder</span>
-                <h2>James Doe</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, sapiente.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-5">
-            <div class="post-entry-1 h-100 person-1">
-              
-                <img src="<%= request.getContextPath() %>/resources/images/person_3.jpg" alt="Image"
-                 class="img-fluid">
-            
-              <div class="post-entry-1-contents">
-                <span class="meta">Founder</span>
-                <h2>James Doe</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, sapiente.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-5">
-            <div class="post-entry-1 h-100 person-1">
-              
-                <img src="<%= request.getContextPath() %>/resources/images/person_4.jpg" alt="Image"
-                 class="img-fluid">
-            
-              <div class="post-entry-1-contents">
-                <span class="meta">Founder</span>
-                <h2>James Doe</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, sapiente.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-5">
-            <div class="post-entry-1 h-100 person-1">
-              
-                <img src="<%= request.getContextPath() %>/resources/images/person_5.jpg" alt="Image"
-                 class="img-fluid">
-            
-              <div class="post-entry-1-contents">
-                <span class="meta">Founder</span>
-                <h2>James Doe</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, sapiente.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-5">
-            <div class="post-entry-1 h-100 person-1">
-              
-                <img src="<%= request.getContextPath() %>/resources/images/person_1.jpg" alt="Image"
-                 class="img-fluid">
-            
-              <div class="post-entry-1-contents">
-                <span class="meta">Founder</span>
-                <h2>James Doe</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, sapiente.</p>
-              </div>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-    </div>
+  
 
     <div class="site-section">
       <div class="container">

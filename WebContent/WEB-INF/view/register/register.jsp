@@ -60,12 +60,15 @@
           <div class="col-lg-8 mb-5"  >
             <form action="#" method="post" >
             
-              <div class="form-group row" >
+            
+   
+            
+              <!-- <div class="form-group row" >
                 <div class="col-md-12">
                   <input type="text" class="form-control" placeholder="주차장소">
                 </div>
                 
-              </div>
+              </div> -->
             
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
@@ -112,17 +115,19 @@
                 </div>
               </div>
               
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <textarea name="" id="" class="form-control" placeholder="참고사항" cols="30" rows="10"></textarea>
+                </div>
+              </div>
+              
                <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
                  <input type="file" id="image" accept="image/*" onchange="setThumbnail(event);" /> 
               </div>
               </div>
               
-              <div class="form-group row">
-                <div class="col-md-12">
-                  <textarea name="" id="" class="form-control" placeholder="참고사항" cols="30" rows="10"></textarea>
-                </div>
-              </div>
+              
               
               <div class="form-group row">
                 <div class="col-md-6 mr-auto">

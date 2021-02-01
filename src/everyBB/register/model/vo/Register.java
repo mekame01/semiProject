@@ -4,150 +4,151 @@ import java.sql.Date;
 
 public class Register {
 	
-	private int car_idx; //차 등록번호
-	private String user_id; //회원 아이디
-	private String car_number; //차 번호
-	private String car_model; //차종
-	private String car_parking; //주차장소
-	private int car_parking_lat; //주차장소 위도
-	private int car_parking_lng; //주차장소 경도
-	private int car_fuel_effi; //차 연비
-	private String car_fuel_type; //연료
-	private int car_door_num; //문 개수
-	private int car_seat_num; //좌석 개수
-	private String car_transmission; //자동/수동
-	private String car_navi; //내비게이션 유무
-	private String car_back_cam; //후방카메라 유무
-	private String car_note; //참고사항
-	private int car_fee; //가격
-	private int car_avg_score; //평균평가점수
-	private Date car_date; //등록날짜
-	private String car_state; //차 상태코드
+	private int carIdx; //차 등록번호
+	private String userId; //회원 아이디
+	private String carNumber; //차 번호
+	private String carModel; //차종
+	private String carParking; //주차장소
+	private int carParkingLat; //주차장소 위도
+	private int carParkingLng; //주차장소 경도
+	private int carFuelEffi; //차 연비
+	private String carFuelType; //연료
+	private int carDoorNum; //문 개수
+	private int carSeatNum; //좌석 개수
+	private String carTransmission; //자동/수동
+	private String carNavi; //내비게이션 유무
+	private String carBackCam; //후방카메라 유무
+	private String carNote; //참고사항
+	private int carFee; //가격
+	private int carAvgScore; //평균평가점수
+	private Date carDate; //등록날짜
+	private String carState; //차 상태코드
 	
-	public int getCar_idx() {
-		return car_idx;
+	public int getCarIdx() {
+		return carIdx;
 	}
-	public void setCar_idx(int car_idx) {
-		this.car_idx = car_idx;
+	public void setCarIdx(int carIdx) {
+		this.carIdx = carIdx;
 	}
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getCar_number() {
-		return car_number;
+	public String getCarNumber() {
+		return carNumber;
 	}
-	public void setCar_number(String car_number) {
-		this.car_number = car_number;
+	public void setCarNumber(String carNumber) {
+		this.carNumber = carNumber;
 	}
-	public String getCar_model() {
-		return car_model;
+	public String getCarModel() {
+		return carModel;
 	}
-	public void setCar_model(String car_model) {
-		this.car_model = car_model;
+	public void setCarModel(String carModel) {
+		this.carModel = carModel;
 	}
-	public String getCar_parking() {
-		return car_parking;
+	public String getCarParking() {
+		return carParking;
 	}
-	public void setCar_parking(String car_parking) {
-		this.car_parking = car_parking;
+	public void setCarParking(String carParking) {
+		this.carParking = carParking;
 	}
-	public int getCar_parking_lat() {
-		return car_parking_lat;
+	public int getCarParkingLat() {
+		return carParkingLat;
 	}
-	public void setCar_parking_lat(int car_parking_lat) {
-		this.car_parking_lat = car_parking_lat;
+	public void setCarParkingLat(int carParkingLat) {
+		this.carParkingLat = carParkingLat;
 	}
-	public int getCar_parking_lng() {
-		return car_parking_lng;
+	public int getCarParkingLng() {
+		return carParkingLng;
 	}
-	public void setCar_parking_lng(int car_parking_lng) {
-		this.car_parking_lng = car_parking_lng;
+	public void setCarParkingLng(int carParkingLng) {
+		this.carParkingLng = carParkingLng;
 	}
-	public int getCar_fuel_effi() {
-		return car_fuel_effi;
+	public int getCarFuelEffi() {
+		return carFuelEffi;
 	}
-	public void setCar_fuel_effi(int car_fuel_effi) {
-		this.car_fuel_effi = car_fuel_effi;
+	public void setCarFuelEffi(int carFuelEffi) {
+		this.carFuelEffi = carFuelEffi;
 	}
-	public String getCar_fuel_type() {
-		return car_fuel_type;
+	public String getCarFuelType() {
+		return carFuelType;
 	}
-	public void setCar_fuel_type(String car_fuel_type) {
-		this.car_fuel_type = car_fuel_type;
+	public void setCarFuelType(String carFuelType) {
+		this.carFuelType = carFuelType;
 	}
-	public int getCar_door_num() {
-		return car_door_num;
+	public int getCarDoorNum() {
+		return carDoorNum;
 	}
-	public void setCar_door_num(int car_door_num) {
-		this.car_door_num = car_door_num;
+	public void setCarDoorNum(int carDoorNum) {
+		this.carDoorNum = carDoorNum;
 	}
-	public int getCar_seat_num() {
-		return car_seat_num;
+	public int getCarSeatNum() {
+		return carSeatNum;
 	}
-	public void setCar_seat_num(int car_seat_num) {
-		this.car_seat_num = car_seat_num;
+	public void setCarSeatNum(int carSeatNum) {
+		this.carSeatNum = carSeatNum;
 	}
-	public String getCar_transmission() {
-		return car_transmission;
+	public String getCarTransmission() {
+		return carTransmission;
 	}
-	public void setCar_transmission(String car_transmission) {
-		this.car_transmission = car_transmission;
+	public void setCarTransmission(String carTransmission) {
+		this.carTransmission = carTransmission;
 	}
-	public String getCar_navi() {
-		return car_navi;
+	public String getCarNavi() {
+		return carNavi;
 	}
-	public void setCar_navi(String car_navi) {
-		this.car_navi = car_navi;
+	public void setCarNavi(String carNavi) {
+		this.carNavi = carNavi;
 	}
-	public String getCar_back_cam() {
-		return car_back_cam;
+	public String getCarBackCam() {
+		return carBackCam;
 	}
-	public void setCar_back_cam(String car_back_cam) {
-		this.car_back_cam = car_back_cam;
+	public void setCarBackCam(String carBackCam) {
+		this.carBackCam = carBackCam;
 	}
-	public String getCar_note() {
-		return car_note;
+	public String getCarNote() {
+		return carNote;
 	}
-	public void setCar_note(String car_note) {
-		this.car_note = car_note;
+	public void setCarNote(String carNote) {
+		this.carNote = carNote;
 	}
-	public int getCar_fee() {
-		return car_fee;
+	public int getCarFee() {
+		return carFee;
 	}
-	public void setCar_fee(int car_fee) {
-		this.car_fee = car_fee;
+	public void setCarFee(int carFee) {
+		this.carFee = carFee;
 	}
-	public int getCar_avg_score() {
-		return car_avg_score;
+	public int getCarAvgScore() {
+		return carAvgScore;
 	}
-	public void setCar_avg_score(int car_avg_score) {
-		this.car_avg_score = car_avg_score;
+	public void setCarAvgScore(int carAvgScore) {
+		this.carAvgScore = carAvgScore;
 	}
-	public Date getCar_date() {
-		return car_date;
+	public Date getCarDate() {
+		return carDate;
 	}
-	public void setCar_date(Date car_date) {
-		this.car_date = car_date;
+	public void setCarDate(Date carDate) {
+		this.carDate = carDate;
 	}
-	public String getCar_state() {
-		return car_state;
+	public String getCarState() {
+		return carState;
 	}
-	public void setCar_state(String car_state) {
-		this.car_state = car_state;
+	public void setCarState(String carState) {
+		this.carState = carState;
 	}
 	
 	@Override
 	public String toString() {
-		return "Register [car_idx=" + car_idx + ", user_id=" + user_id + ", car_number=" + car_number + ", car_model="
-				+ car_model + ", car_parking=" + car_parking + ", car_parking_lat=" + car_parking_lat
-				+ ", car_parking_lng=" + car_parking_lng + ", car_fuel_effi=" + car_fuel_effi + ", car_fuel_type="
-				+ car_fuel_type + ", car_door_num=" + car_door_num + ", car_seat_num=" + car_seat_num
-				+ ", car_transmission=" + car_transmission + ", car_navi=" + car_navi + ", car_back_cam=" + car_back_cam
-				+ ", car_note=" + car_note + ", car_fee=" + car_fee + ", car_avg_score=" + car_avg_score + ", car_date="
-				+ car_date + ", car_state=" + car_state + "]";
+		return "Register [carIdx=" + carIdx + ", userId=" + userId + ", carNumber=" + carNumber + ", carModel="
+				+ carModel + ", carParking=" + carParking + ", carParkingLat=" + carParkingLat + ", carParkingLng="
+				+ carParkingLng + ", carFuelEffi=" + carFuelEffi + ", carFuelType=" + carFuelType + ", carDoorNum="
+				+ carDoorNum + ", carSeatNum=" + carSeatNum + ", carTransmission=" + carTransmission + ", carNavi="
+				+ carNavi + ", carBackCam=" + carBackCam + ", carNote=" + carNote + ", carFee=" + carFee
+				+ ", carAvgScore=" + carAvgScore + ", carDate=" + carDate + ", carState=" + carState + "]";
 	}
-
+	
+	
+	
 }
