@@ -59,49 +59,49 @@ public class UserController extends HttpServlet {
 
 	private void join(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/member/join.jsp")
+		request.getRequestDispatcher("/WEB-INF/view/user/join.jsp")
 		.forward(request, response);
 	}
 	
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/member/login.jsp")
+		request.getRequestDispatcher("/WEB-INF/view/user/login.jsp")
 		.forward(request, response);
 	}
 	
 	private void login2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/member/login2.jsp")
+		request.getRequestDispatcher("/WEB-INF/view/user/login2.jsp")
 		.forward(request, response);
 	}
 	
 	private void pastTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/member/mypage/past_trip.jsp")
+		request.getRequestDispatcher("/WEB-INF/view/user/mypage/past_trip.jsp")
 		.forward(request, response);
 	}
 	
 	private void currentTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/member/mypage/current_trip.jsp")
+		request.getRequestDispatcher("/WEB-INF/view/user/mypage/current_trip.jsp")
 		.forward(request, response);
 	}
 	
 	private void reservDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/member/mypage/reserv_detail.jsp")
+		request.getRequestDispatcher("/WEB-INF/view/user/mypage/reserv_detail.jsp")
 		.forward(request, response);
 	}
 	
 	private void wishList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/member/mypage/wishlist.jsp")
+		request.getRequestDispatcher("/WEB-INF/view/user/mypage/wishlist.jsp")
 		.forward(request, response);
 	}
 	
 	private void userInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/member/mypage/user_info.jsp")
+		request.getRequestDispatcher("/WEB-INF/view/user/mypage/user_info.jsp")
 		.forward(request, response);
 	}
 	
