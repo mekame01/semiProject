@@ -1,17 +1,12 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="/WEB-INF/view/include/head.jsp" %>
+    
 <head>
 <style type="text/css">
-	.valid_info{
-		display: block;
-		color: red;
-		font-size: 0.5vw;
-	}
-	.btn-id{
-		width:32%; 
-		background-color:gainsboro!important;
-	}
+	
+	
 	.uu{
 		margin-left: 20%;
 	}
@@ -33,17 +28,22 @@
 
  <%@ include file="/WEB-INF/view/include/header.jsp" %>
 
-     
-      
-      <div class="hero inner-page" style="background-image: url('/resources/images/hero_1_a.jpg');">
+
+<div class="hero inner-page" style="background-image: url('/resources/images/hero_1_a.jpg');">
         
         <div class="container">
           <div class="row align-items-end ">
             <div class="col-lg-5">
 
-              <div class="intro">
-                <h1><strong>회원가입</strong></h1>
-                <div class="custom-breadcrumbs"><a href="index.html">Home</a> <span class="mx-2">/</span> <strong>About</strong></div>
+              <div class="intro" style="width:500px">
+                <h1><strong>마이페이지</strong></h1>
+                <div class="custom-breadcrumbs">
+                	<a href="/user/userinfo">회원정보</a> <span class="mx-2">/</span> 
+                	<a href="/user/userinfomodify">회원정보 수정</a> <span class="mx-2">/</span> 
+                	<a href="/user/past">과거여행</a> <span class="mx-2">/</span> 
+                	<a href="/user/current">미래여행</a> <span class="mx-2">/</span> 
+                	<a href="/user/wishlist">찜한 붕붕이</a>
+                </div>
               </div>
 
             </div>
@@ -51,13 +51,12 @@
         </div>
       </div>
 
-    
 
     <div class="site-section bg-light" id="contact-section">
       <div class="container">
         <div class="row justify-content-center text-center">
         <div class="col-7 text-center mb-5">
-          <h2>회원정보를 입력해주세요</h2>
+          <h2>회원정보 변경</h2>
           <p></p>
         </div>
       </div>
@@ -74,10 +73,7 @@
                 <div class="col-md-6 mb-4 mb-lg-0">
                   <input type="text" class="form-control" placeholder="아이디" required="required">
                 </div>
-                <div class="col-md-6">
-                  <button class="form-control btn-id" type="button" onclick="idCheck()">중복확인</button>
-                 <span class="valid_info" id="id_check"></span>
-                </div>
+                
               </div>
               
               
@@ -111,7 +107,7 @@
               
               <div class="form-group row">
                 <div class="col-md-6 mr-auto">
-                  <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="가입하기">
+                  <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="수정완료">
                 </div>
               </div>
             </form>
@@ -122,6 +118,12 @@
       </div>
     </div>
 
+
+
+
+
+
+
    <%@ include file="/WEB-INF/view/include/footer.jsp" %>   
     </div>
   <%@ include file="/WEB-INF/view/include/script.jsp" %>
@@ -129,4 +131,4 @@
   </body>
 
 </html>
-
+</head>
