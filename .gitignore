@@ -13,6 +13,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+.project
+.classpath
 
 # Compiled class file
 *.class
@@ -74,4 +76,3 @@ local.properties
 ## ignoring target file
 target/
 
-# End of https://www.toptal.com/developers/gitignore/api/java-web,eclipse
