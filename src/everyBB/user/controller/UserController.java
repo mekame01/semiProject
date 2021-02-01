@@ -1,4 +1,4 @@
-package everyBB.member.controller;
+package everyBB.user.controller;
 
 import java.io.IOException;
 
@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Why
  */
-@WebServlet("/member/*")
-public class MemberController extends HttpServlet {
+@WebServlet("/user/*")
+public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberController() {
+    public UserController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,7 +43,7 @@ public class MemberController extends HttpServlet {
 			break;
 		case "wishlist" : wishList(request, response);
 			break;
-		case "memberinfo" : memberInfo(request, response);
+		case "userinfo" : userInfo(request, response);
 			break;
 		default : response.setStatus(404);
 		}
@@ -99,9 +99,9 @@ public class MemberController extends HttpServlet {
 		.forward(request, response);
 	}
 	
-	private void memberInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void userInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/member/mypage/member_info.jsp")
+		request.getRequestDispatcher("/WEB-INF/view/member/mypage/user_info.jsp")
 		.forward(request, response);
 	}
 	
