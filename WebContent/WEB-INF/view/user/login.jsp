@@ -108,36 +108,33 @@
   color: white;
   margin: 0 0 20px 0;
 }
-.facebook,.instagram{
+.facebook{
   width: 100%;
   height: 45px;
   line-height: 45px;
   margin-left: 10px;
 }
 .facebook{
-  margin-left: 0;
-  background: #4267B2;
-  border: 1px solid #3e61a8;
+  margin-left: 10;
+  background: gold;
+  border: 1px solid gold;
 }
-.instagram{
-  background: #E1306C;
-  border: 1px solid #df2060;
-}
+
 .facebook:hover{
-  background: #3e61a8;
+  background: yellow;
 }
-.instagram:hover{
-  background: #df2060;
-}
+
 .links i{
   font-size: 17px;
 }
 i span{
   margin-left: 8px;
+  margin-right: 8px;
   font-weight: 500;
   letter-spacing: 1px;
   font-size: 16px;
   font-family: 'Poppins',sans-serif;
+  color: black;
 }
 .signup{
   font-size: 15px;
@@ -208,7 +205,7 @@ i span{
             <span class="show">SHOW</span>
           </div>
 	<div class="pass">
-            <a href="#">비밀번호 찾기</a>
+            <a> </a>
           </div>
 	<div class="field">
             <input type="submit" value="LOGIN">
@@ -218,13 +215,11 @@ i span{
 	<div class="login">Or login with</div>
 	<div class="links">
           <div class="facebook">
-            <i class="fab fa-facebook-f"><span>Facebook</span></i>
+            <i class="fab fa-facebook-f"><span>카카오계정으로 로그인</span></i>
           </div>
-	<div class="instagram">
-            <i class="fab fa-instagram"><span>Instagram</span></i>
-          </div>
+	
 	</div>
-	<div class="signup">회원이 아니신가요?<a href="#">가입하러가기</a>
+	<div class="signup">회원이 아니신가요?<a href="/user/join">가입하러가기</a>
         </div>
 </div>
 </div>

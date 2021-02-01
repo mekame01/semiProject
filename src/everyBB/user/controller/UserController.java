@@ -33,8 +33,6 @@ public class UserController extends HttpServlet {
 			break;
 		case "login" : login(request, response);
 			break;
-		case "login2" : login2(request, response);
-			break;
 		case "past" : pastTrip(request, response);
 			break;
 		case "current" : currentTrip(request, response);
@@ -44,6 +42,8 @@ public class UserController extends HttpServlet {
 		case "wishlist" : wishList(request, response);
 			break;
 		case "userinfo" : userInfo(request, response);
+			break;
+		case "userinfomodify" : userInfoModify(request, response);
 			break;
 		default : response.setStatus(404);
 		}
@@ -69,11 +69,6 @@ public class UserController extends HttpServlet {
 		.forward(request, response);
 	}
 	
-	private void login2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/user/login2.jsp")
-		.forward(request, response);
-	}
 	
 	private void pastTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -102,6 +97,12 @@ public class UserController extends HttpServlet {
 	private void userInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getRequestDispatcher("/WEB-INF/view/user/mypage/user_info.jsp")
+		.forward(request, response);
+	}
+	
+	private void userInfoModify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("/WEB-INF/view/user/mypage/user_info_modify.jsp")
 		.forward(request, response);
 	}
 	
