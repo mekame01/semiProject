@@ -10,10 +10,9 @@ tmp/
 *.swp
 *~.nib
 local.properties
+.settings/
 .loadpath
 .recommenders
-.project
-.classpath
 
 # Compiled class file
 *.class
@@ -40,6 +39,7 @@ local.properties
 .buildpath
 
 # sbteclipse plugin
+.target
 
 # Tern plugin
 .tern-project
