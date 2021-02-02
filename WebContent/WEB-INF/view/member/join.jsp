@@ -1,7 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="/WEB-INF/view/include/head.jsp" %>
-
+<head>
+<style type="text/css">
+	.valid_info{
+		display: block;
+		color: red;
+		font-size: 0.5vw;
+	}
+	.btn-id{
+		width:32%; 
+		background-color:gainsboro!important;
+	}
+	.uu{
+		margin-left: 20%;
+	}
+</style>
+</head>
   <body>
 
     
@@ -27,7 +42,7 @@
             <div class="col-lg-5">
 
               <div class="intro">
-                <h1><strong>회원가입하기</strong></h1>
+                <h1><strong>회원가입</strong></h1>
                 <div class="custom-breadcrumbs"><a href="index.html">Home</a> <span class="mx-2">/</span> <strong>About</strong></div>
               </div>
 
@@ -43,24 +58,32 @@
         <div class="row justify-content-center text-center">
         <div class="col-7 text-center mb-5">
           <h2>회원정보를 입력해주세요</h2>
-          <p>아이디 이름같은거 따로 안빼고 placeholder에 넣어도갠춘? Nemo assumenda, dolorum necessitatibus eius earum voluptates sed!</p>
+          <p></p>
         </div>
       </div>
         <div class="row">
-          <div class="col-lg-8 mb-5" >
+          <div class="col-lg-8 mb-5 uu" >
             <form action="#" method="post">
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
                   <input type="text" class="form-control" placeholder="이름" required="required">
                 </div>
-                <div class="col-md-6">
+              </div>
+              
+               <div class="form-group row">
+                <div class="col-md-6 mb-4 mb-lg-0">
                   <input type="text" class="form-control" placeholder="아이디" required="required">
+                </div>
+                <div class="col-md-6">
+                  <button class="form-control btn-id" type="button" onclick="idCheck()">중복확인</button>
+                 <span class="valid_info" id="id_check"></span>
                 </div>
               </div>
               
+              
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="password" class="form-control" placeholder="비밀번호 8 ~ 12자 영문, 숫자, 특수문자" required="required">
+                  <input type="password" class="form-control" placeholder="비밀번호 8~12이상 영문, 숫자, 특수문자" required="required">
                 </div>
                 <div class="col-md-6">
                   <input type="password" class="form-control" placeholder="비밀번호 확인" required="required">
@@ -79,29 +102,13 @@
                 </div>
               </div>
               
-              <div class="form-group row">
-                <div class="col-md-12">
-                  <input type="text" class="form-control" placeholder="주소 : 우편번호 검색기능 추가?" required="required">
-                </div>
-              </div>
-
 			  <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="text" class="form-control" placeholder="운전면허 번호 : 앞뒤 사진으로 받을지.. 번호입력만받을지.." required="required">
+                  <input type="text" class="form-control" placeholder="운전면허 번호 : " required="required">
                 </div>
               </div>
               
-              <div class="form-group row">
-                <div class="col-md-12">
-                  <input type="text" class="form-control" placeholder="카드 번호 : 받을지 말지.. 가짜인지아닌지 어떻게 알지" required="required">
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <div class="col-md-12">
-                  <textarea name="" id="" class="form-control" placeholder="Write your message." cols="30" rows="10"></textarea>
-                </div>
-              </div>
+              
               <div class="form-group row">
                 <div class="col-md-6 mr-auto">
                   <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="가입하기">
@@ -109,18 +116,8 @@
               </div>
             </form>
           </div>
-          <div class="col-lg-4 ml-auto">
-            <div class="bg-white p-3 p-md-5">
-              <h3 class="text-black mb-4">Contact Info</h3>
-              <ul class="list-unstyled footer-link">
-                <li class="d-block mb-3">
-                  <span class="d-block text-black">Address:</span>
-                  <span>34 Street Name, City Name Here, United States</span></li>
-                <li class="d-block mb-3"><span class="d-block text-black">Phone:</span><span>+1 242 4942 290</span></li>
-                <li class="d-block mb-3"><span class="d-block text-black">Email:</span><span>info@yourdomain.com</span></li>
-              </ul>
-            </div>
-          </div>
+          
+         
         </div>
       </div>
     </div>

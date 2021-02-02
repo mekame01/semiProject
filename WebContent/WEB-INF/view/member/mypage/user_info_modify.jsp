@@ -38,11 +38,11 @@
               <div class="intro" style="width:500px">
                 <h1><strong>마이페이지</strong></h1>
                 <div class="custom-breadcrumbs">
-                	<a href="/user/userinfo">회원정보</a> <span class="mx-2">/</span> 
-                	<a href="/user/userinfomodify">회원정보 수정</a> <span class="mx-2">/</span> 
-                	<a href="/user/past">과거여행</a> <span class="mx-2">/</span> 
-                	<a href="/user/current">미래여행</a> <span class="mx-2">/</span> 
-                	<a href="/user/wishlist">찜한 붕붕이</a>
+                	<a href="/member/userinfo">회원정보</a> <span class="mx-2">/</span> 
+                	<a href="/member/userinfomodify">회원정보 수정</a> <span class="mx-2">/</span> 
+                	<a href="/member/past">과거여행</a> <span class="mx-2">/</span> 
+                	<a href="/member/current">미래여행</a> <span class="mx-2">/</span> 
+                	<a href="/member/wishlist">찜한 붕붕이</a>
                 </div>
               </div>
 
@@ -65,13 +65,13 @@
             <form action="#" method="post">
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="이름" required="required">
+                  <input type="text" class="form-control" placeholder="이름" required="required" readonly="readonly">
                 </div>
               </div>
               
                <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="아이디" required="required">
+                  <input type="text" class="form-control" placeholder="아이디" required="required" readonly="readonly">
                 </div>
                 
               </div>
@@ -88,7 +88,7 @@
 
               <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="email" class="form-control" placeholder="이메일주소 : example@example.com" required="required">
+                  <input type="email" class="form-control" placeholder="이메일주소 : example@example.com" required="required" readonly="readonly">
                 </div>
               </div>
               

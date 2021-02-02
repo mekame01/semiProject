@@ -108,36 +108,33 @@
   color: white;
   margin: 0 0 20px 0;
 }
-.facebook,.instagram{
+.facebook{
   width: 100%;
   height: 45px;
   line-height: 45px;
   margin-left: 10px;
 }
 .facebook{
-  margin-left: 0;
-  background: #4267B2;
-  border: 1px solid #3e61a8;
+  margin-left: 10;
+  background: gold;
+  border: 1px solid gold;
 }
-.instagram{
-  background: #E1306C;
-  border: 1px solid #df2060;
-}
+
 .facebook:hover{
-  background: #3e61a8;
+  background: yellow;
 }
-.instagram:hover{
-  background: #df2060;
-}
+
 .links i{
   font-size: 17px;
 }
 i span{
   margin-left: 8px;
+  margin-right: 8px;
   font-weight: 500;
   letter-spacing: 1px;
   font-size: 16px;
   font-family: 'Poppins',sans-serif;
+  color: black;
 }
 .signup{
   font-size: 15px;
@@ -200,31 +197,30 @@ i span{
         <form action="#">
           <div class="field">
             <span class="fa fa-user"></span>
-            <input type="text" required placeholder="아이디">
+            <input type="text" class="id" id="id" name="id" required placeholder="아이디">
           </div>
 	<div class="field space">
             <span class="fa fa-lock"></span>
-            <input type="password" class="pass-key" required placeholder="비밀번호">
+            <input type="password" class="pass-key" id="pw" name="pw" required placeholder="비밀번호">
             <span class="show">SHOW</span>
           </div>
 	<div class="pass">
-            <a href="#">비밀번호 찾기</a>
+            <a> </a>
           </div>
+          <span class='valid_info'></span>
 	<div class="field">
-            <input type="submit" value="LOGIN">
+            <input type="submit" value="LOGIN" onclick='login()'>
           </div>
 	</form>
 
 	<div class="login">Or login with</div>
 	<div class="links">
           <div class="facebook">
-            <i class="fab fa-facebook-f"><span>Facebook</span></i>
+            <i class="fab fa-facebook-f"><span>카카오계정으로 로그인</span></i>
           </div>
-	<div class="instagram">
-            <i class="fab fa-instagram"><span>Instagram</span></i>
-          </div>
+	
 	</div>
-	<div class="signup">회원이 아니신가요?<a href="#">가입하러가기</a>
+	<div class="signup">회원이 아니신가요?<a href="/user/join">가입하러가기</a>
         </div>
 </div>
 </div>
@@ -243,6 +239,50 @@ i span{
          showBtn.style.color = "#222";
        }
       });
+      
+      let login = () =>{
+			const url = '/member/loginimpl';
+			
+			let params = {};
+			params.id = id.value;
+			params.pw = pw.value;
+			
+			let headerObj = new Headers();
+			
+			headerObj.append("content-type", "application/x-www-form-urlencoded");
+			
+			fetch(url,{
+				method:"post",
+				headers:headerObj,
+				
+				body:"data=" + JSON.stringify(params) 
+			}) 
+			.then(response => {
+				if(response.ok){ 
+					return response.text();
+				}else{
+					throw new AsyncResponseError(response.text());
+				}
+			})
+			.then(text => {
+				if(text == 'fail'){
+					document.querySelector('.valid_info').innerHTML = '아이디나 비밀번호를 확인하세요';
+					
+				}else if(text =='success'){
+					location.href="/member/userinfo";
+					
+				}
+			}).catch((error)=>{
+				
+				error.alertMessage();
+				
+			})
+			
+			
+			
+		}
+	
+      
     </script>
     
     

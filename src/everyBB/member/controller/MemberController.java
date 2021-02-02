@@ -1,12 +1,18 @@
 package everyBB.member.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
+import everyBB.member.model.service.MemberService;
+import everyBB.member.model.vo.Member;
 
 /**
  * Servlet implementation class Why
@@ -15,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	MemberService memberService = new MemberService();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -33,7 +41,7 @@ public class MemberController extends HttpServlet {
 			break;
 		case "login" : login(request, response);
 			break;
-		case "login2" : login2(request, response);
+		case "loginimpl" : loginImpl(request, response);
 			break;
 		case "past" : pastTrip(request, response);
 			break;
@@ -43,7 +51,9 @@ public class MemberController extends HttpServlet {
 			break;
 		case "wishlist" : wishList(request, response);
 			break;
-		case "memberinfo" : memberInfo(request, response);
+		case "userinfo" : userInfo(request, response);
+			break;
+		case "userinfomodify" : userInfoModify(request, response);
 			break;
 		default : response.setStatus(404);
 		}
@@ -69,11 +79,39 @@ public class MemberController extends HttpServlet {
 		.forward(request, response);
 	}
 	
-	private void login2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void loginImpl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/member/login2.jsp")
-		.forward(request, response);
+		
+		String jsonData = request.getParameter("data"); 
+		
+		System.out.println("json형식으로 넘어온 데이터 : " + jsonData); 
+		
+		Gson gson = new Gson();
+		Map<String, Object> jsonMap = gson.fromJson(jsonData, Map.class); 
+		String userId = (String) jsonMap.get("id");
+		String userPwd = (String) jsonMap.get("pw");
+		
+		for(String key : jsonMap.keySet()) {
+			System.out.println(key + " : " + jsonMap.get(key).getClass());
+		} 
+	
+		Map<String, Object> jsonMapT = (Map<String, Object>)jsonMap.get("jsonObj");
+		System.out.println(jsonMapT);
+		
+		
+		
+		Member member = memberService.memberAuthenticate(userId, userPwd);
+		
+				if(member != null) {
+					
+					request.getSession().setAttribute("user", member);
+					response.getWriter().print("success");
+				}else {
+					response.getWriter().print("fail");
+				}
+			
 	}
+	
 	
 	private void pastTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -99,9 +137,15 @@ public class MemberController extends HttpServlet {
 		.forward(request, response);
 	}
 	
-	private void memberInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void userInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/member/mypage/member_info.jsp")
+		request.getRequestDispatcher("/WEB-INF/view/member/mypage/user_info.jsp")
+		.forward(request, response);
+	}
+	
+	private void userInfoModify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("/WEB-INF/view/member/mypage/user_info_modify.jsp")
 		.forward(request, response);
 	}
 	
