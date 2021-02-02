@@ -203,25 +203,30 @@ i span{
             <span class="fa fa-lock"></span>
             <input type="password" class="pass-key" id="pw" name="pw" required placeholder="비밀번호">
             <span class="show">SHOW</span>
+             <span class='valid_info'></span>
           </div>
 	<div class="pass">
             <a> </a>
           </div>
-          <span class='valid_info'></span>
+         
 	<div class="field">
             <input type="submit" value="LOGIN" onclick='login()'>
           </div>
 	</form>
-
+	<div class="signup">회원이 아니신가요?<a href="/member/join">가입하러가기</a>
+        </div>
 	<div class="login">Or login with</div>
-	<div class="links">
-          <div class="facebook">
-            <i class="fab fa-facebook-f"><span>카카오계정으로 로그인</span></i>
+	
+          	<a id="custom-login-btn" href="javascript:loginWithKakao()">
+			  <img
+			    src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+			    width="222"
+			  />
+			</a>
           </div>
 	
 	</div>
-	<div class="signup">회원이 아니신가요?<a href="/user/join">가입하러가기</a>
-        </div>
+	
 </div>
 </div>
 </div>
@@ -282,6 +287,18 @@ i span{
 			
 		}
 	
+      function loginWithKakao() {
+    	    Kakao.Auth.login({
+    	      success: function(authObj) {
+    	        alert(JSON.stringify(authObj))
+    	      },
+    	      fail: function(err) {
+    	        alert(JSON.stringify(err))
+    	      },
+    	    })
+    	  }
+      
+      //4d17ea56d4446f9717ad7ae08873916f
       
     </script>
     

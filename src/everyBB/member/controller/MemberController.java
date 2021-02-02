@@ -39,6 +39,12 @@ public class MemberController extends HttpServlet {
 		switch(uriArr[uriArr.length-1]) {
 		case "join" : join(request, response);
 			break;
+		case "idcheck" : confirmId(request, response);
+			break;
+		case "mailauth" : authenticateEmail(request, response);
+			break;	
+		case "joinimpl" : joinImpl(request, response);
+			break;
 		case "login" : login(request, response);
 			break;
 		case "loginimpl" : loginImpl(request, response);
@@ -66,11 +72,69 @@ public class MemberController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+	
 	private void join(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getRequestDispatcher("/WEB-INF/view/member/join.jsp")
 		.forward(request, response);
+	}
+	
+	private void confirmId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String userId = request.getParameter("userId");
+		
+		Member member = memberService.selectMemberById(userId);
+		
+		
+		if(member != null) { 
+			response.getWriter().print("fail"); //응답바디에 fail 작성
+		}else { 
+			response.getWriter().print("success"); //응답바디에 success 작성
+		}
+		
+	}
+	
+private void authenticateEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String userName = request.getParameter("name");
+		String userId = request.getParameter("id");
+		String userPwd = request.getParameter("pw");
+		String userPhone = request.getParameter("tell");
+		String userEmail = request.getParameter("email");
+		String userLicense = request.getParameter("license");
+		
+		Member member = new Member();
+		member.setUserName(userName);
+		member.setUserId(userId);
+		member.setUserPwd(userPwd);
+		member.setUserPhone(userPhone);
+		member.setUserEmail(userEmail);
+		member.setUserLicense(userLicense);
+		
+		
+		memberService.authenticateEmail(member);
+		
+		request.getSession().setAttribute("persistUser", member);
+		
+		request.setAttribute("msg", "회원가입 완료를 위한 이메일이 발송되었습니다.");
+		request.setAttribute("url", "/member/login");
+		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
+		.forward(request, response);
+		
+	}
+	
+	
+	private void joinImpl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Member member = (Member) request.getSession().getAttribute("persistUser");
+		
+		memberService.insertMember(member);
+		
+		request.setAttribute("msg", "회원가입을 축하드립니다.");
+		request.setAttribute("url", "/member/login");
+		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
+		.forward(request, response);
+		
 	}
 	
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

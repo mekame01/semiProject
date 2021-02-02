@@ -61,18 +61,19 @@
           <p></p>
         </div>
       </div>
+     <form action="${context}/member/mailauth" method="post" id="frm_join">
         <div class="row">
           <div class="col-lg-8 mb-5 uu" >
             <form action="#" method="post">
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="이름" required="required">
+                  <input type="text" class="form-control" name="name" id="name" placeholder="이름" required="required">
                 </div>
               </div>
               
                <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="아이디" required="required">
+                  <input type="text" class="form-control" name="id" id="id" placeholder="아이디" required="required">
                 </div>
                 <div class="col-md-6">
                   <button class="form-control btn-id" type="button" onclick="idCheck()">중복확인</button>
@@ -83,7 +84,8 @@
               
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="password" class="form-control" placeholder="비밀번호 8~12이상 영문, 숫자, 특수문자" required="required">
+                  <input type="password" class="form-control" name="pw" id="pw" placeholder="비밀번호 8~12이상 영문, 숫자, 특수문자" required="required">
+                   <span id="pw_confirm" class="valid_info"></span>
                 </div>
                 <div class="col-md-6">
                   <input type="password" class="form-control" placeholder="비밀번호 확인" required="required">
@@ -92,22 +94,25 @@
 
               <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="email" class="form-control" placeholder="이메일주소 : example@example.com" required="required">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="이메일주소 : example@example.com" required="required">
                 </div>
               </div>
               
               <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="tel" class="form-control" placeholder="전화번호 010-0000-0000" required="required">
+                  <input type="tel" class="form-control" placeholder="전화번호 010-0000-0000" name="tell" id="tell" required="required">
                 </div>
               </div>
               
 			  <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="text" class="form-control" placeholder="운전면허 번호 : " required="required">
+                  <input type="text" class="form-control" name="license" id="license"placeholder="운전면허 번호 : " required="required">
                 </div>
               </div>
               
+              <div>
+              	<input type="checkbox" required><span style="font-size:1.2vw"> I agree to the terms and conditions</span><br><br>
+              </div>
               
               <div class="form-group row">
                 <div class="col-md-6 mr-auto">
@@ -119,12 +124,63 @@
           
          
         </div>
+        </form>
       </div>
     </div>
 
    <%@ include file="/WEB-INF/view/include/footer.jsp" %>   
     </div>
   <%@ include file="/WEB-INF/view/include/script.jsp" %>
+  
+  <script type="text/javascript">
+      
+      let idCheckFlg = false; 
+      
+      let idCheck = () => {
+   	   let userId = id.value;
+   	   if(userId){
+   		  
+   		   fetch("/member/idcheck?userId=" + userId,{
+   			   method:"GET"
+   		   })
+   		   .then(response => response.text())
+   		   .then(text =>{
+   			   if(text == 'success'){
+   				   idCheckFlg = true;
+   				   id_check.innerHTML = '사용 가능한 아이디 입니다.';
+   			   }else{
+   				   idCheckFlg = false;
+   				   id_check.innerHTML = '사용 불가능한 아이디 입니다.';
+   				   id.value="";
+   			   }
+   		   })
+   		   
+   	   }else{
+   		   alert("아이디를 입력하지 않으셨습니다.");
+   	   }
+      }
+      
+      document.querySelector('#frm_join').addEventListener('submit',(e)=>{
+   	   let password = pw.value;
+   	   let regExp = /^(?!.*[ㄱ-힣])(?=.*\W)(?=.*\d)(?=.*[a-zA-Z])(?=.{8,})/;
+   	   
+   	   if(!idCheckFlg){
+   		   e.preventDefault();
+   		   alert("아이디 중복검사를 하지 않으셨습니다.");
+   		   id.focus()
+   	   }
+   	   
+   	   if(!(regExp.test(password))){
+   		   e.preventDefault();
+   		   pw_confirm.innerHTML = '비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다.';
+   		   pw.value='';
+   	   }
+      });
+      
+     
+      </script>
+  
+  
 
   </body>
 
