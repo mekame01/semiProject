@@ -14,7 +14,7 @@
         <div class="site-mobile-menu-body"></div>
       </div>
       
-      <div class="hero inner-page" style="background-image: url('/resources/images/hero_1_a.jpg');">    
+      <div class="hero inner-page" style="background-image: url('<%= request.getContextPath() %>/resources/images/hero_1_a.jpg');">    
         <div class="container">
           <div class="row align-items-end ">
             <div class="col-lg-5">
@@ -42,6 +42,18 @@
                  <thead>
                   <tr>
                     <th class="product-thumbnail">차량이미지</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="product-thumbnail">
+                      <img src="<%= request.getContextPath() %>/resources/images/car_2.jpg" alt="Image" class="img-fluid">
+                    </td> 
+                </tbody>
+               </table>  
+               <table class="table table-bordered">
+                 <thead>
+                  <tr>
                     <th class="product-name">차량</th>
                     <th class="product-price">가격</th>
                     <th class="product-regDate">예약날짜</th>
@@ -51,32 +63,16 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="product-thumbnail">
-                      <img src="images/product_02.png" alt="Image" class="img-fluid">
-                    </td>
                     <td class="product-name">
                       <h2 class="h5 text-black">Sonata</h2>
                     </td>
                     <td>$55.00</td>
                     <td>2021.02.02</td>
                     <td>2021.02.05</td>
-                    <td>$49.00</td>
-                  </tr>
-    
-                  <tr>
-                    <td class="product-thumbnail">
-                      <img src="images/product_01.png" alt="Image" class="img-fluid">
-                    </td>
-                    <td class="product-name">
-                      <h2 class="h5 text-black">Avante</h2>
-                    </td>
-                    <td>$49.00</td>
-                    <td>2021.02.02</td>
-                    <td>2021.02.10</td>
-                    <td>$49.00</td>
+                    <td>$57.00</td>
                   </tr>
                 </tbody>
-              </table>
+               </table>
             </div>
           </form>
         </div>
@@ -106,7 +102,7 @@
               <div class="col-md-7">
                 <div class="row">
                   <div class="col-md-12 text-right border-bottom mb-5">
-                    <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                    <h3 class="text-black h4 text-uppercase">결제 금액</h3>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -136,6 +132,7 @@
     
                 <div class="row">
                   <div class="col-md-12">
+                  	<img src='<%= request.getContextPath() %>/resources/images/kakaopay.png'>
                     <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout.html'">결제</button>
                   </div>
                 </div>

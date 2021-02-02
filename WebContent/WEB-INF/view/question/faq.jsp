@@ -14,7 +14,7 @@
         <div class="site-mobile-menu-body"></div>
       </div>
       
-      <div class="hero inner-page" style="background-image: url('/resources/images/hero_1_a.jpg');">    
+      <div class="hero inner-page" style="background-image: url('<%= request.getContextPath() %>/resources/images/hero_1_a.jpg');">    
         <div class="container">
           <div class="row align-items-end ">
             <div class="col-lg-5">
