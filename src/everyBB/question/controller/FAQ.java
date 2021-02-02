@@ -1,4 +1,4 @@
-package everyBB.payment.controller;
+package everyBB.question.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class PaymentController
+ * Servlet implementation class FAQ
  */
-@WebServlet("/payment/*")
-public class PaymentController extends HttpServlet {
+@WebServlet("/question/*")
+public class FAQ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PaymentController() {
+    public FAQ() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,10 +29,8 @@ public class PaymentController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String[] uriArr = request.getRequestURI().split("/");
 		switch(uriArr[uriArr.length - 1]) {
-			case "payment" : payment(request, response);
-				break;
-			case "payDetail" : payDetail(request, response);
-				break;
+			case "faq" : faq(request, response);
+			break;
 			default : response.setStatus(404);
 		}
 	}
@@ -45,16 +43,9 @@ public class PaymentController extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private void payment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void faq(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/payment/payment.jsp")
+		request.getRequestDispatcher("/WEB-INF/view/question/faq.jsp")
 		.forward(request, response);
 	}
-	
-	private void payDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/payment/payDetail.jsp")
-		.forward(request, response);
-	}
-
 }

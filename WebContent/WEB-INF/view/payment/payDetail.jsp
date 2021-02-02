@@ -19,8 +19,8 @@
           <div class="row align-items-end ">
             <div class="col-lg-5">
               <div class="intro">
-                <h1><strong>결제</strong></h1>
-                <div class="custom-breadcrumbs"><a href="/index.jsp">Home</a> <span class="mx-2">/</span> <strong>결제</strong></div>
+                <h1><strong>결제정보</strong></h1>
+                <div class="custom-breadcrumbs"><a href="/index.jsp">Home</a> <span class="mx-2">/</span> <strong>결제정보</strong></div>
               </div>
             </div>
           </div>
@@ -31,11 +31,11 @@
       	<div class="container">
 	     <div class="row">
 	        <div class="col-lg-7">
-	          <h2 class="section-heading"><strong>결제</strong></h2>
-	          <p class="mb-5">Payment</p>  
+	          <h2 class="section-heading"><strong>결제정보</strong></h2>
+	          <p class="mb-5">결제 상세 정보</p>  
 	        </div>
 	      </div>
-          <div class="row mb-5">
+	      <div class="row mb-5">
           	<form class="col-md-12" method="post">
               <div class="site-blocks-table">
                	<table class="table table-bordered">
@@ -79,21 +79,20 @@
     
         <div class="row">
           <div class="col-md-6">
-            <div class="row mb-5">
-              <div class="col-md-6">
-                <button class="btn btn-outline-primary btn-md btn-block">예약내역으로 돌아가기</button>
-              </div>
-            </div>
             <div class="row">
               <div class="col-md-12">
-                <label class="text-black h4" for="coupon">Coupon</label>
-                <p>Enter your coupon code if you have one.</p>
+                <label class="text-black h4">결제 수단</label>
+                <p>결제 수다아아아안</p>
               </div>
               <div class="col-md-8 mb-3 mb-md-0">
-                <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
-              </div>
-              <div class="col-md-4">
-                <button class="btn btn-primary btn-md px-4">Apply Coupon</button>
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <span class="text-black">카카오 페이<img src='<%= request.getContextPath() %>/resources/images/kakaopay.png'></span>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <strong class="text-black">결제일시 나오게..</strong>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -110,7 +109,7 @@
                     <span class="text-black">Subtotal</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">$230.00</strong>
+                    <strong class="text-black">$55.00</strong>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -126,25 +125,17 @@
                     <span class="text-black">Total</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">$232.00</strong>
-                  </div>
-                </div>
-    
-                <div class="row">
-                  <div class="col-md-12">
-                  	<img src='<%= request.getContextPath() %>/resources/images/kakaopay.png'>
-                    <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout.html'">결제</button>
+                    <strong class="text-black">$57.00</strong>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <%@ include file="/WEB-INF/view/include/footer.jsp" %>
-   </div>
-   <%@ include file="/WEB-INF/view/include/script.jsp" %>
-
+	   </div>
+	  </div>
+	 <%@ include file="/WEB-INF/view/include/footer.jsp" %>
+	</div>
+    <%@ include file="/WEB-INF/view/include/script.jsp" %>
 </body>
 </html>

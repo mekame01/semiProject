@@ -40,6 +40,8 @@ public class RegisterController extends HttpServlet {
 					break;	
 				case "register": register(request,response);
 					break;	
+				case "jusoPopup": jusoPopup(request,response);
+					break;	
 				case "rg_list": rg_list(request,response);
 					break;
 				case "rg_detail": rg_detail(request,response);
@@ -80,6 +82,12 @@ public class RegisterController extends HttpServlet {
 	private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getRequestDispatcher("/WEB-INF/view/register/register.jsp")
+		.forward(request, response);
+	}
+	
+	private void jusoPopup(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("/WEB-INF/view/register/jusoPopup.jsp")
 		.forward(request, response);
 	}
 	
