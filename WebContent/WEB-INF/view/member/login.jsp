@@ -150,6 +150,13 @@ i span{
 }
 
 </style>
+
+<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+    
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+  
   </head>
 
   <body>
@@ -217,7 +224,7 @@ i span{
         </div>
 	<div class="login">Or login with</div>
 	
-          	<a id="custom-login-btn" href="javascript:loginWithKakao()">
+          	<a id="kakao-login-btn" href="javascript:loginWithKakao()">
 			  <img
 			    src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
 			    width="222"
@@ -272,21 +279,16 @@ i span{
 			.then(text => {
 				if(text == 'fail'){
 					document.querySelector('.valid_info').innerHTML = '아이디나 비밀번호를 확인하세요';
-					
 				}else if(text =='success'){
 					location.href="/member/userinfo";
-					
 				}
 			}).catch((error)=>{
-				
 				error.alertMessage();
-				
 			})
-			
-			
-			
 		}
 	
+      
+      
       function loginWithKakao() {
     	    Kakao.Auth.login({
     	      success: function(authObj) {
@@ -297,6 +299,22 @@ i span{
     	      },
     	    })
     	  }
+      
+      //<![CDATA[
+      // 사용할 앱의 JavaScript 키를 설정해 주세요.
+      Kakao.init('4d17ea56d4446f9717ad7ae08873916f');
+      // 카카오 로그인 버튼을 생성합니다.
+      Kakao.Auth.createLoginButton({
+          container: '#kakao-login-btn',
+          success: function (authObj) {
+              alert(JSON.stringify(authObj));
+          },
+          fail: function (err) {
+              alert(JSON.stringify(err));
+          }
+      });
+    //]]>
+      
       
       //4d17ea56d4446f9717ad7ae08873916f
       
