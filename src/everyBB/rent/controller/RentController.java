@@ -26,7 +26,14 @@ public class RentController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String[] uriArr = request.getRequestURI().split("/");
+		switch (uriArr[uriArr.length-1]) {
+			case "list": rentList(request, response);
+				break;
+			case "detail": rentDetail(request, response);
+				break;
+			default: response.setStatus(404);
+		}
 	}
 
 	/**
@@ -35,6 +42,16 @@ public class RentController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	private void rentList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/view/rent/rent_list.jsp")
+		.forward(request, response);
+	}
+
+	private void rentDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/view/rent/rent_detail.jsp")
+		.forward(request, response);
 	}
 
 }

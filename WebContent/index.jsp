@@ -27,25 +27,24 @@
               		<form class="trip-form">
                 		<div class="row align-items-center">
 							<div class="mb-3 mb-md-0 col-md-3">
-			                    <select name="" id="" class="custom-select form-control">
-			                      	<option value="">Select Type</option>
-			                      	<option value="">Ferrari</option>
-			                      	<option value="">Toyota</option>
-			                      	<option value="">Ford</option>
-			                      	<option value="">Lamborghini</option>
-			                    </select>
+			                    <input name="palce" id="place" type="text" class="form-control">
                   			</div>
 	                  		<div class="mb-3 mb-md-0 col-md-3">
 	                    		<div class="form-control-wrap">
-	                      			<input type="text" id="cf-3" placeholder="Pick up" class="form-control datepicker px-3">
-	                      			<span class="icon icon-date_range"></span>
-	
+	                      			<input type="text" id="pickup_date" placeholder="픽업 날짜" class="form-control datepicker px-3">
+	                      			<span class="icon icon-date_range"> </span>
+	                    		</div>
+	                    		<div>
+	                      			<input type="number" min="0" max="23" id="pickup_hour" placeholder="픽업 시각" class="form-control px-3">
 	                    		</div>
 	                  		</div>
 	                 		<div class="mb-3 mb-md-0 col-md-3">
 	                    		<div class="form-control-wrap">
-	                      			<input type="text" id="cf-4" placeholder="Drop off" class="form-control datepicker px-3">
-	                      			<span class="icon icon-date_range"></span>
+	                      			<input type="text" id="return_date" placeholder="반환 날짜" class="form-control datepicker px-3">
+	                      			<span class="icon icon-date_range"> </span>
+	                    		</div>
+	                    		<div>
+	                      			<input type="number" min="0" max="23" id="return_hour" placeholder="반환 시각" class="form-control px-3">
 	                    		</div>
 	                  		</div>
 	                  		<div class="mb-3 mb-md-0 col-md-3">
