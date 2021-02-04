@@ -52,6 +52,8 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		
 		} catch (SQLException e) {
 			throw new DataAccessException(ErrorCode.SM01, e); 
+		}finally {
+			jdt.close(rset, pstm);
 		}
 		return member;
 	}

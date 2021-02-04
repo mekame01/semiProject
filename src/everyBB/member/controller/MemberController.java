@@ -148,8 +148,6 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		
 		String jsonData = request.getParameter("data"); 
 		
-		System.out.println("json형식으로 넘어온 데이터 : " + jsonData); 
-		
 		Gson gson = new Gson();
 		Map<String, Object> jsonMap = gson.fromJson(jsonData, Map.class); 
 		String userId = (String) jsonMap.get("id");

@@ -230,6 +230,8 @@ i span{
 			    width="222"
 			  />
 			</a>
+			<br>
+			<a href="https://developers.kakao.com/logout">로그아웃</a>
           </div>
 	
 	</div>
@@ -287,7 +289,7 @@ i span{
 			})
 		}
 	
-      
+    
       
       function loginWithKakao() {
     	    Kakao.Auth.login({
@@ -298,8 +300,9 @@ i span{
     	        alert(JSON.stringify(err))
     	      },
     	    })
+    	    
     	  }
-      
+     /* 
       //<![CDATA[
       // 사용할 앱의 JavaScript 키를 설정해 주세요.
       Kakao.init('4d17ea56d4446f9717ad7ae08873916f');
@@ -314,8 +317,74 @@ i span{
           }
       });
     //]]>
+     
       
       
+      /*
+      Kakao.init('4d17ea56d4446f9717ad7ae08873916f');
+      // 카카오 로그인 버튼을 생성합니다.
+      Kakao.Auth.createLoginButton({
+          container: '#kakao-login-btn',
+          success: function (authObj) {
+        	Kakao.API.request({
+        		url:'/v2/user/me',
+        		success: function(res){
+        			console.log(res){
+        				console.log(res);
+        				var id = res.id;
+        				var email = res.kakao_account.email;
+        				var name = res.properties.nickname;
+						var html = '<br>' + email + '<br>' + name;
+						
+						$('body').append(html);
+					
+        			
+        			}
+        			}
+        		
+        	})
+        	}
+      })
+     
+      Kakao.Auth.login({
+			success.function(authObj){
+				
+				Kakao.API.request({
+					uri:'/v2/user/me',
+					success: function(res){
+						console.log(res);
+						
+						var id = res.id;
+						var email = res.kakao_account.email;
+						var name = res.properties.nickname;
+						var html = '<br>' + email + '<br>' + name;
+						
+						$('body').append(html);
+					
+						//location.href='kakaoRedirectForm.jsp?email='+ email + '&name=' + name;
+					
+					}
+				})
+			
+				console.log(authObj);
+				var token = authObj.access_token;
+			
+			},
+			fail: function(err){
+				alert(JSON.stringify(err));
+			}
+		});
+		
+      */
+      
+      
+      
+     /* 
+      Kakao.Auth.authorize({
+    	 redirectUri: 'http://localhost:9090/member/mypage' 
+      });
+      
+     */
       //4d17ea56d4446f9717ad7ae08873916f
       
     </script>
