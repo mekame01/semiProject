@@ -35,7 +35,8 @@
 	          <p class="mb-5">결제 상세 정보</p>  
 	        </div>
 	      </div>
-	      <div class="row mb-5">
+	      <div class="site-section">
+	       <div class="container">
           	<form class="col-md-12" method="post">
               <div class="site-blocks-table">
                	<table class="table table-bordered">
@@ -75,6 +76,7 @@
                </table>
             </div>
           </form>
+          </div>
         </div>
     
         <div class="row">
