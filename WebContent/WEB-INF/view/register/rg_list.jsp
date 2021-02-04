@@ -19,7 +19,7 @@
          <%@ include file="/WEB-INF/view/include/header.jsp" %>
    
 
-      
+      <br><br>
       <div class="hero inner-page" style="background-image: url('<%= request.getContextPath() %>/resources/images/hero_1_a.jpg');">
         
         <div class="container">
@@ -61,7 +61,7 @@
               <div class="listing-contents h-100">
                 <h3>Mitsubishi Pajero</h3>
                 <div class="rent-price">
-                  <strong>$389.00</strong><span class="mx-1">/</span>day
+                  <strong>${fffffffffffffffffffff}</strong><span class="mx-1">/</span>day
                 </div>
                 <div class="d-block d-md-flex mb-3 border-bottom pb-3">
                   <div class="listing-feature pr-4">
@@ -79,7 +79,7 @@
                 </div>
                 <div>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem quibusdam.</p>
-                  <p><a href="#" class="btn btn-primary btn-sm">상세보기</a></p>
+                  <p><a href="register/rg_detail" class="btn btn-primary btn-sm">상세보기</a></p>
                 </div>
               </div>
 
