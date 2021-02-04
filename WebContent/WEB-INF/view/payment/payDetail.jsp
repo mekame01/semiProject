@@ -35,8 +35,7 @@
 	          <p class="mb-5">결제 상세 정보</p>  
 	        </div>
 	      </div>
-	      <div class="site-section">
-	       <div class="container">
+	      <div class="row mb-5">
           	<form class="col-md-12" method="post">
               <div class="site-blocks-table">
                	<table class="table table-bordered">
@@ -53,30 +52,29 @@
                 </tbody>
                </table>  
                <table class="table table-bordered">
-                 <thead>
                   <tr>
-                    <th class="product-name">차량</th>
+                    <th class="product-name" style="width:30%">차량</th>
+                    <td class="product-name"><h2 class="h5 text-black">Sonata</h2></td>
+                  </tr>
+                  <tr>
                     <th class="product-price">가격</th>
-                    <th class="product-regDate">예약날짜</th>
-                    <th class="product-pickDate">픽업날짜</th>
-                    <th class="product-total">총가격</th>
+                    <td class="product-price">$55.00</td>
                   </tr>
-                </thead>
-                <tbody>
                   <tr>
-                    <td class="product-name">
-                      <h2 class="h5 text-black">Sonata</h2>
-                    </td>
-                    <td>$55.00</td>
-                    <td>2021.02.02</td>
-                    <td>2021.02.05</td>
-                    <td>$57.00</td>
+                    <th class="product-regDate">예약날짜</th>
+                    <td class="product-regDate">2021.02.02</td>
                   </tr>
-                </tbody>
+                  <tr>
+                    <th class="product-pickDate">픽업날짜</th>
+                    <td class="product-pickDate">2021.02.05</td>
+                  </tr>
+                  <tr>
+                    <th class="product-total">총가격</th>
+                    <td class="product-total">$57.00</td>
+                  </tr>
                </table>
             </div>
           </form>
-          </div>
         </div>
     
         <div class="row">
@@ -89,7 +87,7 @@
               <div class="col-md-8 mb-3 mb-md-0">
                 <div class="row mb-3">
                   <div class="col-md-6">
-                    <span class="text-black">카카오 페이<img src='<%= request.getContextPath() %>/resources/images/kakaopay.png'></span>
+                    <span class="text-black">KG이니시스</span>
                   </div>
                   <div class="col-md-6 text-right">
                     <strong class="text-black">결제일시 나오게..</strong>
