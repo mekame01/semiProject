@@ -24,7 +24,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		ResultSet rset = null;
 	
 		try {
-		String query = "select * from tb_user where user_id = ? and user_pwd = ?" ;
+		String query = "select * from tb_member where user_id = ? and user_pwd = ?" ;
 		pstm = conn.prepareStatement(query);
 		
 		pstm.setString(1, userId);

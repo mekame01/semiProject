@@ -13,6 +13,9 @@ public class Member {
 	private Date userRegDate;
 	private int userIsLeave;
 	
+	public Member() {
+	}
+	
 	public String getUserId() {
 		return userId;
 	}
