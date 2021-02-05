@@ -1,6 +1,7 @@
 package everyBB.car.model.service;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.List;
 
 import everyBB.car.model.dao.CarDao;
@@ -16,12 +17,12 @@ public class CarService {
 		
 	}
 	
-	public List<Car> selectByLatLng(double latMin, double latMax, double lngMin, double lngMax) {
+	public List<Car> selectByLatLng(String address, Date pickupDate, Date returnDate) {
 		Connection conn = jdt.getConnection();
 		List<Car> carList = null;
 		
 		try {
-			carList = carDao.selectByLatLng(conn, latMin, latMax, lngMin, lngMax);
+			carList = carDao.selectByLatLng(conn, address, pickupDate, returnDate);
 		} finally {
 			jdt.close(conn);
 		}
