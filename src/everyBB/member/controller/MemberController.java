@@ -36,7 +36,7 @@ public class MemberController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] uriArr = request.getRequestURI().split("/");
-		switch(uriArr[uriArr.length-1]) {
+		switch(uriArr[2]) {
 		case "join" : join(request, response);
 			break;
 		case "idcheck" : confirmId(request, response);
@@ -49,18 +49,25 @@ public class MemberController extends HttpServlet {
 			break;
 		case "loginimpl" : loginImpl(request, response);
 			break;
-		case "past" : pastTrip(request, response);
-			break;
-		case "current" : currentTrip(request, response);
-			break;
-		case "reservdetail" : reservDetail(request, response);
-			break;
-		case "wishlist" : wishList(request, response);
-			break;
-		case "userinfo" : userInfo(request, response);
-			break;
-		case "userinfomodify" : userInfoModify(request, response);
-			break;
+		case "mypage" : 
+			switch(uriArr[uriArr.length-1]) {
+			case "past" : pastTrip(request, response);
+				break;
+			case "current" : currentTrip(request, response);
+				break;
+			case "reservdetail" : reservDetail(request, response);
+				break;
+			case "wishlist" : wishList(request, response);
+				break;
+			case "userinfo" : userInfo(request, response);
+				break;
+			case "userinfomodify" : userInfoModify(request, response);
+				break;
+			case "userinfomodifyimpl" : userInfoModifyImpl(request, response);
+				break;
+			default : response.setStatus(404);
+			}
+			
 		default : response.setStatus(404);
 		}
 	}
@@ -211,5 +218,27 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		.forward(request, response);
 	}
 	
-	
+	private void userInfoModifyImpl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String userPwd = request.getParameter("pw");
+		String userPhone = request.getParameter("tell");
+		String userLicense = request.getParameter("license");
+		
+		Member member = new Member();
+		member.setUserPwd(userPwd);
+		member.setUserPhone(userPhone);
+		member.setUserLicense(userLicense);
+		
+		
+		memberService.updateMember(member);
+		
+		
+		
+		request.setAttribute("msg", "회원정보 변경이 완료되었습니다.");
+		request.setAttribute("url", "/member/mypage/user_info_modify");
+		
+		
+		request.getRequestDispatcher("/WEB-INF/view/member/mypage/user_info.jsp")
+		.forward(request, response);
+	}
 }

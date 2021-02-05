@@ -201,7 +201,8 @@ i span{
     <div class="bg-img">
       <div class="content">
         <header>Every 붕붕</header>
-        <form action="#">
+        
+        
           <div class="field">
             <span class="fa fa-user"></span>
             <input type="text" class="id" id="id" name="id" required placeholder="아이디">
@@ -210,8 +211,9 @@ i span{
             <span class="fa fa-lock"></span>
             <input type="password" class="pass-key" id="pw" name="pw" required placeholder="비밀번호">
             <span class="show">SHOW</span>
-             <span class='valid_info'></span>
+             
           </div>
+          <span class='valid_info'></span>
 	<div class="pass">
             <a> </a>
           </div>
@@ -219,7 +221,9 @@ i span{
 	<div class="field">
             <input type="submit" value="LOGIN" onclick='login()'>
           </div>
-	</form>
+	
+	
+	
 	<div class="signup">회원이 아니신가요?<a href="/member/join">가입하러가기</a>
         </div>
 	<div class="login">Or login with</div>
@@ -282,7 +286,7 @@ i span{
 				if(text == 'fail'){
 					document.querySelector('.valid_info').innerHTML = '아이디나 비밀번호를 확인하세요';
 				}else if(text =='success'){
-					location.href="/member/userinfo";
+					location.href="/";
 				}
 			}).catch((error)=>{
 				error.alertMessage();
@@ -302,7 +306,7 @@ i span{
     	    })
     	    
     	  }
-     /* 
+     
       //<![CDATA[
       // 사용할 앱의 JavaScript 키를 설정해 주세요.
       Kakao.init('4d17ea56d4446f9717ad7ae08873916f');

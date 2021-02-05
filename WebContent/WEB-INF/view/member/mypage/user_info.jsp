@@ -38,11 +38,11 @@
               <div class="intro" style="width:500px">
                 <h1><strong>마이페이지</strong></h1>
                 <div class="custom-breadcrumbs">
-                	<a href="/member/userinfo">회원정보</a> <span class="mx-2">/</span> 
-                	<a href="/member/userinfomodify">회원정보 수정</a> <span class="mx-2">/</span> 
-                	<a href="/member/past">과거여행</a> <span class="mx-2">/</span> 
-                	<a href="/member/current">미래여행</a> <span class="mx-2">/</span> 
-                	<a href="/member/wishlist">찜한 붕붕이</a>
+                	<a href="/member/mypage/userinfo">회원정보</a> <span class="mx-2">/</span> 
+                	<a href="/member/mypage/userinfomodify">회원정보 수정</a> <span class="mx-2">/</span> 
+                	<a href="/member/mypage/past">과거여행</a> <span class="mx-2">/</span> 
+                	<a href="/member/mypage/current">미래여행</a> <span class="mx-2">/</span> 
+                	<a href="/member/mypage/wishlist">찜한 붕붕이</a>
                 </div>
               </div>
 
@@ -56,57 +56,32 @@
       <div class="container">
         <div class="row justify-content-center text-center">
         <div class="col-7 text-center mb-5">
-          <h2>회원정보</h2>
+          <h2>${sessionScope.user.userId}님의 가입정보</h2>
           <p></p>
         </div>
       </div>
         <div class="row">
-          <div class="col-lg-8 mb-5 uu" >
-            <form action="#" method="post">
-              <div class="form-group row">
-                <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="이름" required="required">
-                </div>
-              </div>
-              
-               <div class="form-group row">
-                <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="아이디" required="required">
-                </div>
-                
-              </div>
-              
-              
-              <div class="form-group row">
-                <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="password" class="form-control" placeholder="비밀번호 8~12이상 영문, 숫자, 특수문자" required="required">
-                </div>
-                <div class="col-md-6">
-                  <input type="password" class="form-control" placeholder="비밀번호 확인" required="required">
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <div class="col-md-12">
-                  <input type="email" class="form-control" placeholder="이메일주소 : example@example.com" required="required">
-                </div>
-              </div>
-              
-              <div class="form-group row">
-                <div class="col-md-12">
-                  <input type="tel" class="form-control" placeholder="전화번호 010-0000-0000" required="required">
-                </div>
-              </div>
-              
-			  <div class="form-group row">
-                <div class="col-md-12">
-                  <input type="text" class="form-control" placeholder="운전면허 번호 : " required="required">
-                </div>
-              </div>
-              
-              
-            </form>
-          </div>
+          
+           <div class="container body-content" style="width:60%">
+				<div class="container">
+                    <div class="row justify-content-start" style="padding-top:10px;">
+                		
+                		<div class="col" style="padding-top:10px; background-color:white;">
+							<ul style="list-style:none; font-family:궁서">
+								
+								<li>이름 : ${sessionScope.user.userName}</li>
+								<li>비밀번호 : ${sessionScope.user.userPwd}</li>
+								<li>전화번호 : ${sessionScope.user.userPhone}</li>
+								<li>이메일 : ${sessionScope.user.userEmail}</li>
+								<li>운전면허 번호 : ${sessionScope.user.userLicense}</li>
+								<li>가입일자 : ${sessionScope.user.userRegDate}</li>
+								<li> 너무 허접한데? 노답인데? 글씨체 어쩌지 뭘바꿔야하지</li>
+								<li>로그인 안하면 안떠야함 alert 로그인해주세요</li>
+							</ul>
+                		</div>
+                	</div>
+				</div>
+    		</div>
           
          
         </div>

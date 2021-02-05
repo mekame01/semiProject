@@ -123,7 +123,27 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 
 	
 	
-	
+	public int updateMember(Connection conn, Member member) {
+		int res = 0;
+		PreparedStatement pstm = null;
+		
+		try {
+			String query = "update tb_member set user_pwd = ?, user_phone = ?, user_license = ? where user_id = ?";
+					
+			pstm = conn.prepareStatement(query); //쿼리 실행용 객체
+			pstm.setString(1, member.getUserPwd());
+			pstm.setString(2, member.getUserPhone());
+			pstm.setString(3, member.getUserLicense());
+			pstm.setString(4, member.getUserId());
+			
+			res = pstm.executeUpdate();
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.UM01, e);
+		}finally {
+			jdt.close(pstm);
+		}
+		return res;
+	}
 	
 	
 	
