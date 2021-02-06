@@ -4,11 +4,50 @@
 <head>
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=ff54c303c8682fcc772f6b39d0173146&libraries=services"></script>
 <style type="text/css">
+	body {
+		padding-top: 25vh;
+	}
+
+	.site-navbar {
+		margin-bottom: 0px;
+		position: fixed;
+		z-index: 9;
+		top: 0;
+		width: 100%;
+		padding: 1rem;
+	}
+	
+	.hero.inner-page {
+		height: 25vh !important;
+		position: fixed;
+		top: 0;
+		width: 100vw;
+		z-index: 8;
+	}
+	
+	.hero, .hero > .container > .row {
+		max-height: 25vh;
+		z-index: 8;
+	}
+	
+	.hero .container {
+		height: 25vh;
+		z-index: 8;
+	}
+	
+	.col-lg-4 {
+		-webkit-box-flex: 0;
+		-ms-flex: 0 0 34%;
+		flex: 0 0 34%;
+		max-width: 34%; 
+	}
+	
+
 	.map{
 		position: fixed;
-		width: 33%;
-		height: 60%;
-		top: 40%;
+		width: 35%;
+		height: 75vh;
+		top: 25vh;
 		right: 0;
 		z-index: 10;
 	}
@@ -91,53 +130,42 @@
 				</div>
 			</div>
 			
-			<div id="result">
-				<div class="carList">
-					<c:forEach var="car" items="${carList}" varStatus="status">
-						<c:if test="${status.count%2==1}">
-							<div class="row">
-								<div class="col-md-6 col-lg-4 mb-4">
-									<div class="listing-img h-100 mr-4">
-										<img src="/resources/images/car_6.jpg" alt="Image" class="img-fluid">
-									</div>
-									<div class="listing-contents h-100">
-										<h3>${car.carModel}</h3>
-										<div class="d-block d-md-flex mb-3 border-bottom pb-3">
-											<div class="listing-feature pr-4">
-												<span class="caption">평점:</span>
-												<span class="number">${car.carAvgScore}</span>
-											</div>
-										</div>
-									</div>
-									<div class="rent-price">
-										<strong>${car.carFee}</strong><span class="mx-1">/</span>hour
-									</div>
-								</div>
+			<div class="row">
+				<c:forEach var="car" items="${requestScope.carList}" varStatus="status">
+					<div class="col-md-6 col-lg-4 mb-4">
+						<div class="listing d-block  align-items-stretch">
+							<div class="listing-img h-100 mr-4">
+								<img src="/resources/images/car_4.jpg" alt="Image" class="img-fluid">
 							</div>
-						</c:if>
-						<c:if test="${status.count%2==0}">
-							<div class="col-md-6 col-lg-4 mb-4">
-								<div class="listing-img h-100 mr-4">
-									<img src="/resources/images/car_6.jpg" alt="Image" class="img-fluid">
-								</div>
-								<div class="listing-contents h-100">
-									<h3>${car.carModel}</h3>
-									<div class="d-block d-md-flex mb-3 border-bottom pb-3">
-										<div class="listing-feature pr-4">
-											<span class="caption">평점:</span>
-											<span class="number">${car.carAvgScore}</span>
-										</div>
-									</div>
-								</div>
+							<div class="listing-contents h-100">
+								<h3>${car.carModel}</h3>
 								<div class="rent-price">
-									<strong>${car.carFee}</strong><span class="mx-1">/</span>hour
+									<strong>${car.carFee}</strong>원<span class="mx-1">/</span>시간
+								</div>
+								<div class="d-block d-md-flex mb-3 border-bottom pb-3">
+									<div class="listing-feature pr-4">
+										<span class="caption">평점:</span>
+										<span class="number">${car.carAvgScore}</span>
+									</div>
+									<div class="listing-feature pr-4">
+										<span class="caption">Doors:</span>
+										<span class="number">4</span>
+									</div>
+									<div class="listing-feature pr-4">
+										<span class="caption">Passenger:</span>
+										<span class="number">4</span>
+									</div>
+								</div>
+								<div>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem quibusdam.</p>
+									<p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
 								</div>
 							</div>
-						</c:if>
-					</c:forEach>
-				</div>
-				<div class="map" id="map"></div>
+						</div>
+					</div>
+				</c:forEach>
 			</div>
+			<div class="map" id="map"></div>
 		</div>
 	</div>
 
