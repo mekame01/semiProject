@@ -67,7 +67,7 @@
                     <div class="row justify-content-start" style="padding-top:10px;">
                 		
                 		<div class="col" style="padding-top:10px; background-color:white;">
-							<ul style="list-style:none; font-family:궁서">
+							<ul style="list-style:none;">
 								
 								<li>이름 : ${sessionScope.user.userName}</li>
 								<li>비밀번호 : ${sessionScope.user.userPwd}</li>
@@ -76,7 +76,7 @@
 								<li>운전면허 번호 : ${sessionScope.user.userLicense}</li>
 								<li>가입일자 : ${sessionScope.user.userRegDate}</li>
 								<li> 너무 허접한데? 노답인데? 글씨체 어쩌지 뭘바꿔야하지</li>
-								<li>로그인 안하면 안떠야함 alert 로그인해주세요</li>
+							
 							</ul>
                 		</div>
                 	</div>
