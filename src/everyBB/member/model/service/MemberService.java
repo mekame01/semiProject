@@ -82,7 +82,21 @@ public class MemberService {
 		
 	} 
 	
-	
+	public int updateMember(Member member) {
+		Connection conn = jdt.getConnection();
+		int res = 0;
+		try {
+			res = memberDao.updateMember(conn, member);
+			jdt.commit(conn);
+		} catch (DataAccessException e) {
+			jdt.rollback(conn);
+			throw new ToAlertException(e.error);
+		}finally {
+			jdt.close(conn);
+		}
+		
+		return res;
+	}
 	
 	
 	

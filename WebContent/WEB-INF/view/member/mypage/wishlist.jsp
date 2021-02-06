@@ -30,11 +30,11 @@
               <div class="intro" style="width:500px">
                 <h1><strong>마이페이지</strong></h1>
                 <div class="custom-breadcrumbs">
-                	<a href="/member/userinfo">회원정보</a> <span class="mx-2">/</span> 
-                	<a href="/member/userinfomodify">회원정보 수정</a> <span class="mx-2">/</span> 
-                	<a href="/member/past">과거여행</a> <span class="mx-2">/</span> 
-                	<a href="/member/current">미래여행</a> <span class="mx-2">/</span> 
-                	<a href="/member/wishlist">찜한 붕붕이</a>
+                	<a href="/member/mypage/userinfo">회원정보</a> <span class="mx-2">/</span> 
+                	<a href="/member/mypage/userinfomodify">회원정보 수정</a> <span class="mx-2">/</span> 
+                	<a href="/member/mypage/past">과거여행</a> <span class="mx-2">/</span> 
+                	<a href="/member/mypage/current">미래여행</a> <span class="mx-2">/</span> 
+                	<a href="/member/mypage/wishlist">찜한 붕붕이</a>
                 </div>
               </div>
 
@@ -59,20 +59,21 @@
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
+         
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="post-entry-1 h-100">
               <a href="single.html">
-                <img src="/resources/images/post_1.jpg" alt="Image"
-                 class="img-fluid">
+                <img src="/resources/images/post_1.jpg" alt="Image" class="img-fluid">
               </a>
               <div class="post-entry-1-contents">
-                
                 <h2><a href="single.html">The best car rent in the entire planet</a></h2>
                 <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a href="#">Admin</a></span>
+                
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias consectetur.</p>
               </div>
             </div>
           </div>
+          
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="post-entry-1 h-100">
               <a href="single.html">

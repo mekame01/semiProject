@@ -38,11 +38,11 @@
               <div class="intro" style="width:500px">
                 <h1><strong>마이페이지</strong></h1>
                 <div class="custom-breadcrumbs">
-                	<a href="/member/userinfo">회원정보</a> <span class="mx-2">/</span> 
-                	<a href="/member/userinfomodify">회원정보 수정</a> <span class="mx-2">/</span> 
-                	<a href="/member/past">과거여행</a> <span class="mx-2">/</span> 
-                	<a href="/member/current">미래여행</a> <span class="mx-2">/</span> 
-                	<a href="/member/wishlist">찜한 붕붕이</a>
+                	<a href="/member/mypage/userinfo">회원정보</a> <span class="mx-2">/</span> 
+                	<a href="/member/mypage/userinfomodify">회원정보 수정</a> <span class="mx-2">/</span> 
+                	<a href="/member/mypage/past">과거여행</a> <span class="mx-2">/</span> 
+                	<a href="/member/mypage/current">미래여행</a> <span class="mx-2">/</span> 
+                	<a href="/member/mypage/wishlist">찜한 붕붕이</a>
                 </div>
               </div>
 
@@ -57,21 +57,22 @@
         <div class="row justify-content-center text-center">
         <div class="col-7 text-center mb-5">
           <h2>회원정보 변경</h2>
-          <p></p>
+          <p>이름, 아이디, 이메일은 변경이 불가합니다. 원래 값을 placeholder에 넣어놨는데 변경할때 다오가 받아올수있나?</p>
+          <p> 만약 전화번호만 변경한다면 나머지 두개를 불러올수 있을지.. </p>
         </div>
       </div>
         <div class="row">
           <div class="col-lg-8 mb-5 uu" >
-            <form action="#" method="post">
+            <form action="#" method="post" class="modify-btn">
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="이름" required="required" readonly="readonly">
+                  <input type="text" class="form-control" required="required" readonly="readonly" value="${sessionScope.user.userName}">
                 </div>
               </div>
               
                <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="아이디" required="required" readonly="readonly">
+                  <input type="text" class="form-control" required="required" readonly="readonly" value="${sessionScope.user.userId}">
                 </div>
                 
               </div>
@@ -79,7 +80,7 @@
               
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="password" class="form-control" placeholder="비밀번호 8~12이상 영문, 숫자, 특수문자" required="required">
+                  <input type="password" class="form-control" required="required" value="${sessionScope.user.userPwd}">
                 </div>
                 <div class="col-md-6">
                   <input type="password" class="form-control" placeholder="비밀번호 확인" required="required">
@@ -88,19 +89,19 @@
 
               <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="email" class="form-control" placeholder="이메일주소 : example@example.com" required="required" readonly="readonly">
+                  <input type="email" class="form-control" required="required" readonly="readonly" value="${sessionScope.user.userEmail}">
                 </div>
               </div>
               
               <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="tel" class="form-control" placeholder="전화번호 010-0000-0000" required="required">
+                  <input type="tel" class="form-control" required="required" value="${sessionScope.user.userPhone}">
                 </div>
               </div>
               
 			  <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="text" class="form-control" placeholder="운전면허 번호 : " required="required">
+                  <input type="text" class="form-control" required="required" value="${sessionScope.user.userLicense}">
                 </div>
               </div>
               
@@ -127,6 +128,28 @@
    <%@ include file="/WEB-INF/view/include/footer.jsp" %>   
     </div>
   <%@ include file="/WEB-INF/view/include/script.jsp" %>
+<script type="text/javascript">
+
+document.querySelector('.modify-btn').addEventListener('submit',(e)=>{
+	   let password = pw.value;
+	   let regExp = /^(?!.*[ㄱ-힣])(?=.*\W)(?=.*\d)(?=.*[a-zA-Z])(?=.{8,})/;
+	   
+	   if(!(regExp.test(password))){
+		   e.preventDefault();
+		   pw_confirm.innerHTML = '비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다.';
+		   pw.value='';
+	   }
+   });
+
+
+
+
+
+
+
+</script>
+
+
 
   </body>
 
