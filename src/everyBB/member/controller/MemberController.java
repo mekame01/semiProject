@@ -68,8 +68,8 @@ public class MemberController extends HttpServlet {
 			
 			default : response.setStatus(404);
 			}
-			case "logout" : logout(request, response);
-			break;
+			/*case "logout" : logout(request, response);
+			break;*/
 		default : response.setStatus(404);
 		}
 	}
@@ -237,20 +237,20 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		
 		
 		request.setAttribute("msg", "회원정보 변경이 완료되었습니다.");
-		request.setAttribute("url", "/member/mypage/user_info_modify");
+		request.setAttribute("url", "/member/mypage/userinfo");
 		
 		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/user_info.jsp")
 		.forward(request, response);
 	}
 	
-	
+	/*
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getSession().removeAttribute("user");
 		response.sendRedirect("/");  
 		
-	}
+	}*/
 	
 	
 	

@@ -84,11 +84,13 @@
               
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="password" class="form-control" name="pw" id="pw" placeholder="비밀번호 8~12이상 영문, 숫자, 특수문자" required="required">
+                  <input type="password" class="form-control pwd" name="pw" id="pw" placeholder="비밀번호 8~12이상 영문, 숫자, 특수문자" required="required">
                    <span id="pw_confirm" class="valid_info"></span>
                 </div>
                 <div class="col-md-6">
-                  <input type="password" class="form-control" placeholder="비밀번호 확인" required="required">
+                  <input type="password" class="form-control pwd" id="pw_check" placeholder="비밀번호 확인" required="required">
+                	 <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
+    				 <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
                 </div>
               </div>
 
@@ -159,6 +161,28 @@
    		   alert("아이디를 입력하지 않으셨습니다.");
    	   }
       }
+      
+      
+      $('.pwd').focusout(function(){
+    		var pwd1 = $("#pw").val();
+    		var pwd2 = $("#pw_check").val();
+    		
+    		if ( pwd1 != '' && pwd2 == '' ) {
+                null;
+            } else if (pwd1 != "" || pwd2 != "") {
+                if (pwd1 == pwd2) {
+                    $("#alert-success").css('display', 'inline-block');
+                    $("#alert-danger").css('display', 'none');
+                } else {
+                    alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+                    $("#alert-success").css('display', 'none');
+                    $("#alert-danger").css('display', 'inline-block');
+                }
+            }
+        });
+    		
+    		
+      
       
       document.querySelector('#frm_join').addEventListener('submit',(e)=>{
    	   let password = pw.value;

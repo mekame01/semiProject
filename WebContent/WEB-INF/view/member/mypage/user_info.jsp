@@ -56,32 +56,37 @@
       <div class="container">
         <div class="row justify-content-center text-center">
         <div class="col-7 text-center mb-5">
-          <h2>${sessionScope.user.userId}님의 가입정보</h2>
+          <h2>${sessionScope.user.userId} 님의 가입정보</h2>
           <p></p>
         </div>
       </div>
         <div class="row">
           
-           <div class="container body-content" style="width:60%">
-				<div class="container">
-                    <div class="row justify-content-start" style="padding-top:10px;">
-                		
-                		<div class="col" style="padding-top:10px; background-color:white;">
-							<ul style="list-style:none;">
-								
-								<li>이름 : ${sessionScope.user.userName}</li>
-								<li>비밀번호 : ${sessionScope.user.userPwd}</li>
-								<li>전화번호 : ${sessionScope.user.userPhone}</li>
-								<li>이메일 : ${sessionScope.user.userEmail}</li>
-								<li>운전면허 번호 : ${sessionScope.user.userLicense}</li>
-								<li>가입일자 : ${sessionScope.user.userRegDate}</li>
-								<li> 너무 허접한데? 노답인데? 글씨체 어쩌지 뭘바꿔야하지</li>
-							
-							</ul>
-                		</div>
-                	</div>
-				</div>
-    		</div>
+          	<table class="table table-bordered" style="width:60%; margin-left:15vw">
+                  <tr>
+                    <th class="product-name" style="width:40%">이름</th>
+                    <td class="product-name"><h2 class="h5 text-black">${sessionScope.user.userName}</h2></td>
+                  </tr>
+                  <tr>
+                    <th class="product-regDate">전화번호</th>
+                    <td class="product-regDate"><h2 class="h5 text-black">${sessionScope.user.userPhone}</td>
+                  </tr>
+                  <tr>
+                    <th class="product-pickDate">이메일</th>
+                    <td class="product-pickDate"><h2 class="h5 text-black">${sessionScope.user.userEmail}</td>
+                  </tr>
+                  <tr>
+                    <th class="product-total">운전면허 번호</th>
+                    <td class="product-total"><h2 class="h5 text-black">${sessionScope.user.userLicense}</td>
+                  </tr>
+                  <tr>
+                    <th class="product-total">가입일자 번호</th>
+                    <td class="product-total"><h2 class="h5 text-black">${sessionScope.user.userRegDate}</td>
+                  </tr>
+               </table>
+          
+          
+          
           
          
         </div>
