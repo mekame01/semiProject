@@ -5,7 +5,6 @@ public class Likey {
 	private int likeyIdx;
 	private String userId;
 	private int carIdx;
-	private int state;
 
 	public int getLikeyIdx() {
 		return likeyIdx;
@@ -31,17 +30,10 @@ public class Likey {
 		this.carIdx = carIdx;
 	}
 
-	public int getState() {
-		return state;
-	}
-
-	public void setState(int state) {
-		this.state = state;
-	}
-
+	
 	@Override
 	public String toString() {
-		return "Likey [likeyIdx=" + likeyIdx + ", userId=" + userId + ", carIdx=" + carIdx + ", state=" + state + "]";
+		return "Likey [likeyIdx=" + likeyIdx + ", userId=" + userId + ", carIdx=" + carIdx + "]";
 	}
 	
 }
