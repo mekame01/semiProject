@@ -57,13 +57,13 @@
         <div class="row justify-content-center text-center">
         <div class="col-7 text-center mb-5">
           <h2>회원정보 변경</h2>
-          <p>이름, 아이디, 이메일은 변경이 불가합니다. 원래 값을 placeholder에 넣어놨는데 변경할때 다오가 받아올수있나?</p>
+          <p>이름, 아이디, 이메일은 변경이 불가합니다. </p>
           <p> 만약 전화번호만 변경한다면 나머지 두개를 불러올수 있을지.. </p>
         </div>
       </div>
         <div class="row">
           <div class="col-lg-8 mb-5 uu" >
-            <form action="#" method="post" class="modify-btn">
+            <form action="${url}" method="post" class="modify-btn">
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
                   <input type="text" class="form-control" required="required" readonly="readonly" value="${sessionScope.user.userName}">
@@ -72,7 +72,7 @@
               
                <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" required="required" readonly="readonly" value="${sessionScope.user.userId}">
+                  <input type="text" class="form-control pwd" required="required" readonly="readonly" value="${sessionScope.user.userId}">
                 </div>
                 
               </div>
@@ -80,10 +80,12 @@
               
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="password" class="form-control" required="required" value="${sessionScope.user.userPwd}">
+                  <input type="password" class="form-control pwd" required="required" value="${sessionScope.user.userPwd}">
                 </div>
                 <div class="col-md-6">
-                  <input type="password" class="form-control" placeholder="비밀번호 확인" required="required">
+                  <input type="password" class="form-control" id="pw_check" placeholder="비밀번호 확인" required="required">
+                  	<span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
+    				 <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
                 </div>
               </div>
 
@@ -140,6 +142,24 @@ document.querySelector('.modify-btn').addEventListener('submit',(e)=>{
 		   pw.value='';
 	   }
    });
+   
+$('.pwd').focusout(function(){
+	var pwd1 = $("#pw").val();
+	var pwd2 = $("#pw_check").val();
+	
+	if ( pwd1 != '' && pwd2 == '' ) {
+        null;
+    } else if (pwd1 != "" || pwd2 != "") {
+        if (pwd1 == pwd2) {
+            $("#alert-success").css('display', 'inline-block');
+            $("#alert-danger").css('display', 'none');
+        } else {
+            alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+            $("#alert-success").css('display', 'none');
+            $("#alert-danger").css('display', 'inline-block');
+        }
+    }
+});
 
 
 

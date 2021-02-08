@@ -228,7 +228,7 @@ i span{
         </div>
 	<div class="login">Or login with</div>
 	
-          	<a id="kakao-login-btn" href="javascript:loginWithKakao()">
+          	<a id="kakao-login-btn" href="javascript:kakaoLogin()">
 			  <img
 			    src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
 			    width="222"
@@ -295,6 +295,36 @@ i span{
 	
     
       
+      window.Kakao.init("eba581b49ce24e33fa30a825ab8ac456");
+  	
+  	function kakaoLogin(){
+  		window.Kakao.Auth.login({
+  			scope: 'profile, account_email, gender',
+  			success: function(authObj){
+  				console.log(authObj);
+  				window.Kakao.API.request({
+  					url:'/v2/user/me',
+  					success: res => {
+  						//const kakao_account = res.kakao_account;
+  						//console.log(kakao_account);
+  						
+  						var userId = res.id;
+  						var userEmail = res.kaccount_email;
+  						var userName = res.properties.nickname;
+  						
+  						console.log(userId);
+  						console.log(userEmail);
+  						console.log(userName);
+  						
+  					}
+  				});
+  			}
+  		});
+  	}
+      
+      
+      
+      /*
       function loginWithKakao() {
     	    Kakao.Auth.login({
     	      success: function(authObj) {
@@ -390,6 +420,22 @@ i span{
       
      */
       //4d17ea56d4446f9717ad7ae08873916f
+    
+      
+      
+      
+     /*
+     첫째, 리소스서버에서 가져온 아이디가 클라이언트에 있으면 충돌이일어난다. 
+     때문에 카카오서버에서 회원가입을하면 내서버에서는 회원가입을 패싱시켜야한다.
+
+	둘째, 독자가 웹사이트에서 카카오, 구글 또는 페이스북 등으로 로그인을 하고나서 추가적인 회원가입을 요청받는 
+	경우를 접했을 것이다. 그것은 로그인API를 제공한 기업에서 자료수집 동의를 받을때 선택항목에 대한 정보를 
+	고객이 null로 넘겨 가입했을때 주체가 되는 기업에서는 해당 정보가 필수수집자료이기에 일어나는 결과다. 
+	즉, 로그인API서버에서 가지고 있지 않는 유저정보를 주체가되는 기업의 서버에서 필요로 할때 로그인을 했더라도 
+	회원가입이 수행된다. 이 개념을 잡고 코드설계하길 바란다.
+     */ 
+      
+      
       
     </script>
     
