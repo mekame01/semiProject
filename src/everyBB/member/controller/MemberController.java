@@ -181,7 +181,7 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 					response.getWriter().print("fail");
 				}
 			
-	}
+	} 
 	
 	
 	private void pastTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -222,23 +222,22 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 	
 	private void userInfoModifyImpl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//String userId = (String) Session.getAttribute("id"); 
+		//((Member) request.getSession().getAttribute("user")).getUserId(); 
 		String userPwd = request.getParameter("pw");
 		String userPhone = request.getParameter("tell");
 		String userLicense = request.getParameter("license");
 		
-		Member member = new Member();
+		Member member = (Member) request.getSession().getAttribute("user"); 
+		
 		member.setUserPwd(userPwd);
 		member.setUserPhone(userPhone);
 		member.setUserLicense(userLicense);
 		
-		
 		memberService.updateMember(member);
-		
-		
 		
 		request.setAttribute("msg", "회원정보 변경이 완료되었습니다.");
 		request.setAttribute("url", "/member/mypage/userinfo");
-		
 		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/user_info.jsp")
 		.forward(request, response);
