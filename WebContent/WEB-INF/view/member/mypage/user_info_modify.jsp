@@ -61,18 +61,21 @@
           <p> 만약 전화번호만 변경한다면 나머지 두개를 불러올수 있을지.. </p>
         </div>
       </div>
+      
+      
         <div class="row">
           <div class="col-lg-8 mb-5 uu" >
-            <form action="${url}" method="post" class="modify-btn">
+            <form action="./userinfomodifyimpl" method="post" class="modify-btn">
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" required="required" readonly="readonly" value="${sessionScope.user.userName}">
+                  <input type="text" class="form-control" required="required" readonly="readonly" value="${sessionScope.user.userId}">
+                	
                 </div>
               </div>
               
                <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control pwd" required="required" readonly="readonly" value="${sessionScope.user.userId}">
+                  <input type="text" class="form-control" required="required" readonly="readonly" value="${sessionScope.user.userName}">
                 </div>
                 
               </div>
@@ -80,10 +83,10 @@
               
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="password" class="form-control pwd" required="required" value="${sessionScope.user.userPwd}">
+                  <input type="password" class="form-control pwd" id="pw" name="pw" required="required" value="${sessionScope.user.userPwd}">
                 </div>
                 <div class="col-md-6">
-                  <input type="password" class="form-control" id="pw_check" placeholder="비밀번호 확인" required="required">
+                  <input type="password" class="form-control pwd" id="pw_check" placeholder="비밀번호 확인" required="required">
                   	<span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
     				 <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
                 </div>
@@ -97,13 +100,13 @@
               
               <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="tel" class="form-control" required="required" value="${sessionScope.user.userPhone}">
+                  <input type="tel" class="form-control" name="tell" required="required" value="${sessionScope.user.userPhone}">
                 </div>
               </div>
               
 			  <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="text" class="form-control" required="required" value="${sessionScope.user.userLicense}">
+                  <input type="text" class="form-control" name="license" required="required" value="${sessionScope.user.userLicense}">
                 </div>
               </div>
               
