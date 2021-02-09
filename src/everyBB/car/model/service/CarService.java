@@ -17,16 +17,28 @@ public class CarService {
 		
 	}
 	
-	public List<Car> selectByLatLng(String address, Date pickupDate, Date returnDate) {
+	public List<Car> selectByAddress(String address, Date pickupDate, Date returnDate) {
 		Connection conn = jdt.getConnection();
 		List<Car> carList = null;
 		
 		try {
-			carList = carDao.selectByLatLng(conn, address, pickupDate, returnDate);
+			carList = carDao.selectByAddress(conn, address, pickupDate, returnDate);
 		} finally {
 			jdt.close(conn);
 		}
 		return carList;
+	}
+
+	public Car selectByCarIdx(int carIdx) {
+		Connection conn = jdt.getConnection();
+		Car car = null;
+		
+		try {
+			car = carDao.selectByCarIdx(conn, carIdx);
+		} finally {
+			jdt.close(conn);
+		}
+		return car;
 	}
 
 }

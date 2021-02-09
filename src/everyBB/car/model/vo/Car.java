@@ -20,7 +20,7 @@ public class Car {
 	private String carBackCam; //후방카메라 유무
 	private String carNote; //참고사항
 	private int carFee; //가격
-	private int carAvgScore; //평균평가점수
+	private double carAvgScore; //평균평가점수
 	private Date carDate; //등록날짜
 	private String carState; //차 상태코드
 
@@ -152,11 +152,11 @@ public class Car {
 		this.carFee = carFee;
 	}
 
-	public int getCarAvgScore() {
+	public double getCarAvgScore() {
 		return carAvgScore;
 	}
 
-	public void setCarAvgScore(int carAvgScore) {
+	public void setCarAvgScore(double carAvgScore) {
 		this.carAvgScore = carAvgScore;
 	}
 
@@ -185,5 +185,5 @@ public class Car {
 				+ ", carBackCam=" + carBackCam + ", carNote=" + carNote + ", carFee=" + carFee + ", carAvgScore="
 				+ carAvgScore + ", carDate=" + carDate + ", carState=" + carState + "]";
 	}
-	
+
 }

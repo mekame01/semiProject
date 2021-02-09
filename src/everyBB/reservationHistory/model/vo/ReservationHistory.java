@@ -6,8 +6,8 @@ public class ReservationHistory {
 
 	private int resHistoryIdx;
 	private int resIdx;
-	private int carIdx;
 	private String userId;
+	private int carIdx;
 	private Date regDate;
 	private String resState;
 
@@ -27,20 +27,20 @@ public class ReservationHistory {
 		this.resIdx = resIdx;
 	}
 
-	public int getCarIdx() {
-		return carIdx;
-	}
-
-	public void setCarIdx(int carIdx) {
-		this.carIdx = carIdx;
-	}
-
 	public String getUserId() {
 		return userId;
 	}
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public int getCarIdx() {
+		return carIdx;
+	}
+
+	public void setCarIdx(int carIdx) {
+		this.carIdx = carIdx;
 	}
 
 	public Date getRegDate() {
@@ -61,7 +61,8 @@ public class ReservationHistory {
 
 	@Override
 	public String toString() {
-		return "ReservationHistory [resHistoryIdx=" + resHistoryIdx + ", resIdx=" + resIdx + ", carIdx=" + carIdx
-				+ ", userId=" + userId + ", regDate=" + regDate + ", resState=" + resState + "]";
+		return "ReservationHistory [resHistoryIdx=" + resHistoryIdx + ", resIdx=" + resIdx + ", userId=" + userId
+				+ ", carIdx=" + carIdx + ", regDate=" + regDate + ", resState=" + resState + "]";
 	}
+
 }

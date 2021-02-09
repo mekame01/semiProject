@@ -2,55 +2,67 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/include/head.jsp" %>
 <head>
-<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=ff54c303c8682fcc772f6b39d0173146&libraries=services"></script>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8f0a8bf7d90077ec52cc56e4a88c0fcd&libraries=services"></script>
 <style type="text/css">
-	body {
-		padding-top: 25vh;
-	}
+body {
+	padding-top: 25vh;
+}
 
-	.site-navbar {
-		margin-bottom: 0px;
-		position: fixed;
-		z-index: 9;
-		top: 0;
-		width: 100%;
-		padding: 1rem;
-	}
-	
-	.hero.inner-page {
-		height: 25vh !important;
-		position: fixed;
-		top: 0;
-		width: 100vw;
-		z-index: 8;
-	}
-	
-	.hero, .hero > .container > .row {
-		max-height: 25vh;
-		z-index: 8;
-	}
-	
-	.hero .container {
-		height: 25vh;
-		z-index: 8;
-	}
-	
-	.col-lg-4 {
-		-webkit-box-flex: 0;
-		-ms-flex: 0 0 34%;
-		flex: 0 0 34%;
-		max-width: 34%; 
-	}
-	
+.site-navbar {
+	margin-bottom: 0px;
+	position: fixed;
+	z-index: 9;
+	top: 0;
+	width: 100%;
+	padding: 1rem;
+}
 
-	.map{
-		position: fixed;
-		width: 35%;
-		height: 75vh;
-		top: 25vh;
-		right: 0;
-		z-index: 10;
-	}
+.hero.inner-page {
+	height: 25vh !important;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	z-index: 8;
+}
+
+.hero, .hero > .container > .row {
+	max-height: 25vh;
+	z-index: 8;
+}
+
+.hero .container {
+	height: 25vh;
+	z-index: 8;
+}
+
+.col-lg-4 {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 34%;
+	flex: 0 0 34%;
+	max-width: 34%; 
+}
+
+a:not([href]):not([tabindex]) {
+	cursor: pointer;
+	color: white;
+	text-decoration: none;
+}
+a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
+	color: white;
+	text-decoration: none;
+}
+a:not([href]):not([tabindex]):focus {
+	outline: 0;
+}
+
+.map{
+	position: fixed;
+	width: 35%;
+	height: 75vh;
+	top: 25vh;
+	right: 0;
+	z-index: 10;
+}
 </style>
 </head>
 <body>
@@ -132,7 +144,7 @@
 			
 			<div class="row">
 				<c:forEach var="car" items="${requestScope.carList}" varStatus="status">
-					<div class="col-md-6 col-lg-4 mb-4">
+					<div class="cars col-md-6 col-lg-4 mb-4">
 						<div class="listing d-block  align-items-stretch">
 							<div class="listing-img h-100 mr-4">
 								<img src="/resources/images/car_4.jpg" alt="Image" class="img-fluid">
@@ -158,7 +170,7 @@
 								</div>
 								<div>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem quibusdam.</p>
-									<p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
+									<p><a onclick="rentDetail(${car.carIdx})" class="btn btn-primary btn-sm">Rent Now</a></p>
 								</div>
 							</div>
 						</div>
@@ -174,15 +186,6 @@
 
 <%@ include file="/WEB-INF/view/include/script.jsp" %>
 <script type="text/javascript">
-//변수 선언
-/*
-let latMin;
-let latMax;
-let lngMin;
-let lngMax;
-let pickupDate;
-let returnDate;
-*/
 
 
 //입력값 초기화
@@ -194,6 +197,7 @@ $("#return_date").val("${requestScope.return_date}");
 $("#return_hour").val("${requestScope.return_hour}");
 $("#centerLat").val("${requestScope.centerLat}");
 $("#centerLng").val("${requestScope.centerLng}");
+
 /*
 if(${requestScope.from=="/index"}){
 	let pickupDateArr = "${param.pickup_date}".split("/");
@@ -253,6 +257,32 @@ let dbSelect = ()=>{
 }
 */
 
+//
+let rentDetail = (carIdx) => {
+	let pickupDate = document.querySelector("#pickup_date").value;
+	let pickupHour = document.querySelector("#pickup_hour").value;
+	let returnDate = document.querySelector("#return_date").value;
+	let returnHour = document.querySelector("#return_hour").value;
+	location.href="/rent/detail?car_idx=" + carIdx
+	+ "&pickup_date=" + pickupDate + "&pickup_hour=" + pickupHour
+	+ "&return_date=" + returnDate + "&return_hour=" + returnHour;
+}
+
+//인포윈도우
+let infowindow = (i,infowindows,markers,positions) => {
+	document.querySelectorAll(".cars")[i].addEventListener("mouseenter",()=>{
+		console.dir(infowindows);
+		console.dir(markers);
+		console.dir(positions[i]);
+		infowindows[i].open(map, markers[i]);
+	});
+
+	document.querySelectorAll(".cars")[i].addEventListener("mouseleave",()=>{
+		//infowindows[i].infowindow.close();
+	});
+}
+
+
 //지도
 let mapSelect = ()=>{
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
@@ -268,12 +298,16 @@ let mapSelect = ()=>{
 	
 	// 마커를 표시할 위치와 title 객체 배열입니다 
 	var positions  = [];
+	var contents = [];
+	var markers = [];
+	var infowindows = [];
 	<c:forEach items="${requestScope.carList}" var="car" varStatus="status">
-		positions["${status.index}"] = {latlng: new kakao.maps.LatLng("${car.carParkingLat}", "${car.carParkingLng}")};
-		console.dir("${status.index}");
-		console.dir("car");
+		positions["${status.index}"] = {"latlng": new kakao.maps.LatLng("${car.carParkingLat}", "${car.carParkingLng}")};
+		contents["${status.index}"] = {"content": '<div style="padding:5px; width:auto;">${car.carFee}</div>'};
+		//console.dir("${status.index}");
+		//console.dir("${car}");
 	</c:forEach>
-	console.dir("${requestScope.carList}");
+	//console.dir("${requestScope.carList}");
 	console.dir(positions);
 	for (var i = 0; i < positions.length; i ++) {
 		
@@ -284,14 +318,48 @@ let mapSelect = ()=>{
 		//var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
 		
 		// 마커를 생성합니다
-		var marker = new kakao.maps.Marker({
+		markers[i] = new kakao.maps.Marker({
 			map: map, // 마커를 표시할 지도
 			position: positions[i].latlng // 마커를 표시할 위치
 			//title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 			//image : markerImage // 마커 이미지 
 		});
+		
+		// 인포윈도우를 생성합니다
+		infowindows[i] = new kakao.maps.InfoWindow({
+			position : positions[i].latlng,
+			content : contents[i].content
+		});
+		
+		// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+		//infowindow.open(map, marker);
+		document.querySelectorAll(".cars").forEach((e,index)=>{
+			e.addEventListener("mouseenter",()=>{
+				/*
+				console.dir("index : " + index);
+				console.dir(infowindows);
+				console.dir(markers);
+				*/
+				infowindows[index].open(map, markers[index]);
+			});
+			
+			e.addEventListener("mouseleave",()=>{
+				/*
+				console.dir("index : " + index);
+				console.dir(infowindows);
+				console.dir(markers);
+				*/
+				infowindows[index].close();
+			});
+		});
 	}
-
+	/*
+	document.querySelectorAll(".cars").forEach((e,i)=>{
+		e.addEventListener("mouseenter",()=>{
+			infowindow.open();
+		});
+	});
+	*/
 	/*
 	// 장소 검색 객체를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();
@@ -358,7 +426,6 @@ let mapSelect = ()=>{
 }
 
 mapSelect();
-
 
 let kakaoAddr = async (e)=>{
 	//e.preventDefault();

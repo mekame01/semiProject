@@ -14,25 +14,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import everyBB.car.model.service.CarService;
 import everyBB.car.model.vo.Car;
+import everyBB.member.model.vo.Member;
+import everyBB.reservationHistory.model.service.ReservationHistoryService;
+import everyBB.reservationHistory.model.vo.ReservationHistory;
+import everyBB.review.model.service.ReviewService;
+import everyBB.review.model.vo.Review;
 
-/**
- * Servlet implementation class RentController
- */
 @WebServlet("/rent/*")
 public class RentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private CarService carService = new CarService();
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public RentController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] uriArr = request.getRequestURI().split("/");
 		switch (uriArr[uriArr.length-1]) {
@@ -46,11 +43,7 @@ public class RentController extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 	
@@ -70,6 +63,31 @@ public class RentController extends HttpServlet {
 
 
 	private void rentDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int carIdx = Integer.parseInt(request.getParameter("car_idx"));
+		System.out.println("carIdx : " + carIdx);
+		Car car = carService.selectByCarIdx(carIdx);
+		System.out.println("car : " + car);
+		
+		String userId = ((Member)request.getSession().getAttribute("user")).getUserId();
+		
+		List<ReservationHistory> reservationHistoryList = new ReservationHistoryService().selectReservationById(userId, carIdx);
+		System.out.println("reservationHistoryList : " + reservationHistoryList);
+		
+		List<Review> reviewList = new ReviewService().selectReviewByCarIdx(carIdx);
+		System.out.println("reviewList : " + reviewList);
+		
+		//enum 코드 등록
+		//결과값에 따라 내비, 백캠 값 세팅 아니면 화면에서 처리
+		request.setAttribute("car", car);
+		//리뷰 남길 수 있는지 판단용
+		request.setAttribute("reservationHistoryList", reservationHistoryList);
+		//리뷰 화면에 뿌리는 용
+		request.setAttribute("reviewList", reviewList);
+		
+		request.setAttribute("pickup_date", request.getParameter("pickup_date"));
+		request.setAttribute("pickup_hour", request.getParameter("pickup_hour"));
+		request.setAttribute("return_date", request.getParameter("return_date"));
+		request.setAttribute("return_hour", request.getParameter("return_hour"));
 		request.getRequestDispatcher("/WEB-INF/view/rent/rent_detail.jsp")
 		.forward(request, response);
 	}
@@ -113,7 +131,7 @@ public class RentController extends HttpServlet {
 			System.out.println("address : " + address);
 			System.out.println("kakaoAddress : " + kakaoAddress);
 			
-			List<Car> carList = new CarService().selectByLatLng(kakaoAddress, pickupDate, returnDate);
+			List<Car> carList = carService.selectByAddress(kakaoAddress, pickupDate, returnDate);
 			System.out.println(carList);
 			request.setAttribute("carList", carList);
 			

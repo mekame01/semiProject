@@ -622,7 +622,7 @@ let kakaoAddr = async (e)=>{
 		"method": "get",
 		"headers": headerObj
 	});
-	
+	console.dir(response);
 	let obj = await response.json();
 	console.dir(obj);
 	let adrressNameArr = obj.documents[0].address_name.split(" ");

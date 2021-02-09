@@ -5,8 +5,9 @@ import java.sql.Date;
 public class Reservation {
 
 	private int resIdx;
-	private int carIdx;
 	private String userId;
+	private int carIdx;
+	private String resParking;
 	private Date resDate;
 	private Date resPickupDate;
 	private Date resReturnDate;
@@ -20,6 +21,14 @@ public class Reservation {
 		this.resIdx = resIdx;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public int getCarIdx() {
 		return carIdx;
 	}
@@ -28,12 +37,12 @@ public class Reservation {
 		this.carIdx = carIdx;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getResParking() {
+		return resParking;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setResParking(String resParking) {
+		this.resParking = resParking;
 	}
 
 	public Date getResDate() {
@@ -70,8 +79,8 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return "Reservation [resIdx=" + resIdx + ", carIdx=" + carIdx + ", userId=" + userId + ", resDate=" + resDate
-				+ ", resPickupDate=" + resPickupDate + ", resReturnDate=" + resReturnDate + ", resFee=" + resFee + "]";
+		return "Reservation [resIdx=" + resIdx + ", userId=" + userId + ", carIdx=" + carIdx + ", resParking="
+				+ resParking + ", resDate=" + resDate + ", resPickupDate=" + resPickupDate + ", resReturnDate="
+				+ resReturnDate + ", resFee=" + resFee + "]";
 	}
-	
 }

@@ -21,44 +21,35 @@ public class CarDao {
 		
 	}
 	
-	public List<Car> selectByLatLng(Connection conn, String address, Date pickupDate, Date returnDate) {
+	public List<Car> selectByAddress(Connection conn, String address, Date pickupDate, Date returnDate) {
 		PreparedStatement pstm = null;
 		ResultSet rset = null;
 		List<Car> carList = new ArrayList<Car>();
 	
 		try {
-		String query = "select c.* "
-				+ " from tb_car c "
-				+ " left join tb_reservation r on(c.car_idx=r.car_idx) "
-				+ " where c.car_parking like ?||'%' "
-				+ " and not (case when r.res_pickup_date != null "
-				+ "               then r.res_pickup_date "
-				+ "               else sysdate end) between ? and ? "
-				+ " and not (case when r.res_return_date != null  "
-				+ "               then r.res_return_date "
-				+ "               else sysdate end) between ? and ? ";
+		String query = "select c.*"
+				+ " from tb_car c"
+				+ " left join tb_reservation r on(c.car_idx=r.car_idx)"
+				+ " where c.car_parking like ?||'%'"
+				+ " and not (case when r.res_pickup_date is not null"
+				+ "               then r.res_pickup_date"
+				+ "               else ? - 1 end) between ? and ?"
+				+ " and not (case when r.res_return_date is not null"
+				+ "               then r.res_return_date"
+				+ "               else ? - 1 end) between ? and ?"
+				+ " order by c.car_avg_score desc";
 		
 		pstm = conn.prepareStatement(query);
-		/*
-		pstm.setDouble(1, latMin);
-		pstm.setDouble(2, latMax);
-		pstm.setDouble(3, lngMin);
-		pstm.setDouble(4, lngMax);
-		pstm.setDate(5, pickupDate);
-		pstm.setDate(6, returnDate);
-		pstm.setDate(7, pickupDate);
-		pstm.setDate(8, returnDate);
-		*/
 		
 		pstm.setString(1, address);
 		pstm.setDate(2, pickupDate);
-		pstm.setDate(3, returnDate);
-		pstm.setDate(4, pickupDate);
-		pstm.setDate(5, returnDate);
+		pstm.setDate(3, pickupDate);
+		pstm.setDate(4, returnDate);
+		pstm.setDate(5, pickupDate);
+		pstm.setDate(6, pickupDate);
+		pstm.setDate(7, returnDate);
 
-		
 		rset = pstm.executeQuery();
-		
 		
 		while(rset.next()) {
 			Car car = new Car(); 
@@ -78,7 +69,7 @@ public class CarDao {
 			car.setCarBackCam(rset.getString("car_back_cam"));
 			car.setCarNote(rset.getString("car_note"));
 			car.setCarFee(rset.getInt("car_fee"));
-			car.setCarAvgScore(rset.getInt("car_avg_score"));
+			car.setCarAvgScore(rset.getDouble("car_avg_score"));
 			car.setCarDate(rset.getDate("car_date"));
 			car.setCarState(rset.getString("car_state"));
 			carList.add(car);
@@ -98,8 +89,8 @@ public class CarDao {
 		ResultSet rset = null;
 		
 		try {
-			String query = "select * from tb_car "
-					+ "where car_idx = ? ";
+			String query = "select * from tb_car"
+					+ " where car_idx = ?";
 			
 			//3. 쿼리 실행용 객체 생성
 			pstm = conn.prepareStatement(query);
@@ -111,6 +102,7 @@ public class CarDao {
 			rset = pstm.executeQuery();
 			
 			if(rset.next()) {
+				car = new Car();
 				car.setCarIdx(rset.getInt("car_idx"));
 				car.setUserId(rset.getString("user_id"));
 				car.setCarNumber(rset.getString("car_number"));
@@ -127,7 +119,7 @@ public class CarDao {
 				car.setCarBackCam(rset.getString("car_back_cam"));
 				car.setCarNote(rset.getString("car_note"));
 				car.setCarFee(rset.getInt("car_fee"));
-				car.setCarAvgScore(rset.getInt("car_avg_score"));
+				car.setCarAvgScore(rset.getDouble("car_avg_score"));
 				car.setCarDate(rset.getDate("car_date"));
 				car.setCarState(rset.getString("car_state"));
 			}
