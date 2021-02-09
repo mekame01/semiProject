@@ -53,6 +53,7 @@ public class PaymentController extends HttpServlet {
 	
 	private void payDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		request.getRequestDispatcher("/WEB-INF/view/payment/payDetail.jsp")
 		.forward(request, response);
 	}

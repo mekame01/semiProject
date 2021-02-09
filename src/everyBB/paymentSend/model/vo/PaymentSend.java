@@ -2,6 +2,8 @@ package everyBB.paymentSend.model.vo;
 
 import java.sql.Date;
 
+import everyBB.reservation.model.vo.Reservation;
+
 public class PaymentSend {
 
 	private int paySendIdx;
@@ -9,7 +11,7 @@ public class PaymentSend {
 	private String paySendTid;
 	private Date paySendDate;
 	private String paymentYn;
-
+	
 	public int getPaySendIdx() {
 		return paySendIdx;
 	}
