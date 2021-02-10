@@ -55,7 +55,7 @@ public class ReservationHistoryDao {
 					+ "                                   where user_id = ?"
 					+ "                                     and car_idx = ?"
 					+ "                                group by res_idx))"
-					+ " and res_state = 'RH04'";
+					+ " and res_state = 'RH05'";
 			
 			//3. 쿼리 실행용 객체 생성
 			pstm = conn.prepareStatement(query);

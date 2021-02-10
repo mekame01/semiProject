@@ -9,10 +9,11 @@ public enum Code {
 	UPLOAD("C:\\CODE\\E_SERVLET\\resources\\upload\\"),
 	RH01("예약"),
 	RH02("확인"),
-	RH03("픽업"),
-	RH04("반환(리뷰가능)"),
-	RH05("리뷰남김"),
-	RH06("리뷰삭제"),
+	RH03("결제"),
+	RH04("픽업"),
+	RH05("반환(리뷰가능)"),
+	RH06("리뷰남김"),
+	RH07("리뷰삭제"),
 	RH09("거절");
 	
 	public String desc;

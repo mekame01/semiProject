@@ -28,7 +28,8 @@ public class ReviewService {
 		reservationHistory.setResIdx(review.getResIdx());
 		reservationHistory.setUserId(review.getUserId());
 		reservationHistory.setCarIdx(review.getCarIdx());
-		reservationHistory.setResState("RH05");
+		//리뷰남김
+		reservationHistory.setResState("RH06");
 		
 		try {
 			reviewDao.insertReview(conn, review);
@@ -56,4 +57,33 @@ public class ReviewService {
 		return reviewList;
 	}
 
+	public void updateReview(Review review) {
+		Connection conn = jdt.getConnection();
+		
+		try {
+			reviewDao.updateReview(conn, review);
+			reviewDao.updateCarAvgScore(conn, review);
+			jdt.commit(conn);
+		}catch (Exception e) {
+			jdt.rollback(conn);
+			throw new DataAccessException(ErrorCode.UW01, e);
+		}finally {
+			jdt.close(conn);
+		}
+	}
+
+	public void deleteReview(Review review) {
+		Connection conn = jdt.getConnection();
+		
+		try {
+			reviewDao.deleteReview(conn, review);
+			reviewDao.updateCarAvgScore(conn, review);
+			jdt.commit(conn);
+		}catch (Exception e) {
+			jdt.rollback(conn);
+			throw new DataAccessException(ErrorCode.UW01, e);
+		}finally {
+			jdt.close(conn);
+		}
+	}
 }

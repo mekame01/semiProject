@@ -25,7 +25,9 @@ public class RentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private CarService carService = new CarService();
-       
+	private ReservationHistoryService reservationHistoryService = new ReservationHistoryService();
+	private ReviewService reviewService = new ReviewService();
+	
     public RentController() {
         super();
     }
@@ -68,12 +70,17 @@ public class RentController extends HttpServlet {
 		Car car = carService.selectByCarIdx(carIdx);
 		System.out.println("car : " + car);
 		
-		String userId = ((Member)request.getSession().getAttribute("user")).getUserId();
+		List<ReservationHistory> reservationHistoryList = null;
 		
-		List<ReservationHistory> reservationHistoryList = new ReservationHistoryService().selectReservationById(userId, carIdx);
-		System.out.println("reservationHistoryList : " + reservationHistoryList);
+		Member member = ((Member)request.getSession().getAttribute("user"));
+		if(member != null) {
+			String userId = member.getUserId();
+			
+			reservationHistoryList = reservationHistoryService.selectReservationById(userId, carIdx);
+			System.out.println("reservationHistoryList : " + reservationHistoryList);
+		}
 		
-		List<Review> reviewList = new ReviewService().selectReviewByCarIdx(carIdx);
+		List<Review> reviewList = reviewService.selectReviewByCarIdx(carIdx);
 		System.out.println("reviewList : " + reviewList);
 		
 		//enum 코드 등록

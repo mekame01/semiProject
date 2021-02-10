@@ -27,27 +27,23 @@ public class CarDao {
 		List<Car> carList = new ArrayList<Car>();
 	
 		try {
-		String query = "select c.*"
-				+ " from tb_car c"
-				+ " left join tb_reservation r on(c.car_idx=r.car_idx)"
-				+ " where c.car_parking like ?||'%'"
-				+ " and not (case when r.res_pickup_date is not null"
-				+ "               then r.res_pickup_date"
-				+ "               else ? - 1 end) between ? and ?"
-				+ " and not (case when r.res_return_date is not null"
-				+ "               then r.res_return_date"
-				+ "               else ? - 1 end) between ? and ?"
-				+ " order by c.car_avg_score desc";
+			String query = "select c.*"
+					+ " from tb_car c"
+					+ " where c.car_parking like ?||'%'"
+					+ " and c.car_idx not in (select r.car_idx"
+					+ "                         from tb_reservation r"
+					+ "                        where r.car_idx = c.car_idx"
+					+ "                          and (r.res_pickup_date between ? and ?"
+					+ "                           or r.res_return_date between ? and ?))"
+					+ " order by c.car_avg_score desc";
 		
 		pstm = conn.prepareStatement(query);
 		
 		pstm.setString(1, address);
 		pstm.setDate(2, pickupDate);
-		pstm.setDate(3, pickupDate);
-		pstm.setDate(4, returnDate);
-		pstm.setDate(5, pickupDate);
-		pstm.setDate(6, pickupDate);
-		pstm.setDate(7, returnDate);
+		pstm.setDate(3, returnDate);
+		pstm.setDate(4, pickupDate);
+		pstm.setDate(5, returnDate);
 
 		rset = pstm.executeQuery();
 		

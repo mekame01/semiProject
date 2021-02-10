@@ -52,7 +52,7 @@ public class ReservationHistoryController extends HttpServlet {
 		
 		reservationHistoryService.insertReservationHistory(reservationHistory);
 		
-		if(resState.equals("RH04")) {
+		if(resState.equals("RH02")) {
 			request.setAttribute("msg", "예약 수락이 완료되었습니다.");
 		}else if(resState.equals("RH09")) {
 			request.setAttribute("msg", "예약 거절이 완료되었습니다.");
