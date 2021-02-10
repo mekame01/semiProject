@@ -32,6 +32,19 @@ public class MemberService {
 		return member;
 	}
 	
+	public Member kakaoMemberAuthenticate(String userId, String userEmail) {
+		Connection conn = jdt.getConnection();
+		
+		Member member = null;
+		try {
+			member = memberDao.memberAuthenticate(conn, userId, userEmail);
+		}finally {
+			jdt.close(conn);
+		}
+		
+		return member;
+	}
+	
 	public int insertMember(Member member){
 		Connection conn = jdt.getConnection();
 		int res = 0;

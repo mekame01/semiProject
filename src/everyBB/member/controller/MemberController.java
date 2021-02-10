@@ -187,21 +187,37 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 	
 	private void kakaoLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userId = request.getParameter("id");
-		String userName = request.getParameter("name");
-		String userEmail = request.getParameter("email");
+		String jsonData = request.getParameter("data"); 
+		Gson gson = new Gson();
+	      Map<String, Object> jsonMap = gson.fromJson(jsonData, Map.class);
+	      
+	      String userId = Double.toString((double)jsonMap.get("id"));
+	      String userName = (String) jsonMap.get("name");
+	      String userEmail = (String) jsonMap.get("email");
 		
-		Member member = new Member();
-		member.setUserId(userId);
-		member.setUserName(userName);
-		member.setUserEmail(userEmail);
+	      Member member = memberService.kakaoMemberAuthenticate(userId, userEmail);
+			
+			if(member != null) {
+				
+				request.getSession().setAttribute("user", member);
+				response.getWriter().print("success");
+			}else {
+				
+				member = new Member();
+				member.setUserId(userId);
+				member.setUserName(userName);
+				member.setUserEmail(userEmail);
+				
+				memberService.insertKakaoMember(member);
+				
+				request.setAttribute("msg", "회원가입을 축하드립니다.");
+				request.setAttribute("url", "/");
+				request.getRequestDispatcher("/WEB-INF/view/index.jsp")
+				.forward(request, response);
+			}
+	      
+	      
 		
-		memberService.insertKakaoMember(member);
-		
-		request.setAttribute("msg", "회원가입을 축하드립니다.");
-		request.setAttribute("url", "/member/login");
-		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
-		.forward(request, response);
 	}
 	
 	

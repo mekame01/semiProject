@@ -58,6 +58,48 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		return member;
 	}
 	
+	public Member kakaoMemberAuthenticate(Connection conn, String userId, String userEmail) {
+		Member member = null;
+		
+		PreparedStatement pstm = null;
+		ResultSet rset = null;
+	
+		try {
+		String query = "select * from tb_member where user_id = ? and user_email = ?" ;
+		pstm = conn.prepareStatement(query);
+		
+		pstm.setString(1, userId);
+		pstm.setString(2, userEmail);
+		
+		rset = pstm.executeQuery();
+		
+		
+		if(rset.next()) {
+			member = new Member(); 
+
+			member.setUserId(rset.getString("user_id"));
+			member.setUserPwd(rset.getString("user_pwd"));
+			
+			member.setUserName(rset.getString("user_name"));
+			
+			member.setUserPhone(rset.getString("user_phone"));
+			member.setUserEmail(rset.getString("user_email"));
+			member.setUserLicense(rset.getString("user_license"));
+			member.setUserRegDate(rset.getDate("user_reg_date"));
+			
+			member.setUserIsLeave(rset.getInt("user_is_leave"));
+		} 
+		
+		
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.SM01, e); 
+		}finally {
+			jdt.close(rset, pstm);
+		}
+		return member;
+	}
+	
+	
 	public int insertMember(Connection conn, Member member){
 			
 			int res = 0;
