@@ -33,37 +33,28 @@
 						<input type="hidden" name="centerLng" id="centerLng">
 						<div class="row align-items-center">
 							<div class="mb-3 mb-md-0 col-md-3">
-								<input name="address" id="address" type="text"
-									placeholder="주소입력" class="form-control">
+								<input name="address" id="address" type="text" placeholder="주소입력" class="form-control">
 							</div>
 							<div class="mb-3 mb-md-0 col-md-3">
 								<div class="form-control-wrap">
-									<input type="text" name="pickup_date" id="pickup_date"
-										placeholder="픽업 날짜" class="form-control datepicker px-3">
+									<input type="text" name="pickup_date" id="pickup_date" placeholder="픽업 날짜" class="form-control datepicker px-3">
 									<span class="icon icon-date_range"> </span>
 								</div>
 								<div>
-									<input type="number" min="0" max="23" name="pickup_hour"
-										id="pickup_hour" placeholder="픽업 시각"
-										class="form-control px-3">
+									<input type="number" min="0" max="23" name="pickup_hour" id="pickup_hour" placeholder="픽업 시각" class="form-control px-3">
 								</div>
 							</div>
 							<div class="mb-3 mb-md-0 col-md-3">
 								<div class="form-control-wrap">
-									<input type="text" name="return_date" id="return_date"
-										placeholder="반환 날짜" class="form-control datepicker px-3">
+									<input type="text" name="return_date" id="return_date" placeholder="반환 날짜" class="form-control datepicker px-3">
 									<span class="icon icon-date_range"> </span>
 								</div>
 								<div>
-									<input type="number" min="0" max="23" name="return_hour"
-										id="return_hour" placeholder="반환 시각"
-										class="form-control px-3">
+									<input type="number" min="0" max="23" name="return_hour" id="return_hour" placeholder="반환 시각" class="form-control px-3">
 								</div>
 							</div>
 							<div class="mb-3 mb-md-0 col-md-3">
-								<button type="button" value="Search Now"
-									class="btn btn-primary btn-block py-3"
-									onclick="kakaoAddr()"
+								<button type="button" value="Search Now" class="btn btn-primary btn-block py-3"	onclick="kakaoAddr()"
 									>Search Now</button>
 							</div>
 						</div>
@@ -118,8 +109,10 @@
 			<div class="row">
 				<div class="col-lg-4 mx-auto">
 					<a href="#" class="d-flex align-items-center play-now mx-auto">
-						<span class="icon"> <span class="icon-play"></span>
-					</span> <span class="caption">Video how it works</span>
+						<span class="icon">
+							<span class="icon-play"></span>
+						</span>
+						<span class="caption">Video how it works</span>
 					</a>
 				</div>
 			</div>
@@ -131,8 +124,7 @@
 			<div class="row align-items-center">
 				<div class="col-lg-7 text-center order-lg-2">
 					<div class="img-wrap-1 mb-5">
-						<img src="resources/images/feature_01.png" alt="Image"
-							class="img-fluid">
+						<img src="resources/images/feature_01.png" alt="Image" class="img-fluid">
 					</div>
 				</div>
 				<div class="col-lg-4 ml-auto order-lg-1">
@@ -172,8 +164,7 @@
 
 					<div class="listing d-block  align-items-stretch">
 						<div class="listing-img h-100 mr-4">
-							<img src="/resources/images/car_6.jpg" alt="Image"
-								class="img-fluid">
+							<img src="/resources/images/car_6.jpg" alt="Image" class="img-fluid">
 						</div>
 						<div class="listing-contents h-100">
 							<h3>Mitsubishi Pajero</h3>
@@ -207,8 +198,7 @@
 
 					<div class="listing d-block  align-items-stretch">
 						<div class="listing-img h-100 mr-4">
-							<img src="/resources/images/car_5.jpg" alt="Image"
-								class="img-fluid">
+							<img src="/resources/images/car_5.jpg" alt="Image"class="img-fluid">
 						</div>
 						<div class="listing-contents h-100">
 							<h3>Nissan Moco</h3>
@@ -243,8 +233,7 @@
 
 					<div class="listing d-block  align-items-stretch">
 						<div class="listing-img h-100 mr-4">
-							<img src="/resources/images/car_4.jpg" alt="Image"
-								class="img-fluid">
+							<img src="/resources/images/car_4.jpg" alt="Image" class="img-fluid">
 						</div>
 						<div class="listing-contents h-100">
 							<h3>Honda Fitta</h3>
@@ -278,8 +267,7 @@
 
 					<div class="listing d-block  align-items-stretch">
 						<div class="listing-img h-100 mr-4">
-							<img src="/resources/images/car_3.jpg" alt="Image"
-								class="img-fluid">
+							<img src="/resources/images/car_3.jpg" alt="Image" class="img-fluid">
 						</div>
 						<div class="listing-contents h-100">
 							<h3>Skoda Laura</h3>
@@ -313,8 +301,7 @@
 
 					<div class="listing d-block  align-items-stretch">
 						<div class="listing-img h-100 mr-4">
-							<img src="/resources/images/car_2.jpg" alt="Image"
-								class="img-fluid">
+							<img src="/resources/images/car_2.jpg" alt="Image" class="img-fluid">
 						</div>
 						<div class="listing-contents h-100">
 							<h3>Mazda LaPuta</h3>
@@ -348,8 +335,7 @@
 
 					<div class="listing d-block  align-items-stretch">
 						<div class="listing-img h-100 mr-4">
-							<img src="/resources/images/car_1.jpg" alt="Image"
-								class="img-fluid">
+							<img src="/resources/images/car_1.jpg" alt="Image" class="img-fluid">
 						</div>
 						<div class="listing-contents h-100">
 							<h3>Buick LaCrosse</h3>
@@ -426,8 +412,8 @@
 				</div>
 				<div class="col-lg-4 mb-5">
 					<div class="service-1 dark">
-						<span class="service-1-icon"> <span
-							class="icon-watch_later"></span>
+						<span class="service-1-icon"> 
+							<span	class="icon-watch_later"></span>
 						</span>
 						<div class="service-1-contents">
 							<h3>Lorem ipsum dolor</h3>
@@ -442,8 +428,8 @@
 
 				<div class="col-lg-4 mb-5">
 					<div class="service-1 dark">
-						<span class="service-1-icon"> <span
-							class="icon-verified_user"></span>
+						<span class="service-1-icon">
+							<span	class="icon-verified_user"></span>
 						</span>
 						<div class="service-1-contents">
 							<h3>Lorem ipsum dolor</h3>
@@ -457,8 +443,8 @@
 				</div>
 				<div class="col-lg-4 mb-5">
 					<div class="service-1 dark">
-						<span class="service-1-icon"> <span
-							class="icon-video_library"></span>
+						<span class="service-1-icon">
+							<span	class="icon-video_library"></span>
 						</span>
 						<div class="service-1-contents">
 							<h3>Lorem ipsum dolor</h3>
@@ -472,7 +458,8 @@
 				</div>
 				<div class="col-lg-4 mb-5">
 					<div class="service-1 dark">
-						<span class="service-1-icon"> <span class="icon-vpn_key"></span>
+						<span class="service-1-icon">
+							<span class="icon-vpn_key"></span>
 						</span>
 						<div class="service-1-contents">
 							<h3>Lorem ipsum dolor</h3>
@@ -526,8 +513,7 @@
 								voluptatum"</p>
 						</blockquote>
 						<div class="d-flex v-card align-items-center">
-							<img src="/resources/images/person_2.jpg" alt="Image"
-								class="img-fluid mr-3">
+							<img src="/resources/images/person_2.jpg" alt="Image" class="img-fluid mr-3">
 							<div class="author-name">
 								<span class="d-block">Jean Stanley</span> <span>Traveler</span>
 							</div>

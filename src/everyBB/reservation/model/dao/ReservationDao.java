@@ -1,9 +1,12 @@
 package everyBB.reservation.model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import everyBB.common.code.ErrorCode;
 import everyBB.common.exception.DataAccessException;
@@ -64,12 +67,54 @@ public class ReservationDao {
 			}
 			
 		} catch (SQLException e) {
-			throw new DataAccessException(ErrorCode.SC01, e);
+			throw new DataAccessException(ErrorCode.SR01, e);
 		} finally {
 			jdt.close(rset, pstm);
 		}
 		return res;
 	}
 	
-
+	public List<Reservation> selectReservationByCarIdxDate(Connection conn, int carIdx, Date resPickupDate, Date resReturnDate) {
+		List<Reservation> reservationList = new ArrayList<>();
+		PreparedStatement pstm = null;
+		ResultSet rset = null;
+		
+		try {
+			String query = "select *"
+					+ "  from tb_reservation "
+					+ " where car_idx = ?"
+					+ "   and (res_pickup_date between ? and ?"
+					+ "    or res_return_date between ? and ?)";
+			
+			pstm = conn.prepareStatement(query);
+			
+			pstm.setInt(1, carIdx);
+			pstm.setDate(2, resPickupDate);
+			pstm.setDate(3, resReturnDate);
+			pstm.setDate(4, resPickupDate);
+			pstm.setDate(5, resReturnDate);
+			
+			rset = pstm.executeQuery();
+			
+			if(rset.next()) {
+				Reservation reservation = new Reservation();
+				reservation.setResIdx(rset.getInt("res_idx"));
+				reservation.setUserId(rset.getString("user_id"));
+				reservation.setCarIdx(rset.getInt("car_idx"));
+				reservation.setResParking(rset.getString("res_parking"));
+				reservation.setResDate(rset.getDate("res_date"));
+				reservation.setResPickupDate(rset.getDate("res_pickup_date"));
+				reservation.setResReturnDate(rset.getDate("res_return_date"));
+				reservation.setResFee(rset.getInt("res_fee"));
+				reservationList.add(reservation);
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.SR01, e);
+		} finally {
+			jdt.close(rset, pstm);
+		}
+		return reservationList;
+	}
+	
 }

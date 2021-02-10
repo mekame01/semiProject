@@ -28,6 +28,10 @@ public class ReviewController extends HttpServlet {
 		switch (uriArr[uriArr.length-1]) {
 			case "insert" : insertReview(request, response);
 				break;
+			case "update" : updateReview(request, response);
+				break;
+			case "delete" : deleteReview(request, response);
+				break;
 			default: response.setStatus(404);
 		}
 	}
@@ -50,7 +54,40 @@ public class ReviewController extends HttpServlet {
 		review.setReviewScore(reviewScore);
 		review.setReviewContent(reviewContent);
 		
+		System.out.println("insertReview review " + review);
+		
 		reviewService.insertReview(review);
 	}
 
+	private void updateReview(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int reviewIdx = Integer.parseInt(request.getParameter("review_idx"));
+		int carIdx = Integer.parseInt(request.getParameter("car_idx"));
+		Double reviewScore = Double.parseDouble(request.getParameter("review_score"));
+		String reviewContent = request.getParameter("review_content");
+		
+		Review review = new Review();
+		review.setReviewIdx(reviewIdx);
+		review.setCarIdx(carIdx);
+		review.setReviewScore(reviewScore);
+		review.setReviewContent(reviewContent);
+		
+		System.out.println("updateReview review " + review);
+		
+		reviewService.updateReview(review);
+	}
+
+	private void deleteReview(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int reviewIdx = Integer.parseInt(request.getParameter("review_idx"));
+		int carIdx = Integer.parseInt(request.getParameter("car_idx"));
+		
+		Review review = new Review();
+		review.setReviewIdx(reviewIdx);
+		review.setCarIdx(carIdx);
+		
+		System.out.println("deleteReview review " + review);
+		
+		reviewService.deleteReview(review);
+	}
 }

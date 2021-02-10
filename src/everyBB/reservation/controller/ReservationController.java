@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -96,6 +97,12 @@ public class ReservationController extends HttpServlet {
 		
 		System.out.println("reservation : " + reservation);
 		System.out.println("carUserId : " + carUserId);
+		
+		//예약 가능한지 검증
+		List<Reservation> reservationList = reservationService.selectReservationByCarIdxDate(carIdx, resPickupDate, resReturnDate);
+		if(reservationList.size() > 0) {
+			throw new ToAlertException(ErrorCode.RSRV01);
+		}
 		
 		reservationService.insertReservation(reservation);
 		Member member = new MemberService().selectMemberById(carUserId);

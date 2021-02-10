@@ -19,16 +19,19 @@
 	            </span>
 	            
 	            <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
-	                <ul class="site-menu main-menu js-clone-nav ml-auto ">
-	                  	<li class="active"><a href="index.jsp" class="nav-link">Home</a></li>
-	                  	<li><a href="listing.html" class="nav-link">Listing</a></li>
-	                  	<li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
-	                  	<li><a href="blog.html" class="nav-link">Blog</a></li>
+	                <ul class="site-menu main-menu js-clone-nav ml-auto">
+	                  	<li class="active"><a href="/" class="nav-link">Home</a></li>
+	                  	<li><a href="/register/guide" class="nav-link">안내</a></li>
+	                  	<li><a href="/question/faq" class="nav-link">FAQ</a></li>
+	                  	<li><a href="/register/register" class="nav-link">차량 등록</a></li>
 	                  	<li><a href="about.html" class="nav-link">About</a></li>
-	                  	<li><a href="contact.html" class="nav-link">Contact</a></li>
+	                  	<li><a href="/member/login" class="nav-link">로그인</a></li>
 	                </ul>
 	            </nav>
 	        </div>
         </div>
     </div>
 </header>
+<script type="text/javascript">
+
+</script>

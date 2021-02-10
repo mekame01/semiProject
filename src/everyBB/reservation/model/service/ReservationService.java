@@ -1,7 +1,9 @@
 package everyBB.reservation.model.service;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import everyBB.common.code.Code;
@@ -59,7 +61,7 @@ public class ReservationService {
 			resIdx = reservationDao.selectReservationResIdx(conn, reservation);
 			System.out.println("resIdx : " + resIdx);
 		} catch (Exception e) {
-			throw new DataAccessException(ErrorCode.SH01, e);
+			throw new DataAccessException(ErrorCode.SW01, e);
 		} finally {
 			jdt.close(conn);
 		}
@@ -85,7 +87,25 @@ public class ReservationService {
 		params.put("carIdx", Integer.toString(reservation.getCarIdx()));
 		
 		htmlText = http.post(url, headers, http.urlEncodedForm(params));
+		System.out.println("메일발송 직전");
+		System.out.println("member : " + member);
+		System.out.println("subject : " + subject);
+		System.out.println("htmlText : " + htmlText);
 		new MailSender().sendEmail(member.getUserEmail(), subject, htmlText);
+		System.out.println("메일발송 직후");
 	}
 	
+	public List<Reservation> selectReservationByCarIdxDate(int carIdx, Date resPickupDate, Date resReturnDate) {
+		Connection conn = jdt.getConnection();
+		List<Reservation> reservationList = null;
+		
+		try {
+			reservationList = reservationDao.selectReservationByCarIdxDate(conn, carIdx, resPickupDate, resReturnDate);
+		} catch (Exception e) {
+			throw new DataAccessException(ErrorCode.SW01, e);
+		} finally {
+			jdt.close(conn);
+		}
+		return reservationList;
+	}
 }

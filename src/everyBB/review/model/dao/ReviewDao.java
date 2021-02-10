@@ -23,7 +23,7 @@ public class ReviewDao {
 		try {
 			String query = "insert into "
 					+ " tb_review(review_idx, res_idx, user_id, car_idx, review_score, review_content, review_date)"
-					+ " values(sc_rev_idx.nextval, ?, ?, ?, ?, ?, sysdate)";
+					+ " values(sc_rev_idx.nextval, ?, ?, ?, ?, nvl(?, ' '), sysdate)";
 			pstm = conn.prepareStatement(query);
 			pstm.setInt(1, review.getResIdx());
 			pstm.setString(2, review.getUserId());
@@ -86,10 +86,10 @@ public class ReviewDao {
 		
 		try {
 			String query = "UPDATE tb_car c"
-					+ " SET c.car_avg_score = (SELECT AVG(r.review_score)"
+					+ " SET c.car_avg_score = (SELECT ROUND(AVG(r.review_score), 2)"
 					+ "                          FROM tb_review r "
 					+ "                         WHERE r.car_idx = ?"
-					+ "                         GROUP BY r.car_idx)"
+					+ "                      GROUP BY r.car_idx)"
 					+ " WHERE c.car_idx = ?";
 			pstm = conn.prepareStatement(query);
 			
@@ -103,4 +103,51 @@ public class ReviewDao {
 			jdt.close(pstm);
 		}
 	}
+	
+	public void updateReview(Connection conn, Review review){
+		
+		PreparedStatement pstm = null;
+		
+		try {
+			String query = "update tb_review"
+					+ " set review_score = ?"
+					+ " , review_content = ?"
+					+ " where review_idx = ?";
+			
+			pstm = conn.prepareStatement(query);
+			
+			pstm.setDouble(1, review.getReviewScore());
+			pstm.setString(2, review.getReviewContent());
+			pstm.setInt(3, review.getReviewIdx());
+			
+			pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.UW01,e);
+		}finally {
+			jdt.close(pstm);
+		}
+	}
+	
+	public void deleteReview(Connection conn, Review review){
+		
+		PreparedStatement pstm = null;
+		
+		try {
+			String query = "delete tb_review"
+					+ " where review_idx = ?";
+			
+			pstm = conn.prepareStatement(query);
+			
+			pstm.setInt(1, review.getReviewIdx());
+			
+			pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.DW01,e);
+		}finally {
+			jdt.close(pstm);
+		}
+	}
+	
 }
