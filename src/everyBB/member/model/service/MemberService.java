@@ -49,6 +49,23 @@ public class MemberService {
 		return res;
 	}
 	
+	public int insertKakaoMember(Member member){
+		Connection conn = jdt.getConnection();
+		int res = 0;
+		
+		try {
+			 res = memberDao.insertKakaoMember(conn, member);
+			jdt.commit(conn);
+		}catch(DataAccessException e) {
+			jdt.rollback(conn);
+			throw new ToAlertException(e.error);
+		}finally {
+			jdt.close(conn);
+		}
+		
+		return res;
+	}
+	
 	public Member selectMemberById(String userId) {
 		Connection conn = jdt.getConnection();
 		Member member = null;

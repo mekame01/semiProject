@@ -49,6 +49,8 @@ public class MemberController extends HttpServlet {
 			break;
 		case "loginimpl" : loginImpl(request, response);
 			break;
+		case "kakao" : kakaoLogin(request, response);
+			break;
 		case "mypage" : 
 			switch(uriArr[uriArr.length-1]) {
 			case "past" : pastTrip(request, response);
@@ -182,6 +184,25 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 				}
 			
 	} 
+	
+	private void kakaoLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String userId = request.getParameter("id");
+		String userName = request.getParameter("name");
+		String userEmail = request.getParameter("email");
+		
+		Member member = new Member();
+		member.setUserId(userId);
+		member.setUserName(userName);
+		member.setUserEmail(userEmail);
+		
+		memberService.insertKakaoMember(member);
+		
+		request.setAttribute("msg", "회원가입을 축하드립니다.");
+		request.setAttribute("url", "/member/login");
+		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
+		.forward(request, response);
+	}
 	
 	
 	private void pastTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

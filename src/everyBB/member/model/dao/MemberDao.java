@@ -85,6 +85,29 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		}
 		
 	
+	public int insertKakaoMember(Connection conn, Member member){
+		
+		int res = 0;
+		PreparedStatement pstm = null;
+		
+		try {
+			String query = "insert into tb_member(user_name, user_id, user_email) "
+					+"values(?,?,?)";
+			pstm = conn.prepareStatement(query);
+			pstm.setString(1, member.getUserName());
+			pstm.setString(2, member.getUserId());
+			pstm.setString(3, member.getUserEmail());
+			
+			res = pstm.executeUpdate();
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.IM01,e);
+		}finally {
+			jdt.close(pstm);
+		}
+		
+		return res;
+	}
+	
 	
 	
 	public Member selectMemberById(Connection conn,String userId) { //DQL
