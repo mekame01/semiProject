@@ -96,7 +96,7 @@ a:not([href]):not([tabindex]):focus {
 								<input type="number" placeholder="픽업시각" name="pickup_hour" id="pickup_hour" style="width: 10%">
 								<input type="date" placeholder="반환날짜" name="return_date" id="return_date">
 								<input type="number" placeholder="반환시각" name="return_hour" id="return_hour" style="width: 10%">
-								<button onclick="kakaoAddr()">검색</button>
+								<input type="button" value="검색" onclick="kakaoAddr()">
 							</form>
 						</div>
 					</div>
@@ -261,7 +261,7 @@ let mapSelect = ()=>{
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		//center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
 		center: new kakao.maps.LatLng($("#centerLat").val(), $("#centerLng").val()), //지도의 중심좌표.
-		level: 3 //지도의 레벨(확대, 축소 정도)
+		level: 5 //지도의 레벨(확대, 축소 정도)
 	};
 
 	//지도 생성 및 객체 리턴
@@ -275,7 +275,7 @@ let mapSelect = ()=>{
 	var infowindows = [];
 	<c:forEach items="${requestScope.carList}" var="car" varStatus="status">
 		positions["${status.index}"] = {"latlng": new kakao.maps.LatLng("${car.carParkingLat}", "${car.carParkingLng}")};
-		contents["${status.index}"] = {"content": '<div style="padding:5px; width:auto;">${car.carFee}</div>'};
+		contents["${status.index}"] = {"content": '<div style="padding:5px; text-align:center;">${car.carFee}</div>'};
 		//console.dir("${status.index}");
 		//console.dir("${car}");
 	</c:forEach>
@@ -400,6 +400,56 @@ let mapSelect = ()=>{
 mapSelect();
 
 let kakaoAddr = async (e)=>{
+	//입력값 검증
+	let regDate = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+	let regHour = /^([0-1][0-9]|2[0-3])$/;
+	
+	if(!document.querySelector("#address").value.trim()){
+		alert("주소를 입력하지 않았습니다.");
+		return;
+	}
+	
+	if(!regDate.test(document.querySelector("#pickup_date").value)){
+		alert("픽업날짜가 형식에 맞지 않습니다.");
+		return;
+	}
+	
+	if(!regHour.test(document.querySelector("#pickup_hour").value)){
+		alert("픽업시각이 형식에 맞지 않습니다.");
+		return;
+	}
+	
+	if(!regDate.test(document.querySelector("#return_date").value)){
+		alert("반환날짜가 형식에 맞지 않습니다.");
+		return;
+	}
+	
+	if(!regHour.test(document.querySelector("#return_hour").value)){
+		alert("반환시각이 형식에 맞지 않습니다.");
+		return;
+	}
+	
+	const now = new Date();
+	
+	let pickupDateHour = new Date(document.querySelector("#pickup_date").value);
+	pickupDateHour.setHours(document.querySelector("#pickup_hour").value);
+	if(pickupDateHour < now){
+		alert("픽업시일을 지금보다 빠르게 설정할 수 없습니다.");
+		return;
+	}
+	
+	let returnDateHour = new Date(document.querySelector("#return_date").value);
+	returnDateHour.setHours(document.querySelector("#return_hour").value);
+	if(returnDateHour < now){
+		alert("반환시일을 현재보다 빠르게 설정할 수 없습니다.");
+		return;
+	}
+	
+	if(returnDateHour <= pickupDateHour){
+		alert("반환시일을 픽업시일보다 빠르거나 같도록 설정할 수 없습니다.");
+		return;
+	}
+	
 	//e.preventDefault();
 	let keyword = $("#address").val();
 	console.dir($("#address").val());

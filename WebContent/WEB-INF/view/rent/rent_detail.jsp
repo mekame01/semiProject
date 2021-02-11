@@ -109,7 +109,7 @@
 			</div>
 			<div class="right">
 				<img alt="" src="">
-				<form action="/reservation/insert">
+				<form id="frm_reservation" action="/reservation/insert">
 					<input type="hidden" name="car_idx" id="car_idx" value="${requestScope.car.carIdx}">
 					<input type="hidden" name="user_id" id="user_id" value="${requestScope.car.userId}">
 					<div>위치 : <input name="parking" id="parking" style="border: none; width: 300px;" value="${requestScope.car.carParking}" disabled="disabled"></div>
@@ -255,9 +255,14 @@ let setPrevValue = (event,i) => {
 let calculatePrice = (event,i) => {
 	let pickupDateArr = document.querySelector("#pickup_date").value.split("-");
 	let returnDateArr = document.querySelector("#return_date").value.split("-");
-	let pickupDate = new Date(pickupDateArr[0], pickupDateArr[1], pickupDateArr[2], document.querySelector("#pickup_hour").value);
-	let returnDate = new Date(returnDateArr[0], returnDateArr[1], returnDateArr[2], document.querySelector("#return_hour").value);
-	let now = new Date();
+	let pickupDate = new Date(pickupDateArr[0], pickupDateArr[1]-1, pickupDateArr[2], document.querySelector("#pickup_hour").value);
+	let returnDate = new Date(returnDateArr[0], returnDateArr[1]-1, returnDateArr[2], document.querySelector("#return_hour").value);
+	const now = new Date();
+	
+	console.dir("==========pickupDate==========");
+	console.dir(pickupDate);
+	console.dir(returnDate);
+	console.dir(now);
 	
 	if(pickupDate >= returnDate){
 		alert("픽업시간이 반환시간보다 빠르거나 같습니다.");
@@ -293,6 +298,14 @@ let calculatePrice = (event,i) => {
 
 //가격세팅 초기화
 calculatePrice();
+
+document.querySelector("#frm_reservation").addEventListener("submit",(e)=>{
+	if(!"${sessionScope.user.userId}"){
+		alert("예약하기 전에 로그인하셔야 합니다.");
+		location.href="/member/login";
+		e.preventDefault();
+	}
+});
 
 //리뷰등록
 /*
@@ -407,6 +420,7 @@ let deleteReviewStep = async (i) => {
 }
 
 //리뷰 페이징 필요하면 사용
+/*
 let page = 1;
 window.addEventListener("scroll",()=>{
 	if(window.scrollY >= document.body.clientHeight - window.innerHeight) {
@@ -414,7 +428,7 @@ window.addEventListener("scroll",()=>{
 		page++;
 	}
 });
-
+*/
 
 
 </script>
