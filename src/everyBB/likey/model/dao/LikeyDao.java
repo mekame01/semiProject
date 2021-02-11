@@ -52,15 +52,6 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		return likeyList;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public int insertLikey(Connection conn, Likey likey){
 		
 		int res = 0;
@@ -68,7 +59,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		
 		try {
 			String query = "insert into tb_likey(likey_idx, user_id, car_idx) "
-					+"values(sc_likey_idx.nextVal,?,?)";
+					+"values(sc_likey_idx.nextVal, ?, ?)";
 			pstm = conn.prepareStatement(query);
 			pstm.setString(1, likey.getUserId()); //로그인하고 있는 사용자 id
 			pstm.setInt(2, likey.getCarIdx()); //클릭한 차 idx
@@ -83,21 +74,18 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		return res;
 	}
 	
-	
-	public int deleteLikey(Connection conn, String userId) {
+	public int deleteLikey(Connection conn, Likey likey) {
 		int res = 0;
 		PreparedStatement pstm = null;
 		
 		try {
-			String query = "delete from tb_likey where user_id = ?";
+			String query = "delete from tb_likey where user_id = ? and car_idx = ?";
 			pstm = conn.prepareStatement(query);
-			pstm.setString(1, userId);
+			pstm.setString(1, likey.getUserId());
+			pstm.setInt(2, likey.getCarIdx());
 			
 			res = pstm.executeUpdate();
-			//jdt.commit(conn);
 		} catch (SQLException e) {
-			//jdt.rollback(conn);
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw new DataAccessException(ErrorCode.DM01, e);
 		}finally {
@@ -105,7 +93,5 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		}
 		return res;
 	}
-	
-	
 	
 }

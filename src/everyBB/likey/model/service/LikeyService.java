@@ -21,7 +21,6 @@ public class LikeyService {
 			return likeyList;
 		}
 	
-	
 		public int insertLikey(Likey likey) {
 			Connection conn = jdt.getConnection();
 			int res = 0;
@@ -40,25 +39,18 @@ public class LikeyService {
 			
 		}
 	
-	
-		public int deleteLikey(String userId) {
+		public int deleteLikey(Likey likey) {
 			Connection conn = jdt.getConnection();
 			int res = 0;
 			try {
-				res = likeyDao.deleteLikey(conn, userId);
+				res = likeyDao.deleteLikey(conn, likey);
 				 jdt.commit(conn);
 			} catch (DataAccessException e) {
 				jdt.rollback(conn);
 			} finally {
 				jdt.close(conn);
 			}
-			
 			return res;
 		}
-	
-	
-	
-	
-	
 	
 }

@@ -1,6 +1,7 @@
 package everyBB.member.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import everyBB.likey.model.service.LikeyService;
+import everyBB.likey.model.vo.Likey;
 import everyBB.member.model.service.MemberService;
 import everyBB.member.model.vo.Member;
 
@@ -22,7 +25,7 @@ public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	MemberService memberService = new MemberService();
-	
+	LikeyService likeyService = new LikeyService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -176,8 +179,9 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		Member member = memberService.memberAuthenticate(userId, userPwd);
 		
 				if(member != null) {
-					
+					List<Likey> likeyList = likeyService.likeyListById(userId);
 					request.getSession().setAttribute("user", member);
+					request.getSession().setAttribute("likeyList", likeyList);
 					response.getWriter().print("success");
 				}else {
 					response.getWriter().print("fail");
