@@ -24,6 +24,12 @@
 	display: flex;
 }
 
+.heart {
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
 .left {
 	width: 60%;
 }
@@ -86,6 +92,14 @@
 	<%@ include file="/WEB-INF/view/include/header.jsp"%>
 	
 	<div class="hero inner-page" style="background-image: url('/resources/images/hero_1_a.jpg');">
+		<c:if test="${not empty sessionScope.user.userId}">
+			<c:if test="${not empty requestScope.likey.userId}">
+				<div class="heart" style="z-index: 10; position: absolute; right: 1.5%; top: 18%; color: rgba(255,0,0,0.5); font-size: 4em;" onclick="deleteLikey(${requestScope.car.carIdx})">♥</div>
+			</c:if>
+			<c:if test="${empty requestScope.likey.userId}">
+				<div class="heart" style="z-index: 10; position: absolute; right: 1%; top: 20%; color: rgba(255,0,0,0.5); font-size: 3em;" onclick="insertLikey(${requestScope.car.carIdx})">♡</div>
+			</c:if>
+		</c:if>
 		<div class="container">
 		</div>
 	</div>
@@ -300,10 +314,64 @@ let calculatePrice = (event,i) => {
 calculatePrice();
 
 document.querySelector("#frm_reservation").addEventListener("submit",(e)=>{
+	
 	if(!"${sessionScope.user.userId}"){
 		alert("예약하기 전에 로그인하셔야 합니다.");
 		location.href="/member/login";
 		e.preventDefault();
+		return;
+	}
+	
+	//입력값 검증
+	let regDate = /^[0-9]{4}-([1-9]|0[1-9]|1[0-2])-([1-9]|0[1-9]|[1-2][0-9]|3[0-1])$/;
+	let regHour = /^([0-9]|[0-1][0-9]|2[0-3])$/;
+	
+	if(!regDate.test(document.querySelector("#pickup_date").value)){
+		alert("픽업날짜가 형식에 맞지 않습니다.");
+		e.preventDefault();
+		return;
+	}
+	
+	if(!regHour.test(document.querySelector("#pickup_hour").value)){
+		alert("픽업시각이 형식에 맞지 않습니다.");
+		e.preventDefault();
+		return;
+	}
+	
+	if(!regDate.test(document.querySelector("#return_date").value)){
+		alert("반환날짜가 형식에 맞지 않습니다.");
+		e.preventDefault();
+		return;
+	}
+	
+	if(!regHour.test(document.querySelector("#return_hour").value)){
+		alert("반환시각이 형식에 맞지 않습니다.");
+		e.preventDefault();
+		return;
+	}
+	
+	const now = new Date();
+	
+	let pickupDateHour = new Date(document.querySelector("#pickup_date").value);
+	pickupDateHour.setHours(document.querySelector("#pickup_hour").value);
+	if(pickupDateHour < now){
+		alert("픽업시일을 지금보다 빠르게 설정할 수 없습니다.");
+		e.preventDefault();
+		return;
+	}
+	
+	let returnDateHour = new Date(document.querySelector("#return_date").value);
+	returnDateHour.setHours(document.querySelector("#return_hour").value);
+	if(returnDateHour < now){
+		alert("반환시일을 현재보다 빠르게 설정할 수 없습니다.");
+		e.preventDefault();
+		return;
+	}
+	
+	if(returnDateHour <= pickupDateHour){
+		alert("반환시일을 픽업시일보다 빠르거나 같도록 설정할 수 없습니다.");
+		e.preventDefault();
+		return;
 	}
 });
 
@@ -343,7 +411,7 @@ let insertReviewStep1 = async () => {
 	});
 	console.dir(response);
 	
-	if(response.status){
+	if(response.ok){
 		alert("리뷰가 성공적으로 등록되었습니다.");
 		
 		//화면 다시 로딩
@@ -376,7 +444,7 @@ let updateReviewStep = async (i) => {
 	});
 	console.dir(response);
 	
-	if(response.status){
+	if(response.ok){
 		alert("리뷰가 성공적으로 수정되었습니다.");
 		
 		//화면 다시 로딩
@@ -408,7 +476,7 @@ let deleteReviewStep = async (i) => {
 	});
 	console.dir(response);
 	
-	if(response.status){
+	if(response.ok){
 		alert("리뷰가 성공적으로 삭제되었습니다.");
 		
 		//화면 다시 로딩
@@ -417,6 +485,36 @@ let deleteReviewStep = async (i) => {
 		alert("리뷰 삭제에 실패하셨습니다.");
 	}
 	
+}
+
+let insertLikey = async (carIdx) => {
+	let url = "/likey/insert?car_idx="+carIdx;
+	
+	let response = await fetch(url,{
+		"mehtod":"get"
+	});
+	
+	console.dir(response);
+	
+	if(response.ok){
+		//화면 다시 로딩
+		window.location.reload();
+	}
+}
+
+let deleteLikey = async (carIdx) => {
+	let url = "/likey/delete?car_idx="+carIdx;
+	
+	let response = await fetch(url,{
+		"mehtod":"get"
+	});
+	
+	console.dir(response);
+	
+	if(response.ok){
+		//화면 다시 로딩
+		window.location.reload();
+	}
 }
 
 //리뷰 페이징 필요하면 사용

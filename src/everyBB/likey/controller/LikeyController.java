@@ -45,12 +45,6 @@ public class LikeyController extends HttpServlet {
 		likey.setCarIdx(carIdx);
 		
 		likeyService.insertLikey(likey);
-		
-		request.setAttribute("msg", "자동차 찜하기가 완료되었습니다.");
-		//마이페이지로 이동
-		request.setAttribute("back", "back");
-		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
-		.forward(request, response);
 	}
 
 	private void deleteLikey(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,12 +56,6 @@ public class LikeyController extends HttpServlet {
 		likey.setCarIdx(carIdx);
 		
 		likeyService.deleteLikey(likey);
-		
-		request.setAttribute("msg", "자동차 찜하기가 취소되었습니다.");
-		//마이페이지로 이동
-		request.setAttribute("back", "back");
-		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
-		.forward(request, response);
 	}
 
 }

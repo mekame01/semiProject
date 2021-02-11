@@ -566,6 +566,7 @@ return_hour.value = hours;
 
 function getToday(){
 	let date = new Date();
+	date.setHours(date.getHours()+2);
 	let year = date.getFullYear();
 	let month = ("0" + (1 + date.getMonth())).slice(-2);
 	let day = ("0" + date.getDate()).slice(-2);
@@ -576,6 +577,7 @@ function getToday(){
 function getTomorrow(){
 	let date = new Date();
 	date.setDate(date.getDate() + 1);
+	date.setHours(date.getHours()+2);
 	let year = date.getFullYear();
 	let month = ("0" + (1 + date.getMonth())).slice(-2);
 	let day = ("0" + (date.getDate())).slice(-2);
@@ -585,14 +587,14 @@ function getTomorrow(){
 
 function getHours(){
 	let date = new Date();
-	date.setHours(date.getHours()+1);
+	date.setHours(date.getHours()+2);
 	return date.getHours();
 }
 
 let kakaoAddr = async (e)=>{
 	//입력값 검증
-	let regDate = /^(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])\/[0-9]{4}$/;
-	let regHour = /^([0-1][0-9]|2[0-3])$/;
+	let regDate = /^([1-9]|0[1-9]|1[0-2])\/([1-9]|0[1-9]|[1-2][0-9]|3[0-1])\/[0-9]{4}$/;
+	let regHour = /^([0-9]|[0-1][0-9]|2[0-3])$/;
 	
 	if(!document.querySelector("#address").value.trim()){
 		alert("주소를 입력하지 않았습니다.");

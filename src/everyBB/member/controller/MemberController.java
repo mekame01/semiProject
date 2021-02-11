@@ -179,9 +179,7 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		Member member = memberService.memberAuthenticate(userId, userPwd);
 		
 				if(member != null) {
-					List<Likey> likeyList = likeyService.likeyListById(userId);
 					request.getSession().setAttribute("user", member);
-					request.getSession().setAttribute("likeyList", likeyList);
 					response.getWriter().print("success");
 				}else {
 					response.getWriter().print("fail");

@@ -10,7 +10,6 @@ import everyBB.common.code.ErrorCode;
 import everyBB.common.exception.DataAccessException;
 import everyBB.common.template.JDBCTemplate;
 import everyBB.likey.model.vo.Likey;
-import everyBB.member.model.vo.Member;
 
 public class LikeyDao {
 
@@ -50,6 +49,34 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 			jdt.close(rset, pstm);
 		}
 		return likeyList;
+	}
+	
+	public Likey selectLikeyById(Connection conn, String userId, int carIdx) {
+		Likey likey = new Likey();
+		
+		PreparedStatement pstm = null;
+		ResultSet rset = null;
+		
+		try {
+			
+			String query = "select * from tb_likey where user_id = ? and car_idx = ?";
+			pstm = conn.prepareStatement(query);
+			pstm.setString(1, userId);
+			pstm.setInt(2, carIdx);
+			rset = pstm.executeQuery();
+			
+			if(rset.next()) {
+				likey.setUserId(rset.getString("user_id"));
+				likey.setLikeyIdx(rset.getInt("likey_idx"));
+				likey.setCarIdx(rset.getInt("car_idx"));
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.SM01, e);
+		}finally {
+			jdt.close(rset, pstm);
+		}
+		return likey;
 	}
 	
 	public int insertLikey(Connection conn, Likey likey){

@@ -35,6 +35,12 @@ body {
 	z-index: 8;
 }
 
+.heart {
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
 .col-lg-4 {
 	-webkit-box-flex: 0;
 	-ms-flex: 0 0 34%;
@@ -116,10 +122,24 @@ a:not([href]):not([tabindex]):focus {
 			
 			<div class="row">
 				<c:forEach var="car" items="${requestScope.carList}" varStatus="status">
+					<c:set var="flg" value="no"></c:set>
 					<div class="cars col-md-6 col-lg-4 mb-4">
 						<div class="listing d-block  align-items-stretch">
 							<div class="listing-img h-100 mr-4">
 								<img src="/resources/images/car_4.jpg" alt="Image" class="img-fluid">
+								<c:if test="${not empty sessionScope.user.userId}">
+									<c:forEach var="likey" items="${requestScope.likeyList}">
+										<c:if test="${car.carIdx eq likey.carIdx}">
+											<c:set var="flg" value="yes"></c:set>
+										</c:if>
+									</c:forEach>
+									<c:if test="${flg eq 'yes'}">
+													<div class="heart" style="position: absolute; right: 13%; top: -7%; color: rgba(255,0,0,0.5); font-size: 3em;" onclick="deleteLikey(${car.carIdx})">♥</div>
+									</c:if>
+									<c:if test="${flg ne 'yes'}">
+										<div class="heart" style="position: absolute; right: 13%; top: -7%; color: rgba(255,0,0,0.5); font-size: 3em;" onclick="insertLikey(${car.carIdx})">♡</div>
+									</c:if>
+								</c:if>
 							</div>
 							<div class="listing-contents h-100">
 								<h3>${car.carModel}</h3>
@@ -401,8 +421,8 @@ mapSelect();
 
 let kakaoAddr = async (e)=>{
 	//입력값 검증
-	let regDate = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
-	let regHour = /^([0-1][0-9]|2[0-3])$/;
+	let regDate = /^[0-9]{4}-([1-9]|0[1-9]|1[0-2])-([1-9]|0[1-9]|[1-2][0-9]|3[0-1])$/;
+	let regHour = /^([0-9]|[0-1][0-9]|2[0-3])$/;
 	
 	if(!document.querySelector("#address").value.trim()){
 		alert("주소를 입력하지 않았습니다.");
@@ -481,6 +501,36 @@ let kakaoAddr = async (e)=>{
 	//document.forms[0].submit();
 	document.querySelector("#frm_select").submit();
 };
+
+let insertLikey = async (carIdx) => {
+	let url = "/likey/insert?car_idx="+carIdx;
+	
+	let response = await fetch(url,{
+		"mehtod":"get"
+	});
+	
+	console.dir(response);
+	
+	if(response.ok){
+		//화면 다시 로딩
+		window.location.reload();
+	}
+}
+
+let deleteLikey = async (carIdx) => {
+	let url = "/likey/delete?car_idx="+carIdx;
+	
+	let response = await fetch(url,{
+		"mehtod":"get"
+	});
+	
+	console.dir(response);
+	
+	if(response.ok){
+		//화면 다시 로딩
+		window.location.reload();
+	}
+}
 
 /*
 var ps = new kakao.maps.services.Places(); 
