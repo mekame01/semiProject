@@ -250,11 +250,8 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 			try {
 				String query = "select *"
 						+ "  from tb_car "
-						+ " where car_idx = ?"
-						+ "	order by user_id";
-						//+ "   and (res_pickup_date between ? and ?"
-						//+ "    or res_return_date between ? and ?)";
-				
+						+ " where car_idx = ?";//////////////오류
+						
 				pstm = conn.prepareStatement(query);
 				
 				pstm.setInt(1, carIdx);

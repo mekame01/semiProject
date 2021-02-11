@@ -76,8 +76,9 @@
                   </div>
                 </div>
                 <div>
+                
                   <p><a href="register/rg_detail" class="btn btn-primary btn-sm">상세보기</a></p>
-                  <p><a href="${context}/register/rg_delete" class="btn btn-primary btn-sm">삭제하기</a></p>
+                  <p><a href="/register/rg_delete" class="btn btn-primary btn-sm">삭제하기</a></p> <!--경로설정다시.. -->
                 </div>
               </div>
 
