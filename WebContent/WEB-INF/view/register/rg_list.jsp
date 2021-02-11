@@ -59,27 +59,25 @@
                 <img src="<%= request.getContextPath() %>/resources/images/car_6.jpg" alt="Image" class="img-fluid">
               </div>
               <div class="listing-contents h-100">
-                <h3>Mitsubishi Pajero</h3>
-                <div class="rent-price">
-                  <strong>${fffffffffffffffffffff}</strong><span class="mx-1">/</span>day
-                </div>
+                <h3>${data.register.carModel}</h3> <!-- 모델명 -->
+                
                 <div class="d-block d-md-flex mb-3 border-bottom pb-3">
                   <div class="listing-feature pr-4">
-                    <span class="caption">Luggage:</span>
-                    <span class="number">8</span>
+                    <span class="caption">문개수:</span>
+                    <span class="number">${data.register.carDoorNum}</span>
                   </div>
                   <div class="listing-feature pr-4">
-                    <span class="caption">Doors:</span>
-                    <span class="number">4</span>
+                    <span class="caption">좌석개수:</span>
+                    <span class="number">${data.register.carSeatNum}</span>
                   </div>
                   <div class="listing-feature pr-4">
-                    <span class="caption">Passenger:</span>
-                    <span class="number">4</span>
+                    <span class="caption">가격:</span>
+                    <span class="number">${data.register.carFee}</span>
                   </div>
                 </div>
                 <div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem quibusdam.</p>
                   <p><a href="register/rg_detail" class="btn btn-primary btn-sm">상세보기</a></p>
+                  <p><a href="${context}/register/rg_delete" class="btn btn-primary btn-sm">삭제하기</a></p>
                 </div>
               </div>
 

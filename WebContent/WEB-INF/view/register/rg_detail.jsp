@@ -56,58 +56,71 @@
                 <tbody>
                   <tr>
                     <td class="product-thumbnail">
-                      <img src="<%= request.getContextPath() %>/resources/images/car_2.jpg" alt="Image" class="img-fluid">
+                      <c:forEach var="file" items="${data.fileList}">
+      	 			<button type="button" class="btn_down-file"  
+      	 			onclick="downloadFile('${file.originFileName}','${file.renameFileName}','${file.savePath}')">  
+      	 			${file.originFileName}        
+        			 </button><br>
+      				</c:forEach>
                     </td> 
                 </tbody>
                </table>  
                <table class="table table-bordered">
+               	<tr>
+                    <th class="product-name" style="width:30%">작성자</th>
+                    <td class="product-name"><h2 class="h5 text-black">${data.register.userId}</h2></td>
+                  </tr>
+                  <tr>
+                    <th class="product-name" style="width:30%">카Idx</th>
+                    <td class="product-name"><h2 class="h5 text-black">${data.register.carIdx}</h2></td>
+                  </tr>
                   <tr>
                     <th class="product-name" style="width:30%">차량</th>
-                    <td class="product-name"><h2 class="h5 text-black">Sonata</h2></td>
+                    <td class="product-name"><h2 class="h5 text-black">${data.register.carModel}</h2></td>
                   </tr>
                   <tr>
                     <th class="product-price">주차장소</th>
-                    <td class="product-price">${ffffffffffffffff}</td>
+                    <td class="product-price">${data.register.carParking}</td>
                   </tr>
                   <tr>
                     <th class="product-regDate">차종</th>
-                    <td class="product-regDate">소나타</td>
+                    <td class="product-regDate">${data.register.carModel}</td>
                   </tr>
                   <tr>
                     <th class="product-pickDate">차번호</th>
-                    <td class="product-pickDate">2021</td>
+                    <td class="product-pickDate">${data.register.carNumber}</td>
                   </tr>
                   <tr>
                     <th class="product-total">연료</th>
-                    <td class="product-total">경유</td>
+                    <td class="product-total">${data.register.carFuelType}</td>
                   </tr>
                   <tr>
                     <th class="product-total">연비</th>
-                    <td class="product-total">1111</td>
+                    <td class="product-total">${data.register.carFuelEffi}</td>
                   </tr>
                   <tr>
                     <th class="product-total">내비게이션</th>
-                    <td class="product-total">Y</td>
+                    <td class="product-total">${data.register.carNavi}</td>
                   </tr>
                    <tr>
                     <th class="product-total">후방카메라</th>
-                    <td class="product-total">N</td>
+                    <td class="product-total">${data.register.carBackCam}</td>
                   </tr>
                    <tr>
                     <th class="product-total">좌석 개수</th>
-                    <td class="product-total">4</td>
+                    <td class="product-total">${data.register.carSeatNum}</td>
                   </tr>
                   <tr>
                     <th class="product-total">문 개수</th>
-                    <td class="product-total">4</td>
+                    <td class="product-total">${data.register.carDoorNum}</td>
                   </tr>
                   <tr>
                     <th class="product-total">가격</th>
-                    <td class="product-total">30000</td>
+                    <td class="product-total">${data.register.carFee}</td>
                   </tr>
                       <tr>
                     <th class="product-total">참고사항</th>
-                    <td class="product-total">참고사항참고사항참고사항참고사항참고사항참고사항</td>
+                    <td class="product-total">${data.register.carNote}</td>
                   </tr>
                </table>
             </div>
@@ -117,6 +130,11 @@
                   <p><a href="register/rg_modify" class="btn btn-primary btn-sm">수정하기</a></p>
                 </div>
               </div>
+             <div class="form-group row">
+                <div class="col-md-6 mr-auto">
+                  <p><a href="register/rg_modify" class="btn btn-primary btn-sm">삭제하기</a></p>
+                </div>
+              </div> 
           </form>
         </div>
          
@@ -165,6 +183,33 @@
    
 
   <%@ include file="/WEB-INF/view/include/script.jsp" %>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+   function submitData(url){
+      location.href = url;
+   } 
+   
+   function downloadFile(ofname,rfname,savePath){
+	  let params = {'ofname':ofname,
+			  		'rfname':rfname,
+			  		'savePath':savePath};
+	  
+      location.href = '${context}' + "/register/download?" + urlEncodedForm(params);
+   }
+
+</script>
+
+
+
+
+
 
   </body>
 

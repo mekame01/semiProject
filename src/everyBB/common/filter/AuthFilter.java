@@ -61,9 +61,9 @@ public class AuthFilter implements Filter {
 							break;
 					}
 				
-				case "board": 
+				case "register": 
 					switch (uriArr[2]) {
-						case "form":
+						case "register":
 							if(session.getAttribute("user") == null) {
 								throw new ToAlertException(ErrorCode.AUTH01);
 							}
