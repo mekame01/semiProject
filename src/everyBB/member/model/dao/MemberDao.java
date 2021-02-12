@@ -225,7 +225,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		
 		try {
 			
-			String query = "SELECT USER_ID, CAR_MODEL, CAR_FEE, CAR_PARKING, CAR_AVG_SCORE FROM TB_CAR "
+			String query = "SELECT CAR_IDX, USER_ID, CAR_MODEL, CAR_FEE, CAR_PARKING, CAR_AVG_SCORE FROM TB_CAR "
 					+ "WHERE CAR_IDX IN (SELECT CAR_IDX FROM TB_LIKEY WHERE USER_ID = ? )";
 			pstm = conn.prepareStatement(query);
 			pstm.setString(1, userId);
@@ -234,6 +234,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 			while(rset.next()) {
 				Car car = new Car();
 				
+				car.setCarIdx(rset.getInt("car_idx"));
 				car.setUserId(rset.getString("user_id"));
 				car.setCarModel(rset.getString("car_model"));
 				car.setCarFee(rset.getInt("car_fee"));

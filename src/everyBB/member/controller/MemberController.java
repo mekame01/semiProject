@@ -212,11 +212,9 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 				member.setUserEmail(userEmail);
 				
 				memberService.insertKakaoMember(member);
-				
-				request.setAttribute("msg", "회원가입을 축하드립니다.");
-				request.setAttribute("url", "/");
-				request.getRequestDispatcher("/WEB-INF/view/index.jsp")
-				.forward(request, response);
+				request.getSession().setAttribute("user", member);
+				response.getWriter().print("success");
+
 			}
 	      
 	      
@@ -248,7 +246,7 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		
 		memberService.wishListById(member.getUserId());
 		
-		//request.setAttribute("wishList", wishList);
+		//request.setAttribute("wishList", car); 쿼리를 *, car쪽으로 옮기기
 		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/wishlist.jsp")
 		.forward(request, response);

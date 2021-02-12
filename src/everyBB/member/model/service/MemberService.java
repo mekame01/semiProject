@@ -39,7 +39,7 @@ public class MemberService {
 		
 		Member member = null;
 		try {
-			member = memberDao.memberAuthenticate(conn, userId, userEmail);
+			member = memberDao.kakaoMemberAuthenticate(conn, userId, userEmail);
 		}finally {
 			jdt.close(conn);
 		}
