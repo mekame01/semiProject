@@ -27,7 +27,7 @@
 	                  	<li><a href="/register/register" class="nav-link">차량 등록</a></li>
 	                  	<c:choose>
 	                  		<c:when test="${not empty sessionScope.user.userId}">
-			                  	<li><a href="/member/mypage" class="nav-link">마이페이지</a></li>
+			                  	<li><a href="/member/mypage/userinfo" class="nav-link">마이페이지</a></li>
 			                  	<li><a href="/member/logout" class="nav-link">로그아웃</a></li>
 	                  		</c:when>
 	                  		<c:otherwise>
