@@ -2,8 +2,10 @@ package everyBB.member.model.service;
 
 import java.sql.Connection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import everyBB.car.model.vo.Car;
 import everyBB.common.code.Code;
 import everyBB.common.exception.DataAccessException;
 import everyBB.common.exception.ToAlertException;
@@ -129,7 +131,12 @@ public class MemberService {
 	}
 	
 	
-	
+	public List<Car> wishListById(String userId) {
+		Connection conn = jdt.getConnection();
+		List<Car> wishList = memberDao.wishListById(conn, userId);
+		jdt.close(conn);
+		return wishList;
+	}
 	
 	
 	

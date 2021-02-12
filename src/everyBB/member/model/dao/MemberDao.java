@@ -4,10 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import everyBB.car.model.vo.Car;
 import everyBB.common.code.ErrorCode;
 import everyBB.common.exception.DataAccessException;
 import everyBB.common.template.JDBCTemplate;
+import everyBB.likey.model.vo.Likey;
 import everyBB.member.model.vo.Member;
 
 public class MemberDao {
@@ -212,10 +216,40 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 	
 	
 	
-	
-	
-	
-	
+
+	public List<Car> wishListById(Connection conn,String userId) {
+		List<Car> wishList = new ArrayList<>();
+		
+		PreparedStatement pstm = null;
+		ResultSet rset = null;
+		
+		try {
+			
+			String query = "SELECT USER_ID, CAR_MODEL, CAR_FEE, CAR_PARKING, CAR_AVG_SCORE FROM TB_CAR "
+					+ "WHERE CAR_IDX IN (SELECT CAR_IDX FROM TB_LIKEY WHERE USER_ID = ? )";
+			pstm = conn.prepareStatement(query);
+			pstm.setString(1, userId);
+			rset = pstm.executeQuery();
+			
+			while(rset.next()) {
+				Car car = new Car();
+				
+				car.setUserId(rset.getString("user_id"));
+				car.setCarModel(rset.getString("car_model"));
+				car.setCarFee(rset.getInt("car_fee"));
+				car.setCarParking(rset.getString("car_parking"));
+				car.setCarAvgScore(rset.getInt("car_avg_score"));
+				
+				wishList.add(car);
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.SC01, e);
+		}finally {
+			jdt.close(rset, pstm);
+		}
+		return wishList;
+	}
 	
 	
 	
