@@ -267,14 +267,14 @@ $("#price").on("keyup", function() {
 
 
 <!-- 사진업로드 -->
-<!-- <script>
-    var upload = document.querySelector('#upload');
+<script>
+    var upload = document.querySelector('#contract_file');
  
     upload.addEventListener('change',function (e) {
         var get_file = e.target.files;
         console.log(get_file)
     })
-</script> -->
+</script> 
 
 
 

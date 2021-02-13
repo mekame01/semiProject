@@ -24,7 +24,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 	public void insertRegister(Connection conn, Register register) {
 			String sql = "insert into tb_car "
 					+ "(car_idx,user_id,car_parking,car_parking_lat,car_parking_lng,car_model,car_number,car_fuel_type,car_fuel_effi,car_navi,car_back_cam,car_seat_num,car_door_num,car_transmission,car_fee,car_note) "
-					+ "values(sc_car_idx.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";////////////
+					+ "values(sc_car_idx.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pstm = null;
 			try {
 			pstm = conn.prepareStatement(sql);
@@ -62,7 +62,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 			//1. 새로 등록되는 게시글의 파일정보를 저장
 			// typeIdx의 값이 sequence의 currval
 			if(fileVo.getTypeIdx() == null) {
-				typeIdx = "sc_car_idx.currval"; /////////////////////////////
+				typeIdx = "sc_car_idx.currval"; 
 			}else {
 				typeIdx = "'" + fileVo.getTypeIdx() + "'"; 
 			}
@@ -171,15 +171,15 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 /////////수정/////////////////////////////////////////////////////////////////////////////////////////////////
 		//자동차 수정
 		
-		public void updateRegister(Connection conn, Register register) {
-			
-			String sql = "update tb_car set "
-					+ "(car_parking = ?,car_parking_lat = ?,car_parking_lng = ?,car_model = ?,car_number = ?,car_fuel_type = ?,car_fuel_effi = ?,car_navi = ?,car_back_cam = ?,car_seat_num = ?,car_door_num = ?,car_transmission = ?,car_fee = ?,car_note = ? ) "
-					+ "where car_Idx = ? ";
-			
+		public int updateRegister(Connection conn, Register register) {
+			int res = 0;
 			PreparedStatement pstm = null;
 			
 			try {
+				String sql = "update tb_car set "
+						+ "(car_parking = ?,car_parking_lat = ?,car_parking_lng = ?,car_model = ?,car_number = ?,car_fuel_type = ?,car_fuel_effi = ?,car_navi = ?,car_back_cam = ?,car_seat_num = ?,car_door_num = ?,car_transmission = ?,car_fee = ?,car_note = ? ) "
+						+ "where car_Idx = ?";
+				
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, register.getCarParking());
 			pstm.setDouble(2, register.getCarParkingLat());
@@ -197,17 +197,18 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 			pstm.setString(14, register.getCarNote());
 			pstm.setInt(15, register.getCarIdx());
 			
-			pstm.executeUpdate();
+			res = pstm.executeUpdate();
 		
 		} catch (SQLException e) {
-			throw new DataAccessException(ErrorCode.rg02,e);
+			throw new DataAccessException(ErrorCode.rg02,e); //
 		}finally {
 			jdt.close(pstm);
 		}	
+		return res;
 	}
 	
 	
-	
+	//파일 수정.. 다시.. Map..????????????????
 		public void updateFile(Connection conn, FileVo fileVo) {
 			String typeIdx = "";
 			//1. 새로 등록되는 게시글의 파일정보를 저장
@@ -232,7 +233,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 				
 				pstm.executeUpdate();
 			} catch (SQLException e) {
-				throw new DataAccessException(ErrorCode.IF01, e);
+				throw new DataAccessException(ErrorCode.rg01, e);
 			}finally {
 				jdt.close(pstm);
 			}
@@ -241,20 +242,21 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		
 		
 		
-	////목록///////////////////////////////////////////////////////////////////////////////////////////
-		public List<Register> registerList(Connection conn, int carIdx) {
-			List<Register> registerList = new ArrayList<>();
+	////list///////////////////////////////////////////////////////////////////////////////////////////
+		public List<Register> registerList(Connection conn, String userId, int carIdx) {
 			PreparedStatement pstm = null;
 			ResultSet rset = null;
+			List<Register> registerList = new ArrayList<>();
 			
 			try {
 				String query = "select *"
-						+ "  from tb_car "
-						+ " where car_idx = ?";//////////////오류
+						+ " from tb_car "
+						+ " where userId = ?";//////////////오류
 						
 				pstm = conn.prepareStatement(query);
 				
-				pstm.setInt(1, carIdx);
+				pstm.setString(1, userId);
+				pstm.setInt(2,carIdx);
 				
 				rset = pstm.executeQuery();
 				
@@ -280,48 +282,50 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		
 	////삭제//////////////////////////////////////////////////////////////////////////////////////////	
 		//차량등록 삭제
-		public void deleteRegister(Connection conn, Register register) {
-			String sql = "delete tb_car "
-						+"where car_idx = ?";
-				
+		public int deleteRegister(Connection conn, Register register) {
+			int res = 0;
 			PreparedStatement pstm = null;
+			
 			try {
+			String sql = "delete from tb_car where user_id = ? and car_idx = ?";
 			pstm = conn.prepareStatement(sql);
-			pstm.setInt(1, register.getCarIdx());
-			pstm.executeUpdate();
+			pstm.setString(1, register.getUserId());
+			pstm.setInt(2, register.getCarIdx());
+			
+			res = pstm.executeUpdate();
 		
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new DataAccessException(ErrorCode.rg02,e); //오류 고쳐야함
 		}finally {
 			jdt.close(pstm);
 		}	
+			return res;
 	}
-	
-	
-	
 
-	//파일삭제
-		/*
-public void deleteFile(Connection conn, int carIdx){
-			String sql ="delete tb_file "
-			+ "where type_idx = ?";
+	//파일삭제 //흠..........아닌거같음 Map..
+		
+public int deleteFile(Connection conn, FileVo fileVo){
 			
+			int res = 0;
 			PreparedStatement pstm = null;
 			
 			try {
+				String sql ="delete from tb_file where type_idx = ?";
 				pstm = conn.prepareStatement(sql);
-				pstm.setInt(1, carIdx);
-				pstm.executeUpdate();
-				}
+				pstm.setString(2, fileVo.getTypeIdx());
+				
+				res = pstm.executeUpdate();
+				
 			} catch (SQLException e) {
-				throw new DataAccessException(ErrorCode.SF01,e);
+				throw new DataAccessException(ErrorCode.rg02,e);
 			}finally {
 				jdt.close(pstm);
 			}
-			
+			return res;
 		}
 		
-		*/
+		
 		
 		
 		

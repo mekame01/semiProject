@@ -2,6 +2,7 @@ package everyBB.register.controller;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import everyBB.car.model.vo.Car;
 import everyBB.common.util.file.FileVo;
 import everyBB.member.model.vo.Member;
 import everyBB.register.model.service.RegisterService;
@@ -143,26 +145,29 @@ public class RegisterController extends HttpServlet {
 			.forward(request, response);
 		}
 	
-	////////////////////////////////////////////////////////////////////////////////////////////
+	///list/////////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	private void rg_list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String userId = request.getParameter("userId");
-		int carIdx = Integer.parseInt(request.getParameter("carIdx")); //형변환
-		
-		Map<String,Object> commandMap = registerService.selectRegisterDetail(carIdx);
-		request.setAttribute("data", commandMap);
-		
-		request.getRequestDispatcher("/WEB-INF/view/register/rg_list.jsp")
-		.forward(request, response);
-		
-		
-	}
 	
-////////////////////////////////////////////////////////////////////////////////////////////////////
+	  private void rg_list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+		  String from = "/register/rg_list";
+		  registerListImpl(request,from);
+	  
+		  request.getRequestDispatcher("/WEB-INF/view/register/rg_list.jsp")
+		  .forward(request, response);
+	  
+	  
+	  } 
+	  
+	  private void registerListImpl(HttpServletRequest request, String from) throws ServletException, IOException { 
+				
+		 }
+	  
+	  
+	  
+//////////수정///////////////////////////////////////////////////////////////////////////////////////오류남///
 	private void rg_modify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
+	//	String userId = ((Member)request.getSession().getAttribute("user")).getUserId();
 		int carIdx = Integer.parseInt(request.getParameter("carIdx")); 
 		
 		Map<String,Object> commandMap = registerService.selectRegisterDetail(carIdx);
@@ -175,15 +180,7 @@ public class RegisterController extends HttpServlet {
 	
 	private void rg_modifyImpl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//HttpSession session = request.getSession();
-		//Member member = (Member) session.getAttribute("user");
-		//Register register = (Register) session.getAttribute("register");
-		//registerService.UpdateRegister(register.getUserId(),register.getCarIdx(), request);
-		
-		int fIdx = Integer.parseInt(request.getParameter("fIdx"));
-		String originFileName = request.getParameter("originFileName");
-		String renameFileName = request.getParameter("renameFileName");
-		String savePath = request.getParameter("savePath");
+		String userId = ((Member)request.getSession().getAttribute("user")).getUserId();
 		int carIdx = Integer.parseInt(request.getParameter("carIdx"));
 		String carParking = request.getParameter("carParking");
 		Double carParkingLat = Double.parseDouble(request.getParameter("carParkingLat"));
@@ -201,11 +198,8 @@ public class RegisterController extends HttpServlet {
 		String carNote= request.getParameter("carNote");
 		
 		Register register = new Register();
-		FileVo fileVo = new FileVo();//////////
-		fileVo.setfIdx(fIdx);
-		fileVo.setOriginFileName(originFileName);
-		fileVo.setRenameFileName(renameFileName);
-		fileVo.setSavePath(savePath);
+		
+		register.setUserId(userId);
 		register.setCarIdx(carIdx);
 		register.setCarParking(carParking);
 		register.setCarParkingLat(carParkingLat);
@@ -222,26 +216,26 @@ public class RegisterController extends HttpServlet {
 		register.setCarFee(carFee);
 		register.setCarNote(carNote);
 		
-		System.out.println("updateRegister register " + register);
-		
-		
 		request.setAttribute("msg", "차량이 수정되었습니다.");
 		request.setAttribute("url", "/");
 		
-		registerService.updateRegister(register, fileVo);
 		request.getRequestDispatcher("/WEB-INF/view/register/result.jsp")
 		.forward(request, response);
 	}
 
-	////////////////////////////////////////////////////////////////////////////////
+	/////삭제///////////////////////////////////////////////////////////////////////////
 	private void rg_delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int carIdx = Integer.parseInt(request.getParameter("car_idx"));
+		String userId = ((Member)request.getSession().getAttribute("user")).getUserId();
+		int carIdx = Integer.parseInt(request.getParameter("carIdx"));
 		
 		Register register = new Register();
+		register.setUserId(userId);
 		register.setCarIdx(carIdx);
 		
 		
 		registerService.deleteRegister(register);
+		
+		//파일 삭제도 해야함
 		
 	}
 }

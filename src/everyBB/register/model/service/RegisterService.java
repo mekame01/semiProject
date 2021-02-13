@@ -32,6 +32,7 @@ public class RegisterService {
 			Map<String,List> registerData = new FileUtil().fileUpload(request);
 			Register register = new Register();
 			register.setUserId(userId);
+			register.setCarIdx(Integer.parseInt(registerData.get("carIdx").get(0).toString()));
 			register.setCarParking(registerData.get("carParking").get(0).toString());
 			register.setCarParkingLat(Double.parseDouble(registerData.get("carParkingLat").get(0).toString()));
 			register.setCarParkingLng(Double.parseDouble(registerData.get("carParkingLng").get(0).toString()));
@@ -85,35 +86,32 @@ public class RegisterService {
 		
 		
 		
-//////수정하기///////////////////////////////////////////////////////////////////////////////
-		public void updateRegister(Register register, FileVo fileVo) {
-			Map<String,Object> commandMap = new HashMap<String,Object>();
+//////수정하기//////////////////////////////////////////////////////////////////오류/////////////
+		public int updateRegister(Register register) {
 			Connection conn = jdt.getConnection();
-		
+			int res = 0;
 			try {
-				registerDao.updateRegister(conn, register);
-				registerDao.updateFile(conn, fileVo);
-				commandMap.put("register", register);
-				commandMap.put("fileList", fileVo);
-				
+				res = registerDao.updateRegister(conn, register);
+			
 				jdt.commit(conn);
 			}catch (Exception e) {
 				jdt.rollback(conn);
-				throw new DataAccessException(ErrorCode.rg01,e); //에러코드 수정해야함
+				throw new ToAlertException(ErrorCode.rg01,e); //에러코드 수정해야함
 			}finally {
 				jdt.close(conn);
 			}
+			return res;
 		}
+		//파일도 수정
 		
-//목록//////////////////////////////////////////////////////////////////////////////////////		
-		public List<Register> registerList(int carIdx) {
+//list//////////////////////////////////////////////////////////////////////////////////////		
+		public List<Register> registerList(String userId, int carIdx) {
 			Connection conn = jdt.getConnection();
 			List<Register> registerList = null;
 			
 			try {
-				registerList = registerDao.registerList(conn, carIdx);
-			} catch (Exception e) {
-				throw new DataAccessException(ErrorCode.rg01, e);//에러코드 수정해야함
+				registerList = registerDao.registerList(conn, userId, carIdx);
+			
 			} finally {
 				jdt.close(conn);
 			}
@@ -124,21 +122,22 @@ public class RegisterService {
 		
 		
 //////삭제////////////////////////////////////////////////////////////////		
-		public void deleteRegister(Register register) {
-			Connection conn = jdt.getConnection();
+		public int deleteRegister(Register register) {
 			
+			Connection conn = jdt.getConnection();
+			int res =0;
 			try {
 				registerDao.deleteRegister(conn, register);
-	
+				
 				jdt.commit(conn);
 			}catch (Exception e) {
 				jdt.rollback(conn);
-				throw new DataAccessException(ErrorCode.rg01, e); //에러코드 수정해야함
 			}finally {
 				jdt.close(conn);
 			}
+			return res;
 		}
-		
-		
+	
+	//파일도 삭제..
 	
 }

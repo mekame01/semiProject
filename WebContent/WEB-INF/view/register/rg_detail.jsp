@@ -127,13 +127,13 @@
             
             <div class="form-group row">
                 <div class="col-md-6 mr-auto">
-                  <p><a href="register/rg_modify" class="btn btn-primary btn-sm">수정하기</a></p>
+                  <p><a onclick="registerModify(${data.register.carIdx})" class="btn btn-primary btn-sm">수정하기</a></p>
                 </div>
               </div>
-             <div class="form-group row">
+            <div class="form-group row">
                 <div class="col-md-6 mr-auto">
-                  <p><a href="register/rg_modify" class="btn btn-primary btn-sm">삭제하기</a></p>
-                </div>
+                 <button class="btn btn-primary" onclick="registerDelete(${data.register.carIdx})">삭제하기</button>
+	             </div>
               </div> 
           </form>
         </div>
@@ -145,7 +145,7 @@
         
        
             
-          </div>
+          
      
 
   
@@ -206,7 +206,30 @@
 
 </script>
 
+<!-- 수정하기 페이지로 가기 -->
+<script>
+let registerModify = (carIdx) => {
+	location.href="/register/rg_modify?carIdx=" + carIdx;
+	
+}
 
+/* 삭제 후 */
+let registerDelete = async (carIdx) => {
+	let url = "/register/rg_delete?carIdx=" + carIdx;
+	
+	let response = await fetch(url,{
+		"mehtod":"get"
+	});
+	
+	console.dir(response);
+	
+	if(response.ok){
+		//화면 다시 로딩
+		window.location.reload();
+	}
+}
+
+</script>
 
 
 

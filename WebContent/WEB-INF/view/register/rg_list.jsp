@@ -56,7 +56,12 @@
 
             <div class="listing d-block  align-items-stretch">
               <div class="listing-img h-100 mr-4">
-                <img src="<%= request.getContextPath() %>/resources/images/car_6.jpg" alt="Image" class="img-fluid">
+                  <c:forEach var="file" items="${data.fileList}">
+      	 			<button type="button" class="btn_down-file"  
+      	 			onclick="downloadFile('${file.originFileName}','${file.renameFileName}','${file.savePath}')">  
+      	 			${file.originFileName}        
+        			 </button><br>
+      				</c:forEach>
               </div>
               <div class="listing-contents h-100">
                 <h3>${data.register.carModel}</h3> <!-- 모델명 -->
@@ -77,8 +82,8 @@
                 </div>
                 <div>
                 
-                  <p><a href="register/rg_detail" class="btn btn-primary btn-sm">상세보기</a></p>
-                  <p><a href="/register/rg_delete" class="btn btn-primary btn-sm">삭제하기</a></p> <!--경로설정다시.. -->
+                  <p><a onclick="registerDetail(${data.register.carIdx})" class="btn btn-primary btn-sm">상세보기</a></p>
+                  
                 </div>
               </div>
 
@@ -128,6 +133,33 @@
     </div>
 
  <%@ include file="/WEB-INF/view/include/script.jsp" %>
+
+<!-- 사진파일.. -->
+<script>
+   function submitData(url){
+      location.href = url;
+   } 
+   
+   function downloadFile(ofname,rfname,savePath){
+	  let params = {'ofname':ofname,
+			  		'rfname':rfname,
+			  		'savePath':savePath};
+	  
+      location.href = '${context}' + "/register/download?" + urlEncodedForm(params);
+   }
+
+</script>
+
+<!-- 상세보기 버튼 -->
+<script>
+let registerDetail = (carIdx) => {
+	location.href="/register/rg_detail?carIdx=" + carIdx;
+	
+}
+</script>
+
+
+
 
   </body>
 
