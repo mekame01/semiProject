@@ -181,7 +181,7 @@ public class RegisterController extends HttpServlet {
 	private void rg_modifyImpl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String userId = ((Member)request.getSession().getAttribute("user")).getUserId();
-		int carIdx = Integer.parseInt(request.getParameter("carIdx"));
+		//int carIdx = Integer.parseInt(request.getParameter("carIdx"));
 		String carParking = request.getParameter("carParking");
 		Double carParkingLat = Double.parseDouble(request.getParameter("carParkingLat"));
 		Double carParkingLng= Double.parseDouble(request.getParameter("carParkingLng"));
@@ -200,7 +200,7 @@ public class RegisterController extends HttpServlet {
 		Register register = new Register();
 		
 		register.setUserId(userId);
-		register.setCarIdx(carIdx);
+		//register.setCarIdx(carIdx);
 		register.setCarParking(carParking);
 		register.setCarParkingLat(carParkingLat);
 		register.setCarParkingLng(carParkingLng);

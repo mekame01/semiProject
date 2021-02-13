@@ -313,7 +313,7 @@ public int deleteFile(Connection conn, FileVo fileVo){
 			try {
 				String sql ="delete from tb_file where type_idx = ?";
 				pstm = conn.prepareStatement(sql);
-				pstm.setString(2, fileVo.getTypeIdx());
+				pstm.setString(1, fileVo.getTypeIdx());
 				
 				res = pstm.executeUpdate();
 				
