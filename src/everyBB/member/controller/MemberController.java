@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import everyBB.car.model.vo.Car;
 import everyBB.likey.model.service.LikeyService;
 import everyBB.likey.model.vo.Likey;
 import everyBB.member.model.service.MemberService;
@@ -244,9 +245,10 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("user");
 		
-		memberService.wishListById(member.getUserId());
+		List<Car> wishList = memberService.wishListById(member.getUserId());
 		
-		//request.setAttribute("wishList", car); 쿼리를 *, car쪽으로 옮기기
+		request.setAttribute("wishList", wishList); //쿼리를 *, car쪽으로 옮기기
+		
 		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/wishlist.jsp")
 		.forward(request, response);
