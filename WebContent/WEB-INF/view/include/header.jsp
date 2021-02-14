@@ -24,15 +24,16 @@
 	                  	<li class="active"><a href="/index" class="nav-link">Home</a></li>
 	                  	<li><a href="/register/guide" class="nav-link">안내</a></li>
 	                  	<li><a href="/question/faq" class="nav-link">FAQ</a></li>
-	                  	<li><a href="/register/register" class="nav-link">차량 등록</a></li>
 	                  	<c:choose>
 	                  		<c:when test="${not empty sessionScope.user.userId}">
+			                  	<li><a href="/register/register" class="nav-link">차량 등록</a></li>
 			                  	<li><a href="/member/mypage/userinfo" class="nav-link">마이페이지</a></li>
 			                  	<li><a href="/member/logout" class="nav-link">로그아웃</a></li>
 	                  		</c:when>
 	                  		<c:otherwise>
+			                  	<li><a href="/register/register" class="nav-link" style="visibility: hidden;">차량 등록</a></li>
 			                  	<li><a href="" class="nav-link" style="visibility: hidden;">마이페이지</a></li>
-		    	              	<li><a href="/member/login" class="nav-link">로그인</a></li>
+		    	              	<li><a href="/member/login" class="nav-link">  로그인</a></li>
 	                  		</c:otherwise>
 	                  	</c:choose>
 	                </ul>
