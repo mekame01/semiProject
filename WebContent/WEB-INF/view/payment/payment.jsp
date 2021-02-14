@@ -24,7 +24,7 @@
             <div class="col-lg-5">
               <div class="intro">
                 <h1><strong>결제</strong></h1>
-                <div class="custom-breadcrumbs"><a href="/index.jsp">Home</a> <span class="mx-2">/</span> <strong>결제</strong></div>
+                <div class="custom-breadcrumbs"><a href="/">Home</a> <span class="mx-2">/</span> <strong>결제</strong></div>
               </div>
             </div>
           </div>
@@ -148,6 +148,7 @@
     <%@ include file="/WEB-INF/view/include/footer.jsp" %>
    </div>
    <%@ include file="/WEB-INF/view/include/script.jsp" %>
+   
    <script type="text/javascript">
 	   $('#pay').click(function(){
 		   var IMP = window.IMP;
@@ -160,10 +161,10 @@
 	           merchant_uid : 'merchant_' + new Date().getTime(),
 	           name : '결제테스트',
 	           amount : 100
-	           /* buyer_name : ${user.userId},
-	           buyer_phone : ${user.userPhone},
-	           buyer_email : ${user.userEmail},
-	           buyer_license : ${user.userLicense} */
+	           /* buyer_name : ,
+	           buyer_phone : ,
+	           buyer_email : ,
+	           buyer_license :  */
 	       }, function(rsp) {
 	           if ( rsp.success ) {
 	               //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기

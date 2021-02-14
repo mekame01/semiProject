@@ -13,6 +13,7 @@ public class PaymentReceiveService {
 		
 	public int insertPaymentReceive(PaymentReceive paymentReceive) {
 		Connection conn = jdt.getConnection();
+		
 		int res = 0;
 		try {
 			res = paymentReceiveDao.insertPaymentReceive(conn, paymentReceive);

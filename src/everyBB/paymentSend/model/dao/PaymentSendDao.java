@@ -41,7 +41,7 @@ public class PaymentSendDao {
 		ResultSet rset = null;
 		try {
 			String sql = "select "
-					+ "(res_idx, car_idx, user_id, res_date, res_pickup_date, res_return_date) "
+					+ "(res_idx, car_idx, user_id, res_parking, res_date, res_pickup_date, res_return_date) "
 					+ "from tb_reservation where resIdx = ?";
 			res = new ArrayList<Reservation>();
 			pstm = conn.prepareStatement(sql);
@@ -53,9 +53,10 @@ public class PaymentSendDao {
 				reservation.setResIdx(rset.getInt(1));
 				reservation.setCarIdx(rset.getInt(2));
 				reservation.setUserId(rset.getString(3));
-				reservation.setResDate(rset.getDate(4));
-				reservation.setResPickupDate(rset.getDate(5));
-				reservation.setResReturnDate(rset.getDate(6));
+				reservation.setResParking(rset.getString(4));
+				reservation.setResDate(rset.getDate(5));
+				reservation.setResPickupDate(rset.getDate(6));
+				reservation.setResReturnDate(rset.getDate(7));
 				res.add(reservation);
 			}
 		} catch (SQLException e) {

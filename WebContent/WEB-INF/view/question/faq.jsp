@@ -20,7 +20,7 @@
             <div class="col-lg-5">
               <div class="intro">
                 <h1><strong>FAQ</strong></h1>
-                <div class="custom-breadcrumbs"><a href="/index.jsp">Home</a> <span class="mx-2">/</span> <strong>FAQ</strong></div>
+                <div class="custom-breadcrumbs"><a href="/">Home</a> <span class="mx-2">/</span> <strong>FAQ</strong></div>
               </div>
             </div>
           </div>
@@ -62,25 +62,34 @@
 	                        <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab">
 	                            <h3 class="mb-4">차량을 이용하려면 어떻게 해야 하나요?</h3>
 	                            <div class="bg-light p-4">
-	                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis erat cursus, facilisis nulla et, volutpat est. Cras ultrices eu leo ut dapibus. In sollicitudin consectetur est sed laoreet. Cras imperdiet, tortor ac aliquam ullamcorper, eros lorem volutpat odio, ut aliquet elit orci sit amet magna. Quisque in pretium ante, nec maximus ipsum. Ut semper arcu sit amet felis feugiat, ut tempus eros blandit. Donec fermentum elit purus, convallis commodo arcu posuere et. Proin convallis tristique ante, ac auctor magna sodales sit amet. Nulla facilisi. Quisque feugiat sit amet mauris efficitur facilisis. Mauris vitae magna efficitur, vulputate risus facilisis, viverra lorem. Praesent vulputate, felis quis ultrices porta, sapien massa imperdiet metus, eget tincidunt ante ipsum quis lectus. Vivamus placerat pretium euismod. Praesent mattis varius risus eget luctus. Quisque odio risus, tristique in erat eget, dapibus maximus ligula.
+	                            	차량을 이용하려면 먼저 에브리붕붕 사이트의 회원이 되어야 합니다.<br>
+	                            	회원가입을 하고 난 후에 로그인을 하시고 원하는 차량을 골라 예약하시면 됩니다.<br>
+	                            	저희 사이트는 차량을 공유하는 사이트이므로 운전면허증이 있어야 예약이 가능합니다.<br>
+	                            	특별히 원하시는 지역이 있을 경우 차량 검색을 통해 찾으실 수 있습니다.
 	                            </div>
 	                        </div>
 	                        <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab">
 	                            <h3 class="mb-4">차량 이용 시 주의할 사항이 있나요?</h3>
 	                            <div class="bg-light p-4">
-	                                Etiam at posuere metus, in molestie libero. Cras eleifend turpis vel libero vehicula, interdum gravida lacus consectetur. Proin id sodales nunc, sit amet varius orci. Nulla malesuada consectetur ipsum a dapibus. Cras rhoncus justo ex, ac tincidunt mauris fermentum in. Vestibulum hendrerit metus pharetra arcu convallis dictum. Vestibulum leo erat, vehicula eu ex a, convallis faucibus nunc. Duis ultrices lacus quis vulputate iaculis. Ut magna sem, vulputate non tristique sit amet, egestas et purus. Mauris euismod sapien id pretium vulputate. In molestie, enim id finibus hendrerit, velit ante sodales nisi, vitae aliquam nulla tortor nec ligula.
+	                            	저희 사이트에 등록된 차량은 전부 개인의 소유입니다.<br>
+	                            	다른 사람의 차량을 이용하는 만큼 자신의 차량처럼 깔끔하게 이용해주시길 바랍니다.<br>
+	                            	특별히 주의할 사항은 차량을 등록하시는 회원분이 작성해주신 내용을 참고하시길 바랍니다.
 	                            </div>
 	                        </div>
 	                        <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab">
 	                            <h3 class="mb-4">결제 금액과 결제 방법</h3>
 	                            <div class="bg-light p-4">
-	                                Cras in odio facilisis, convallis ex in, euismod elit. Quisque a tortor id nisl egestas mollis. Integer eleifend sapien a rutrum laoreet. Ut mattis tempus ipsum, sed porttitor nulla blandit non. Nulla quis magna id nisl efficitur vestibulum sit amet eget lorem. Pellentesque pharetra porta erat, sed rhoncus libero. Proin nec pellentesque leo. Cras vehicula bibendum rutrum. Duis vel sem vel libero luctus volutpat sagittis eget nunc. Sed vehicula massa mi, ut tempor est maximus ut. Pellentesque ullamcorper odio quis est tincidunt iaculis. Sed viverra ligula in nisi molestie sagittis. Etiam nec dictum tellus. Maecenas orci mi, dignissim id pulvinar nec, venenatis at mauris. Mauris sit amet leo eu metus scelerisque feugiat.
+									제가 정말 잘하고 싶은데요..<br>
+									너무 어렵고 결제는 정말 막막하고..<br>
+									결제 금액은 어떻게 매겨지는지 아직 정하지 않았는데요...<br>
+									예약 시 정해진 결제 금액을 가지고 결제를 진행하시면 됩니다.
 	                            </div>
 	                        </div>
 	                        <div class="tab-pane fade" id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-4-tab">
 	                            <h3 class="mb-4">차량 반납은 어떻게 하나요?</h3>
 	                            <div class="bg-light p-4">
-	                                Vivamus viverra diam id erat porttitor condimentum. Nunc et metus aliquam, maximus felis et, porta erat. Nam laoreet pretium felis, vitae dictum sapien congue vel. Quisque a augue lobortis, molestie odio non, finibus nibh. Cras ut tempus sapien, in porta dolor. Mauris vitae mi ultricies, semper dolor at, rhoncus est. Proin dictum lobortis tortor, vel sodales felis hendrerit eu. Maecenas volutpat dignissim justo, sit amet ultrices libero tristique id. Proin euismod, odio quis tincidunt ullamcorper, nisl leo auctor est, eget facilisis ligula dui non ex. Morbi non sagittis quam, non pharetra libero. Nunc id nibh cursus, dapibus mauris eu, efficitur ligula. Vivamus tempor erat sem, sed sodales urna mattis cursus. Donec at tempus lacus. Aenean scelerisque nibh tellus, in euismod turpis ornare at. Proin pellentesque blandit dignissim. Vestibulum tristique odio ut mauris fermentum, et lobortis diam tincidunt.
+	                            	차량 예약 시 정하신 장소에 가져다 두시면 됩니다.<br>
+	                            	따로 원하시는 사항이 있다면 차량 소유주에게 문의하여 진행하시면 됩니다.<br>
 	                            </div>
 	                        </div>
 	                    </div>
