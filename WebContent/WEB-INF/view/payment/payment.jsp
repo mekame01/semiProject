@@ -160,11 +160,9 @@
 	           pay_method : 'card',
 	           merchant_uid : 'merchant_' + new Date().getTime(),
 	           name : '결제테스트',
-	           amount : 100
-	           /* buyer_name : ,
-	           buyer_phone : ,
-	           buyer_email : ,
-	           buyer_license :  */
+	           amount : 100,
+	           /* buyer_name : , */
+	           buyer_phone : '010-0000-0000'
 	       }, function(rsp) {
 	           if ( rsp.success ) {
 	               //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
@@ -173,8 +171,13 @@
 	                   type: 'POST',
 	                   dataType: 'json',
 	                   data: {
-	                       imp_uid : rsp.imp_uid //기타 필요한 데이터가 있으면 추가 전달
-	                       
+	                	   imp_uid : rsp.imp_uid, //기타 필요한 데이터가 있으면 추가 전달
+	                	   paid_amount : rsp.paid_amount,
+	                	   paid_at : rsp.paid_at,
+	                	   status : rsp.status,
+	                	   error_code : rsp.error_code,
+	                	   error_msg : rsp.error_msg,
+	                	   success : rsp.success
 	                   }
 	               }).done(function(data) {
 	                   //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
@@ -187,6 +190,7 @@
 	                       
 	                       alert(msg);
 	                   } else {
+	                	   
 	                       //[3] 아직 제대로 결제가 되지 않았습니다.
 	                       //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
 	                   }

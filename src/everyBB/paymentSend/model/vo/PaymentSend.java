@@ -1,33 +1,30 @@
 package everyBB.paymentSend.model.vo;
 
-import java.sql.Date;
-
-import everyBB.reservation.model.vo.Reservation;
-
 public class PaymentSend {
 
 	private int paySendIdx;
 	private int resIdx;
 	private String paySendTid;
-	private Date paySendDate;
-	private String paymentYn;
+	private String payMethod;
+	private int payFee;
+	private String payUserPhone;
 	
 	public int getPaySendIdx() {
 		return paySendIdx;
 	}
-
+	
 	public void setPaySendIdx(int paySendIdx) {
 		this.paySendIdx = paySendIdx;
 	}
-
+	
 	public int getResIdx() {
 		return resIdx;
 	}
-
+	
 	public void setResIdx(int resIdx) {
 		this.resIdx = resIdx;
 	}
-
+	
 	public String getPaySendTid() {
 		return paySendTid;
 	}
@@ -36,25 +33,33 @@ public class PaymentSend {
 		this.paySendTid = paySendTid;
 	}
 
-	public Date getPaySendDate() {
-		return paySendDate;
+	public String getPayMethod() {
+		return payMethod;
 	}
-
-	public void setPaySendDate(Date paySendDate) {
-		this.paySendDate = paySendDate;
+	
+	public void setPayMethod(String payMethod) {
+		this.payMethod = payMethod;
 	}
-
-	public String getPaymentYn() {
-		return paymentYn;
+	
+	public int getPayFee() {
+		return payFee;
 	}
-
-	public void setPaymentYn(String paymentYn) {
-		this.paymentYn = paymentYn;
+	
+	public void setPayFee(int payFee) {
+		this.payFee = payFee;
+	}
+	
+	public String getPayUserPhone() {
+		return payUserPhone;
+	}
+	
+	public void setPayUserPhone(String payUserPhone) {
+		this.payUserPhone = payUserPhone;
 	}
 
 	@Override
 	public String toString() {
 		return "PaymentSend [paySendIdx=" + paySendIdx + ", resIdx=" + resIdx + ", paySendTid=" + paySendTid
-				+ ", paySendDate=" + paySendDate + ", paymentYn=" + paymentYn + "]";
+				+ ", payMethod=" + payMethod + ", payFee=" + payFee + ", payUserPhone=" + payUserPhone + "]";
 	}
 }

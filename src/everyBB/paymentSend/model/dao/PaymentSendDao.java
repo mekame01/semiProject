@@ -19,13 +19,14 @@ public class PaymentSendDao {
 		PreparedStatement pstm = null;
 		try {
 			String sql = "insert into tb_payment_send "
-					+ "(pay_send_idx, res_idx, pay_send_tid, pay_send_date, payment_yn) "
-					+ "values(sc_pay_send_idx.nextval ?, ?, ?, ?)";
+					+ "(pay_send_idx, res_idx, pay_send_tid, pay_method, pay_fee, pay_user_phone) "
+					+ "values(sc_pay_send_idx.nextval, ?, ?, ?, ?, ?)";
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, paymentSend.getResIdx());
 			pstm.setString(2, paymentSend.getPaySendTid());
-			pstm.setDate(3, paymentSend.getPaySendDate());
-			pstm.setString(4, paymentSend.getPaymentYn());
+			pstm.setString(3, paymentSend.getPayMethod());
+			pstm.setInt(4, paymentSend.getPayFee());
+			pstm.setString(5, paymentSend.getPayUserPhone());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

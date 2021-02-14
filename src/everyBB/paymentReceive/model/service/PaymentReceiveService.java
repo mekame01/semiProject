@@ -26,7 +26,7 @@ public class PaymentReceiveService {
 		return res;
 	}
 	
-	public PaymentReceive selectPaymentDetail(int payReIdx){
+	public PaymentReceive selectPaymentDetail(String payReIdx){
 		Connection conn = jdt.getConnection();
 		PaymentReceive paymentReceive = null;
 		try {

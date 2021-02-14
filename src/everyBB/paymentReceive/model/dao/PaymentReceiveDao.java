@@ -14,17 +14,19 @@ public class PaymentReceiveDao {
 	public int insertPaymentReceive(Connection conn, PaymentReceive paymentReceive) {
 		int res = 0;
 		String sql = "insert into tb_payment_receive "
-				+ "(pay_re_idx, res_idx, pay_re_tid, pay_re_prog, pay_re_state_cd, pay_re_state_msg, pay_re_error_msg) "
-				+ "values(sc_pay_re_idx.nextval ?, ?, ?, ?, ?, ?)";
+				+ "(pay_re_idx, res_idx, pay_re_tid, pay_re_fee, pay_re_date, pay_re_status, pay_re_error_msg, pay_re_error_cd, pay_re_yn) "
+				+ "values(sc_pay_re_idx.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement pstm = null;
 		try {
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, paymentReceive.getResIdx());
 			pstm.setString(2, paymentReceive.getPayReTid());
-			pstm.setString(3, paymentReceive.getPayReProg());
-			pstm.setString(4, paymentReceive.getPayReStateCd());
-			pstm.setString(5, paymentReceive.getPayReStateMsg());
+			pstm.setInt(3, paymentReceive.getPayReFee());
+			pstm.setDate(4, paymentReceive.getPayReDate());
+			pstm.setString(5, paymentReceive.getPayReStatus());
 			pstm.setString(6, paymentReceive.getPayReErrorMsg());
+			pstm.setString(7, paymentReceive.getPayReErrorCd());
+			pstm.setString(8, paymentReceive.getPayReYn());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -34,17 +36,17 @@ public class PaymentReceiveDao {
 		return res;
 	}
 	
-	public PaymentReceive selectPaymentDetail(Connection conn, int payReIdx) {
+	public PaymentReceive selectPaymentDetail(Connection conn, String payReTid) {
 		PaymentReceive paymentReceive = null;
 		PreparedStatement pstm = null;
 		ResultSet rset = null;
 		
 		try {
 			String sql = "select "
-					+ "(pay_re_idx, res_idx, pay_re_tid, pay_re_prog, pay_re_state_cd, pay_re_state_msg, pay_re_error_msg) "
-					+ "from tb_payment_receive where pay_re_idx = ?";
+					+ "(pay_re_idx, res_idx, pay_re_tid, pay_re_fee, pay_re_date, pay_re_status, pay_re_error_msg, pay_re_error_cd, pay_re_yn) "
+					+ "from tb_payment_receive where pay_re_tid = ?";
 			pstm = conn.prepareStatement(sql);
-			pstm.setInt(1, payReIdx);
+			pstm.setString(1, payReTid);
 			rset = pstm.executeQuery();
 			
 			if(rset.next()) {
@@ -52,10 +54,12 @@ public class PaymentReceiveDao {
 				paymentReceive.setPayReIdx(rset.getInt("pay_re_idx"));
 				paymentReceive.setResIdx(rset.getInt("res_idx"));
 				paymentReceive.setPayReTid(rset.getString("pay_re_tid"));
-				paymentReceive.setPayReProg(rset.getString("pay_re_prog"));
-				paymentReceive.setPayReStateCd(rset.getString("pay_re_state_cd"));
-				paymentReceive.setPayReStateMsg(rset.getString("pay_re_state_msg"));
+				paymentReceive.setPayReFee(rset.getInt("pay_re_fee"));
+				paymentReceive.setPayReDate(rset.getDate("pay_re_date"));
+				paymentReceive.setPayReStatus(rset.getString("pay_re_status"));
 				paymentReceive.setPayReErrorMsg(rset.getString("pay_re_error_msg"));
+				paymentReceive.setPayReErrorCd(rset.getString("pay_re_error_cd"));
+				paymentReceive.setPayReYn(rset.getString("pay_re_yn"));
 			}	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

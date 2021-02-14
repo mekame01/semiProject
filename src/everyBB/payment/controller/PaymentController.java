@@ -57,15 +57,17 @@ public class PaymentController extends HttpServlet {
 	private void payment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PaymentSend paymentSend = new PaymentSend();
-		//int paySendIdx = Integer.parseInt(request.getParameter("pay_send_idx"));
 		//int resIdx = Integer.parseInt(request.getParameter("res_idx"));
-		//String paySendTid = request.getParameter("pay_send_tid");
-		//Date paySendDate = Date.valueOf(request.getParameter("pay_send_date"));
+		String paySendTid = request.getParameter("merchant_uid");
+		String payMethod = request.getParameter("pay_method");
+		int payFee = Integer.parseInt(request.getParameter("amount"));
+		String payUserPhone = request.getParameter("buyer_phone");
 		
-		//paymentSend.setPaySendIdx(paySendIdx);
 		//paymentSend.setResIdx(resIdx);
-		//paymentSend.setPaySendTid(paySendTid);
-		//paymentSend.setPaySendDate(paySendDate);
+		paymentSend.setPaySendTid(paySendTid);
+		paymentSend.setPayMethod(payMethod);
+		paymentSend.setPayFee(payFee);
+		paymentSend.setPayUserPhone(payUserPhone);
 		
 		paymentSendService.insertPaymentSend(paymentSend);
 		//paymentSendService.selectPayWithReserv(resIdx);
@@ -77,6 +79,25 @@ public class PaymentController extends HttpServlet {
 	private void payDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PaymentReceive paymentReceive = new PaymentReceive();
+		String payReTid = request.getParameter("imp_uid");
+		int payReFee = Integer.parseInt(request.getParameter("paid_amount"));
+		Date payReDate = Date.valueOf(request.getParameter("paid_at"));
+		String payReStatus = request.getParameter("status");
+		String payReErrorCd = request.getParameter("error_code");
+		String payReErrorMsg = request.getParameter("error_msg");
+		String payReYn = request.getParameter("success");
+		
+		paymentReceive.setPayReTid(payReTid);
+		paymentReceive.setPayReFee(payReFee);
+		paymentReceive.setPayReDate(payReDate);
+		paymentReceive.setPayReStatus(payReStatus);
+		paymentReceive.setPayReErrorCd(payReErrorCd);
+		paymentReceive.setPayReErrorMsg(payReErrorMsg);
+		if(payReYn.equals("true")) {
+			paymentReceive.setPayReYn("Y");
+		}else {
+			paymentReceive.setPayReYn("N");
+		}
 		
 		request.getRequestDispatcher("/WEB-INF/view/payment/payDetail.jsp")
 		.forward(request, response);
