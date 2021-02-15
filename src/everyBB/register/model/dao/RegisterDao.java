@@ -198,30 +198,7 @@ public class RegisterDao {
 	}
 
 	
-	 //파일 수정 //오류 
-	public int updateFile(Connection conn, FileVo fileVo) { 
-		int res = 0;
-	 PreparedStatement pstm = null; 
-	 
-	 try {
-	  String sql = "update tb_file set origin_file_name = ?,rename_file_name = ?,save_path = ? where type_idx = ?";
-	  
-	  pstm = conn.prepareStatement(sql);
-	  
-	  pstm.setString(1,fileVo.getOriginFileName());
-	  pstm.setString(2,fileVo.getRenameFileName());
-	  pstm.setString(3,fileVo.getSavePath()); 
-	  pstm.setString(4,fileVo.getTypeIdx());
-	 
-	  res = pstm.executeUpdate(); 
-	  
-	 } catch (SQLException e) {
-			throw new DataAccessException(ErrorCode.rg02, e); //
-		} finally {
-			jdt.close(pstm);
-		}
-	 return res;
-	  }
+	
 	
 	
 	//// 삭제//////////////////////////////////////////////////////////////////////////////////////////

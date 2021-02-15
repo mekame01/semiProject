@@ -107,35 +107,7 @@ public class RegisterService {
 			return res;
 		}
 		
-		//파일수정
-		public int updateFile(FileVo fileVo) {
-			 System.out.println(fileVo);
-		      Connection conn = jdt.getConnection();
-		      int res = 0;
-		      List<FileVo> resList = null;
-		      
-		      resList = registerDao.selectFileWithRegister(conn, Integer.parseInt(fileVo.getTypeIdx()));
-		      System.out.println(resList);
-		      for (FileVo fv : resList) {
-		         String path = Code.UPLOAD + fv.getSavePath() + fv.getRenameFileName(); 
-		         File file = new File(path);
-		         file.delete();
-		         System.out.println(path);
-		      }
-			
-			
-			try {
-				registerDao.updateFile(conn, fileVo);
-				jdt.commit(conn);
-			}catch (Exception e) {
-				jdt.rollback(conn);
-				throw new DataAccessException(ErrorCode.UW01, e);
-			}finally {
-				jdt.close(conn);
-			}
-			 return res;
-		}
-		
+	
 		
 		
 		

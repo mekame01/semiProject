@@ -1,5 +1,6 @@
 
 
+<%@page import="everyBB.common.code.Code"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ include file="/WEB-INF/view/include/head.jsp" %>    
@@ -144,26 +145,9 @@
 				    </datalist>
                 </div>
                  <div class="col-md-6">
-                <%--  <c:forEach var="file" items="${data.fileList}">
-                 <input type="file" name="files" id="contract_file" class="form-control" accept="image/*" multiple required 
-                 		value= "${file.originFileName}" >
-              	</c:forEach>  --%>
-                 <input type="file" name="files" id="contract_file" class="form-control" accept="image/*" multiple required 
-                 		value= "${data.fileList[0].originFileName}" >
-                 						 
+              <input type="text" id="price" class="form-control" name="carFee" required value="${data.register.carFee}">
               </div>
-              
-              </div>
-                
-              
-               <div class="form-group row">
-                <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" id="price" class="form-control" name="carFee" required value="${data.register.carFee}">
-                </div>
-               
-                
-              </div>
-              
+             </div>
               <div class="form-group row">
                 <div class="col-md-12">
                   <textarea  class="form-control"  name="carNote" cols="30" rows="10"  >${data.register.carNote}</textarea>

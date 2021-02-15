@@ -212,25 +212,6 @@ public class RegisterController extends HttpServlet {
 		System.out.println(registerData);
 		
 		registerService.updateRegister(register);
-		
-		/*
-		 * String typeIdx = request.getParameter("typeIdx"); String originFileName =
-		 * request.getParameter("ofname"); String renameFileName =
-		 * request.getParameter("rfname"); String savePath =
-		 * request.getParameter("savePath");
-		 */
-		
-		String typeIdx = request.getParameter("carIdx"); 
-		FileVo fileVo = new FileVo();
-		fileVo.setTypeIdx(typeIdx);
-		registerService.updateFile(fileVo);
-		/*
-		 * FileVo fileVo = new FileVo(); fileVo.setTypeIdx(typeIdx);
-		 * fileVo.setOriginFileName(originFileName);
-		 * fileVo.setRenameFileName(renameFileName); fileVo.setSavePath(savePath);
-		 */
-		
-		
 	
 		
 		request.setAttribute("alertMsg", " 차량 등록이 완료되었습니다.");
@@ -238,10 +219,6 @@ public class RegisterController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
 		.forward(request, response);
 	
-		
-		
-		
-		
 		
 	
 	}
