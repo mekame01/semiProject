@@ -1,6 +1,7 @@
 package everyBB.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,8 @@ import everyBB.likey.model.vo.Likey;
 import everyBB.member.model.service.MemberService;
 import everyBB.member.model.vo.Member;
 import everyBB.reservation.model.vo.Reservation;
+import everyBB.reservationHistory.model.service.ReservationHistoryService;
+import everyBB.reservationHistory.model.vo.ReservationHistory;
 
 /**
  * Servlet implementation class Why
@@ -29,6 +32,7 @@ public class MemberController extends HttpServlet {
        
 	MemberService memberService = new MemberService();
 	LikeyService likeyService = new LikeyService();
+	ReservationHistoryService reservationHistoryService = new ReservationHistoryService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -230,6 +234,7 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		
 		List<Reservation> pastList = memberService.selectPastTripById(member.getUserId());
 		
+		
 		request.setAttribute("pastList", pastList);
 		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/past_trip.jsp")
@@ -239,10 +244,16 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 	private void currentTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("user");
+		List<String> resStateList = new ArrayList<>();
 		
 		List<Reservation> currentList = memberService.selectCurrentTripById(member.getUserId());
+		for (Reservation reservation : currentList) {
+			String temp = reservationHistoryService.selectReservationByResIdx(reservation.getResIdx());
+			resStateList.add(temp);
+		}
 		
 		request.setAttribute("currentList", currentList);
+		request.setAttribute("resStateList", resStateList);
 		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/current_trip.jsp")
 		.forward(request, response);

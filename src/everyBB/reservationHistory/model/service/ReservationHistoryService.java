@@ -37,10 +37,23 @@ public class ReservationHistoryService {
 		try {
 			reservationHistoryList = reservationHistoryDao.selectReservationById(conn, userId, carIdx);
 		}catch (Exception e) {
-			throw new DataAccessException(ErrorCode.IH01, e);
+			throw new DataAccessException(ErrorCode.SH01, e);
 		}finally {
 			jdt.close(conn);
 		}
 		return reservationHistoryList;
+	}
+	
+	public String selectReservationByResIdx(int resIdx) {
+		String resState = ""; 
+		Connection conn = jdt.getConnection();
+		try {
+			resState = reservationHistoryDao.selectReservationByResIdx(conn, resIdx);
+		}catch (Exception e) {
+			throw new DataAccessException(ErrorCode.SH01, e);
+		}finally {
+			jdt.close(conn);
+		}
+		return resState;
 	}
 }

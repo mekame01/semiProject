@@ -311,7 +311,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		
 		try {
 			
-			String query = "select car_idx, res_parking, res_pickup_date, res_return_date, res_fee from tb_reservation where res_idx in "
+			String query = "select res_idx, car_idx, res_parking, res_pickup_date, res_return_date, res_fee from tb_reservation where res_idx in "
 					+ "(select res_idx from tb_reservation_history where user_id = ? and res_pickup_date >= sysdate and res_state in ('RH01', 'RH02', 'RH03'))";
 			pstm = conn.prepareStatement(query);
 			pstm.setString(1, userId);
@@ -319,7 +319,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 			
 			while(rset.next()) {
 				Reservation res = new Reservation();
-				
+				res.setResIdx(rset.getInt("res_idx"));
 				res.setCarIdx(rset.getInt("car_idx"));
 				res.setResParking(rset.getString("res_parking"));
 				res.setResPickupDate(rset.getDate("res_pickup_date"));

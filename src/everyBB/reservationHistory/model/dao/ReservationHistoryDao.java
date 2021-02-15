@@ -35,7 +35,7 @@ public class ReservationHistoryDao {
 			pstm.setString(4, reservationHistory.getResState());
 			pstm.executeUpdate();
 		} catch (SQLException e) {
-			throw new DataAccessException(ErrorCode.IM01,e);
+			throw new DataAccessException(ErrorCode.IH01,e);
 		}finally {
 			jdt.close(pstm);
 		}
@@ -57,11 +57,8 @@ public class ReservationHistoryDao {
 					+ "                                group by res_idx))"
 					+ " and res_state = 'RH05'";
 			
-			//3. 쿼리 실행용 객체 생성
 			pstm = conn.prepareStatement(query);
 			
-			//4. prepareStatement의 쿼리를 완성
-			// setString(int idx, String val) : idx번째 물음표에 val를 넣겠다.
 			pstm.setString(1, userId);
 			pstm.setInt(2, carIdx);
 			
@@ -78,13 +75,38 @@ public class ReservationHistoryDao {
 				reservationHistoryList.add(reservationHistory);
 			}
 			
-		//SQLException : db와 통신 중에 발생하는 모든 예외를 담당하는 Exception
 		} catch (SQLException e) {
-			throw new DataAccessException(ErrorCode.SC01, e);
+			throw new DataAccessException(ErrorCode.SH01, e);
 		} finally {
 			jdt.close(rset, pstm);
 		}
 		return reservationHistoryList;
+	}
+
+	public String selectReservationByResIdx(Connection conn, int resIdx) {
+		PreparedStatement pstm = null;
+		ResultSet rset = null;
+		String resState = "";
+		try {
+			String query = "select max(res_state) as res_state from tb_reservation_history"
+					+ " where res_idx = ?";
+			
+			pstm = conn.prepareStatement(query);
+			
+			pstm.setInt(1, resIdx);
+			
+			rset = pstm.executeQuery();
+			
+			if(rset.next()) {
+				resState = rset.getString("res_state");
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.SH01, e);
+		} finally {
+			jdt.close(rset, pstm);
+		}
+		return resState;
 	}
 
 }
