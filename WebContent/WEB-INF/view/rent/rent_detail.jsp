@@ -133,12 +133,12 @@
 				<form id="frm_reservation" action="/reservation/insert">
 					<input type="hidden" name="car_idx" id="car_idx" value="${requestScope.car.carIdx}">
 					<input type="hidden" name="user_id" id="user_id" value="${requestScope.car.userId}">
-					<div>위치 : <input name="parking" id="parking" style="border: none; width: 300px;" value="${requestScope.car.carParking}" disabled="disabled"></div>
+					<div>위치 : <input name="parking" id="parking" style="border: none; width: 300px;" value="${requestScope.car.carParking}" readonly="readonly"></div>
 					<input class="time" type="date" placeholder="픽업날짜" name="pickup_date" id="pickup_date" value="${requestScope.pickup_date}" required="required">
 					<input class="time" type="number" min="0" max="23"  placeholder="픽업시각" name="pickup_hour" id="pickup_hour" style="width: 25%;" value="${requestScope.pickup_hour}" required="required">
 					<input class="time" type="date" placeholder="반환날짜" name="return_date" id="return_date" value="${requestScope.return_date}" required="required">
 					<input class="time" type="number" min="0" max="23" placeholder="반환시각" name="return_hour" id="return_hour" style="width: 25%;" value="${requestScope.return_hour}" required="required">
-					<div>가격 : <input name="price" id="price" style="border: none; width: auto; text-align: right;" disabled="disabled">원</div>
+					<div>가격 : <input name="price" id="price" style="border: none; width: auto; text-align: right;" readonly="readonly">원</div>
 					<input class="btn btn-primary btn-block py-3" id="btn_res" value="예약하기" type="submit">
 				</form>
 			</div>

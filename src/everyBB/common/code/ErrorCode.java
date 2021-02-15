@@ -30,6 +30,8 @@ public enum ErrorCode {
 	HTTP01("HTTP 통신 중 에러가 발생하였습니다."),
 	DATE01("Date 포맷 변환 중 에러가 발생하였습니다."),
 	RSRV01("이미 예약 되어 있는 시간이 포함되어 있습니다."),
+	RSRV02("예약하는데 필요한 면허번호가 없습니다.", "/member/mypage/userinfomodify"),
+	RSRV03("예약하는데 필요한 전화번호가 없습니다.", "/member/mypage/userinfomodify"),
 	CD_404("존재하지 않는 경로입니다.");
 	
 	public String errMsg;

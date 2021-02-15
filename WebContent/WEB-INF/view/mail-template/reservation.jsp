@@ -16,7 +16,7 @@
 	<h2>픽업시간 : ${param.resPickupDate}</h2>
 	<h2>반환시간 : ${param.resReturnDate}</h2>
 	<h2>가격 : ${param.resFee}원</h2>
-	<h1><a href="<%= Code.DOMAIN %>/reservationHistory/insert?res_state=RH04&res_idx=${param.resIdx}&user_id=${param.userId}&car_idx=${param.carIdx}">수락</a></h1>  
+	<h1><a href="<%= Code.DOMAIN %>/reservationHistory/insert?res_state=RH02&res_idx=${param.resIdx}&user_id=${param.userId}&car_idx=${param.carIdx}">수락</a></h1>  
 	<h1><a href="<%= Code.DOMAIN %>/reservationHistory/insert?res_state=RH09&res_idx=${param.resIdx}&user_id=${param.userId}&car_idx=${param.carIdx}">거절</a></h1>
 
 <%-- jsp에 접근할 친구가 필요해 mail 안에 mailhandler --%>
