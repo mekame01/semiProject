@@ -150,20 +150,49 @@
    <%@ include file="/WEB-INF/view/include/script.jsp" %>
    
    <script type="text/javascript">
+   var paySendTid;
+   //그런데 여기 값 2개는 api에서 받아오거나 해야하지 않나 싶네요.
+   var payMethod;
+   var payFee;
+   
+   var payUserPhone;
+   
+   var payReTid;
+   var payReFee;
+   var payReDate;
+   var payReStatus;
+   var payReErrorCd;
+   var payReErrorMsg;
+   var payReYn;
+
 	   $('#pay').click(function(){
 		   var IMP = window.IMP;
 	       IMP.init('imp13888665'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 	       var msg;
 	       
+	       //입력값이 5개로
+	       paySendTid = 'merchant_' + new Date().getTime();
+	       //그런데 여기 값 2개는 api에서 받아오거나 해야하지 않나 싶네요.
+	       payMethod = 'card';
+	       payFee = 100;
+	       
+	       payUserPhone = '010-0000-0000';
+	       
+	       //여기가 통신 시작이니 이 전에 통신을 쏘겠습니다.
+	       //그럼 여기서 통신을 호출하겠습니다.
+	       paymentSend();
+	       
 	       IMP.request_pay({
 	           pg : 'html5_inicis',
-	           pay_method : 'card',
-	           merchant_uid : 'merchant_' + new Date().getTime(),
+	           pay_method : payMethod,
+	           merchant_uid : paySendTid,
 	           name : '결제테스트',
-	           amount : 100,
-	           /* buyer_name : , */
-	           buyer_phone : '010-0000-0000'
+	           amount : payFee,
+	           buyer_tel : payUserPhone
 	       }, function(rsp) {
+	    	   //이쯤에 만들면 될거 같습니다.             
+	           
+	    	   paymentReceive();
 	           if ( rsp.success ) {
 	               //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 	               jQuery.ajax({
@@ -171,13 +200,13 @@
 	                   type: 'POST',
 	                   dataType: 'json',
 	                   data: {
-	                	   imp_uid : rsp.imp_uid, //기타 필요한 데이터가 있으면 추가 전달
-	                	   paid_amount : rsp.paid_amount,
-	                	   paid_at : rsp.paid_at,
-	                	   status : rsp.status,
-	                	   error_code : rsp.error_code,
-	                	   error_msg : rsp.error_msg,
-	                	   success : rsp.success
+	                	   payReTid : rsp.imp_uid, //기타 필요한 데이터가 있으면 추가 전달
+	                	   payReFee : rsp.paid_amount,
+	                	   payReDate : rsp.paid_at,
+	                	   payReStatus : rsp.status,
+	                	   payReErrorCd : rsp.error_code,
+	                	   payReErrorMsg : rsp.error_msg,
+	                	   payReYn : rsp.success
 	                   }
 	               }).done(function(data) {
 	                   //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
@@ -196,16 +225,58 @@
 	                   }
 	               });
 	               //성공시 이동할 페이지
-	               location.href='<%=request.getContextPath()%>/payment/payDetail?msg='+msg;
-	           } else {
-	               msg = '결제에 실패하였습니다.';
-	               msg += ' 에러내용 : ' + rsp.error_msg;
-	               //실패시 이동할 페이지
-	               <%-- location.href="<%=request.getContextPath()%>/order/payFail"; --%>
-	               alert(msg);
-	           }
+	               <%--location.href='<%=request.getContextPath()%>/payment/payDetail?msg='+msg;--%>
+	           	} else {
+	               	msg = '결제에 실패하였습니다.';
+	               	msg += ' 에러내용 : ' + rsp.error_msg;
+	               	//실패시 이동할 페이지
+	               	<%-- location.href="<%=request.getContextPath()%>/order/payFail"; --%>
+	               	alert(msg);
+	           	}
 	       });   
 	   });
+
+	//payment_send에 보낼 function
+	//async는 비동기 작업이 있을 경우 앞에 붙여주는 겁니다. 통신은 일반적으로 비동기 작업이니까요.
+	let paymentSend = async () => {
+		//이값은 전 화면에서 request.setAttribute("")로 받은 값
+		//임시 하드코딩
+		let url = "/payment/insertPaymentSend?resIdx="+1
+			//위에서 변수로 받은 값
+			+"&paySendTid=" + paySendTid
+			+"&payMethod=" + payMethod
+			+"&payFee=" + payFee
+			+"&payUserPhone=" + payUserPhone;
+		console.dir(url);
+		alert("여기서 잠깐1");
+		//이렇게만 해주면 알아서 통신을 쏨
+		let response = await fetch(url,{
+			"method": "get"
+		});
+		alert("여기서 잠깐2");
+	}
+	
+	let paymentReceive = async () => {
+		//이값은 전 화면에서 request.setAttribute("")로 받은 값
+		//임시 하드코딩
+		let url = "/payDetail/insertPaymentReceive?resIdx="+1
+			//위에서 변수로 받은 값
+			+"&payReTid=" + payReTid
+			+"&payReFee=" + payReFee
+			+"&payReDate=" + payReDate
+			+"&payReStatus=" + payReStatus;
+			+"&payReErrorCd=" + payReErrorCd;
+			+"&payReErrorMsg=" + payReErrorMsg;
+			+"&payReYn=" + payReYn;
+		console.dir(url);
+		alert("여기서 잠깐1");
+		//이렇게만 해주면 알아서 통신을 쏩니다.
+		let response = await fetch(url,{
+			"method": "get"
+		});
+		alert("여기서 잠깐2");
+	}
+	
    </script>
 </body>
 </html>

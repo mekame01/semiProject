@@ -27,6 +27,8 @@ public class PaymentSendDao {
 			pstm.setString(3, paymentSend.getPayMethod());
 			pstm.setInt(4, paymentSend.getPayFee());
 			pstm.setString(5, paymentSend.getPayUserPhone());
+			
+			res = pstm.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

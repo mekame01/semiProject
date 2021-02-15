@@ -27,6 +27,8 @@ public class PaymentReceiveDao {
 			pstm.setString(6, paymentReceive.getPayReErrorMsg());
 			pstm.setString(7, paymentReceive.getPayReErrorCd());
 			pstm.setString(8, paymentReceive.getPayReYn());
+			
+			res = pstm.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

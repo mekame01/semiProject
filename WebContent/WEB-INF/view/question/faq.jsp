@@ -79,10 +79,9 @@
 	                        <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab">
 	                            <h3 class="mb-4">결제 금액과 결제 방법</h3>
 	                            <div class="bg-light p-4">
-									제가 정말 잘하고 싶은데요..<br>
-									너무 어렵고 결제는 정말 막막하고..<br>
-									결제 금액은 어떻게 매겨지는지 아직 정하지 않았는데요...<br>
-									예약 시 정해진 결제 금액을 가지고 결제를 진행하시면 됩니다.
+									결제는 예약을 먼저 진행한 후에 이루어집니다.<br>
+									예약 과정에서 금액이 정해지며, 시간당 계산됩니다.<br>
+									
 	                            </div>
 	                        </div>
 	                        <div class="tab-pane fade" id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-4-tab">
@@ -125,25 +124,34 @@
 	                        <div class="tab-pane fade show active" id="v-pills-5" role="tabpanel" aria-labelledby="v-pills-5-tab">
 	                            <h3 class="mb-4">차량 등록은 어떻게 하나요?</h3>
 	                            <div class="bg-light p-4">
-	                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis erat cursus, facilisis nulla et, volutpat est. Cras ultrices eu leo ut dapibus. In sollicitudin consectetur est sed laoreet. Cras imperdiet, tortor ac aliquam ullamcorper, eros lorem volutpat odio, ut aliquet elit orci sit amet magna. Quisque in pretium ante, nec maximus ipsum. Ut semper arcu sit amet felis feugiat, ut tempus eros blandit. Donec fermentum elit purus, convallis commodo arcu posuere et. Proin convallis tristique ante, ac auctor magna sodales sit amet. Nulla facilisi. Quisque feugiat sit amet mauris efficitur facilisis. Mauris vitae magna efficitur, vulputate risus facilisis, viverra lorem. Praesent vulputate, felis quis ultrices porta, sapien massa imperdiet metus, eget tincidunt ante ipsum quis lectus. Vivamus placerat pretium euismod. Praesent mattis varius risus eget luctus. Quisque odio risus, tristique in erat eget, dapibus maximus ligula.
+	                            	차량 등록 페이지에서 등록하면 됩니다.<br>
+	                            	차량의 사진이 필요하고, 차량에 대한 기본적인 정보와<br>
+	                            	추가적으로 적어야 하는 사항을 적어주면 됩니다.
 	                            </div>
 	                        </div>
 	                        <div class="tab-pane fade" id="v-pills-6" role="tabpanel" aria-labelledby="v-pills-6-tab">
 	                            <h3 class="mb-4">차량 관리는 어떻게 이루어져야 하나요?</h3>
 	                            <div class="bg-light p-4">
-	                                Etiam at posuere metus, in molestie libero. Cras eleifend turpis vel libero vehicula, interdum gravida lacus consectetur. Proin id sodales nunc, sit amet varius orci. Nulla malesuada consectetur ipsum a dapibus. Cras rhoncus justo ex, ac tincidunt mauris fermentum in. Vestibulum hendrerit metus pharetra arcu convallis dictum. Vestibulum leo erat, vehicula eu ex a, convallis faucibus nunc. Duis ultrices lacus quis vulputate iaculis. Ut magna sem, vulputate non tristique sit amet, egestas et purus. Mauris euismod sapien id pretium vulputate. In molestie, enim id finibus hendrerit, velit ante sodales nisi, vitae aliquam nulla tortor nec ligula.
+	                            	차량 관리는 차주에 의해 이루어지며, 관리가 잘되지 않는<br>
+	                            	문제점이 생길 것을 대비하여 평점제도를 도입하고 있습니다.<br>
+	                            	차량을 공유하는 것이므로 서로 서로 조심해야 합니다.
 	                            </div>
 	                        </div>
 	                        <div class="tab-pane fade" id="v-pills-7" role="tabpanel" aria-labelledby="v-pills-7-tab">
 	                            <h3 class="mb-4">게스트와의 체크인은 어떤 방식으로 진행되나요?</h3>
 	                            <div class="bg-light p-4">
-	                                Cras in odio facilisis, convallis ex in, euismod elit. Quisque a tortor id nisl egestas mollis. Integer eleifend sapien a rutrum laoreet. Ut mattis tempus ipsum, sed porttitor nulla blandit non. Nulla quis magna id nisl efficitur vestibulum sit amet eget lorem. Pellentesque pharetra porta erat, sed rhoncus libero. Proin nec pellentesque leo. Cras vehicula bibendum rutrum. Duis vel sem vel libero luctus volutpat sagittis eget nunc. Sed vehicula massa mi, ut tempor est maximus ut. Pellentesque ullamcorper odio quis est tincidunt iaculis. Sed viverra ligula in nisi molestie sagittis. Etiam nec dictum tellus. Maecenas orci mi, dignissim id pulvinar nec, venenatis at mauris. Mauris sit amet leo eu metus scelerisque feugiat.
+	                            	게스트와의 체크인은 직접 연락을 통해 변경 사항이 있다면<br>
+	                            	변경하여 진행하셔도 되나, 기본적으로는 예약 시 지정한<br>
+	                            	픽업 장소에서 이루어집니다.
 	                            </div>
 	                        </div>
 	                        <div class="tab-pane fade" id="v-pills-8" role="tabpanel" aria-labelledby="v-pills-8-tab">
 	                            <h3 class="mb-4">평점의 기준은 무엇인가요?</h3>
 	                            <div class="bg-light p-4">
-	                                Vivamus viverra diam id erat porttitor condimentum. Nunc et metus aliquam, maximus felis et, porta erat. Nam laoreet pretium felis, vitae dictum sapien congue vel. Quisque a augue lobortis, molestie odio non, finibus nibh. Cras ut tempus sapien, in porta dolor. Mauris vitae mi ultricies, semper dolor at, rhoncus est. Proin dictum lobortis tortor, vel sodales felis hendrerit eu. Maecenas volutpat dignissim justo, sit amet ultrices libero tristique id. Proin euismod, odio quis tincidunt ullamcorper, nisl leo auctor est, eget facilisis ligula dui non ex. Morbi non sagittis quam, non pharetra libero. Nunc id nibh cursus, dapibus mauris eu, efficitur ligula. Vivamus tempor erat sem, sed sodales urna mattis cursus. Donec at tempus lacus. Aenean scelerisque nibh tellus, in euismod turpis ornare at. Proin pellentesque blandit dignissim. Vestibulum tristique odio ut mauris fermentum, et lobortis diam tincidunt.
+	                            	차량을 이용한 사용자들의 차량 자체에 불편사항이 없다면 좋은 평점을 받을 수 있습니다.<br>
+	                            	이것은 차량의 청결 상태, 외관이나 내부에 문제가 없는 지,<br>
+	                            	차주의 태도 등 다양한 기준이 있습니다.<br>
+	                            	무분별한 평점테러는 추후에 관리할 예정입니다.
 	                            </div>
 	                        </div>
 	                    </div>
