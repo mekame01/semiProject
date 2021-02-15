@@ -277,7 +277,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		try {
 			
 			String query = "select car_idx, res_parking, res_pickup_date, res_return_date, res_fee from tb_reservation where res_idx in "
-					+ "(select res_idx from tb_reservation_history where user_id = ? and res_state='RH06')";
+					+ "(select res_idx from tb_reservation_history where user_id = ? and res_state in ('RH05', 'RH06', 'RH07'))";
 			pstm = conn.prepareStatement(query);
 			pstm.setString(1, userId);
 			rset = pstm.executeQuery();
@@ -312,7 +312,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		try {
 			
 			String query = "select car_idx, res_parking, res_pickup_date, res_return_date, res_fee from tb_reservation where res_idx in "
-					+ "(select res_idx from tb_reservation_history where user_id = ? and res_state='RH05')";
+					+ "(select res_idx from tb_reservation_history where user_id = ? and res_state in ('RH01', 'RH02', 'RH03'))";
 			pstm = conn.prepareStatement(query);
 			pstm.setString(1, userId);
 			rset = pstm.executeQuery();

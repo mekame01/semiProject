@@ -52,20 +52,20 @@
             <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>    
           </div>
         </div>
-    
+    </div>
+    </div>
 
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
-         
-         <c:forEach var="car" items="${wishlist}" varStatus="car">
+         <c:forEach var="car" items="${wishList}">
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="post-entry-1 h-100">
-              <a href="single.html">
+              <a href="/rent/detail">
                 <img src="/resources/images/post_1.jpg" alt="Image" class="img-fluid">
               </a>
               <div class="post-entry-1-contents">
-                <h2><a href="single.html">${car.carParking}</a></h2>
+                <h2><a href="/rent/detail">${car.carParking}</a></h2>
                 <span class="meta d-inline-block mb-3">${car.carModel}<span class="mx-2">by</span> <a href="#">${car.userId}</a></span>
                 <p>이용요금:${car.carFee}원 / 평점 : ${car.carAvgScore}</p>
               </div>
@@ -97,7 +97,7 @@
     </div>
 
     <%@ include file="/WEB-INF/view/include/script.jsp" %>
-
+</div>
   </body>
 
 </html>

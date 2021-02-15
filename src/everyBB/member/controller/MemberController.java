@@ -260,7 +260,7 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		
 		List<Car> wishList = memberService.wishListById(member.getUserId());
 		
-		request.setAttribute("wishList", wishList); //쿼리를 *, car쪽으로 옮기기
+		request.setAttribute("wishList", wishList);
 		
 		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/wishlist.jsp")
