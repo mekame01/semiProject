@@ -32,6 +32,9 @@ public enum ErrorCode {
 	RSRV01("이미 예약 되어 있는 시간이 포함되어 있습니다."),
 	RSRV02("예약하는데 필요한 면허번호가 없습니다.", "/member/mypage/userinfomodify"),
 	RSRV03("예약하는데 필요한 전화번호가 없습니다.", "/member/mypage/userinfomodify"),
+	RH01("이미 진행중인 예약입니다."),
+	RH02("이미 수락한 예약입니다."),
+	RH09("이미 거절한 예약입니다."),
 	CD_404("존재하지 않는 경로입니다.");
 	
 	public String errMsg;
