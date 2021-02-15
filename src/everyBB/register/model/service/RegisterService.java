@@ -22,6 +22,7 @@ import everyBB.register.model.vo.Register;
 
 
 
+
 public class RegisterService {
 
 		JDBCTemplate jdt = JDBCTemplate.getInstance(); 
@@ -94,38 +95,48 @@ public class RegisterService {
 			Connection conn = jdt.getConnection();
 			int res = 0;
 			try {
-				registerDao.updateRegister(conn, register);
-				System.out.println(register);
+				res = registerDao.updateRegister(conn, register);
+				
 				jdt.commit(conn);
 			}catch (Exception e) {
 				jdt.rollback(conn);
-				throw new ToAlertException(ErrorCode.rg01,e); //에러코드 수정해야함
+				throw new DataAccessException(ErrorCode.UW01, e);
 			}finally {
 				jdt.close(conn);
 			}
 			return res;
 		}
-		//파일도 수정
-	
 		
-		
-		
-		
-//list//////////////////////////////////////////////////////////////////////////////////////		
-		/* public List<Register> registerList(String userId, int carIdx) {
-			Connection conn = jdt.getConnection();
-			List<Register> registerList = null;
+		//파일수정
+		public int updateFile(FileVo fileVo) {
+			 System.out.println(fileVo);
+		      Connection conn = jdt.getConnection();
+		      int res = 0;
+		      List<FileVo> resList = null;
+		      
+		      resList = registerDao.selectFileWithRegister(conn, Integer.parseInt(fileVo.getTypeIdx()));
+		      System.out.println(resList);
+		      for (FileVo fv : resList) {
+		         String path = Code.UPLOAD + fv.getSavePath() + fv.getRenameFileName(); 
+		         File file = new File(path);
+		         file.delete();
+		         System.out.println(path);
+		      }
+			
 			
 			try {
-				registerList = registerDao.registerList(conn, userId, carIdx);
-			
-			} finally {
+				registerDao.updateFile(conn, fileVo);
+				jdt.commit(conn);
+			}catch (Exception e) {
+				jdt.rollback(conn);
+				throw new DataAccessException(ErrorCode.UW01, e);
+			}finally {
 				jdt.close(conn);
 			}
-			return registerList;
+			 return res;
 		}
 		
-		*/
+		
 		
 		
 //////삭제////////////////////////////////////////////////////////////////		

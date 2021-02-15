@@ -58,12 +58,14 @@
         <div class="row justify-content-center text-center">
           <div class="col-lg-8 mb-5"  >
             <form action="./rg_modifyImpl" method="post" enctype="multipart/form-data" id="register">
-                 
+                
              <div class="form-group row" >
                 <div class="col-md-12">
+                <input type="hidden" class="form-control" name="carIdx" value="${data.register.carIdx}" />
               		<input type="text" id="address" name="carParking" class="form-control"  required readonly value="${data.register.carParking}" >
               		
               		<div class="d-flex justify-content-end">
+              		
 					<input type="button"  class="btn btn-info" onclick="execDaumPostcode()" value="주소 검색"><br>
 					</div>
 					<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
@@ -73,10 +75,10 @@
              
      		<div class="form-group row">
                  <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" id="search_lat"class="form-control" name="carParkingLat"  required readonly value="${data.register.carParkingLat}">
+                  <input type="hidden" id="search_lat"class="form-control" name="carParkingLat"  required readonly value="${data.register.carParkingLat}">
                 </div>
                 <div class="col-md-6">
-                  <input type="text" id="search_lng"class="form-control" name="carParkingLng"  required readonly value="${data.register.carParkingLng}">
+                  <input type="hidden" id="search_lng"class="form-control" name="carParkingLng"  required readonly value="${data.register.carParkingLng}">
                 </div>
               </div>
              
@@ -142,7 +144,13 @@
 				    </datalist>
                 </div>
                  <div class="col-md-6">
-                 <input type="file" name="files" id="contract_file" class="form-control" accept="image/*" multiple required value="${data.fileList}" ></input>
+                <%--  <c:forEach var="file" items="${data.fileList}">
+                 <input type="file" name="files" id="contract_file" class="form-control" accept="image/*" multiple required 
+                 		value= "${file.originFileName}" >
+              	</c:forEach>  --%>
+                 <input type="file" name="files" id="contract_file" class="form-control" accept="image/*" multiple required 
+                 		value= "${data.fileList[0].originFileName}" >
+                 						 
               </div>
               
               </div>
@@ -268,28 +276,25 @@ $("#price").on("keyup", function() {
 </script> -->
 
 
-<!-- 사진업로드 -->
-<!-- <script>
-    var upload = document.querySelector('#upload');
- 
-    upload.addEventListener('change',function (e) {
-        var get_file = e.target.files;
-        console.log(get_file)
-    })
-</script> -->
+
 
 <script type="text/javascript">
    function submitData(url){
       location.href = url;
    } 
-   
-   function downloadFile(ofname,rfname,savePath){
-	  let params = {'ofname':ofname,
-			  		'rfname':rfname,
-			  		'savePath':savePath};
-	  
-      location.href = '${context}' + "/register/download?" + urlEncodedForm(params);
+   console.dir("${data.register}");
+   document.querySelector("#register").addEventListener("submit",(e)=>{
+	  // e.preventDefault();
    }
+   )
+   /*  
+ console.dir("${data.fileList}");
+   document.querySelector("#file").addEventListener("submit",(e)=>{
+	  // e.preventDefault();
+   }
+   
+   )
+  */
 
 </script>
 

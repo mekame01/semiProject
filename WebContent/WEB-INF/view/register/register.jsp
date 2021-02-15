@@ -71,10 +71,10 @@
              
      		<div class="form-group row">
                  <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" id="search_lat"class="form-control" name="carParkingLat" placeholder="위도" required readonly>
+                  <input type="hidden" id="search_lat"class="form-control" name="carParkingLat" placeholder="위도" required readonly>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" id="search_lng"class="form-control" name="carParkingLng" placeholder="경도" required readonly>
+                  <input type="hidden" id="search_lng"class="form-control" name="carParkingLng" placeholder="경도" required readonly>
                 </div>
               </div>
              
