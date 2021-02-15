@@ -32,24 +32,24 @@
 						<input type="hidden" name="centerLng" id="centerLng">
 						<div class="row align-items-center">
 							<div class="mb-3 mb-md-0 col-md-3">
-								<input name="address" id="address" type="text" placeholder="주소입력" class="form-control">
+								<input name="address" id="address" type="text" placeholder="주소입력" class="form-control" required="required">
 							</div>
 							<div class="mb-3 mb-md-0 col-md-3">
 								<div class="form-control-wrap">
-									<input type="text" name="pickup_date" id="pickup_date" placeholder="픽업 날짜" class="form-control datepicker px-3">
+									<input type="text" name="pickup_date" id="pickup_date" placeholder="픽업 날짜" class="form-control datepicker px-3" required="required">
 									<span class="icon icon-date_range"> </span>
 								</div>
 								<div>
-									<input type="number" min="0" max="23" name="pickup_hour" id="pickup_hour" placeholder="픽업 시각" class="form-control px-3">
+									<input type="number" min="0" max="23" name="pickup_hour" id="pickup_hour" placeholder="픽업 시각" class="form-control px-3" required="required">
 								</div>
 							</div>
 							<div class="mb-3 mb-md-0 col-md-3">
 								<div class="form-control-wrap">
-									<input type="text" name="return_date" id="return_date" placeholder="반환 날짜" class="form-control datepicker px-3">
+									<input type="text" name="return_date" id="return_date" placeholder="반환 날짜" class="form-control datepicker px-3" required="required">
 									<span class="icon icon-date_range"> </span>
 								</div>
 								<div>
-									<input type="number" min="0" max="23" name="return_hour" id="return_hour" placeholder="반환 시각" class="form-control px-3">
+									<input type="number" min="0" max="23" name="return_hour" id="return_hour" placeholder="반환 시각" class="form-control px-3" required="required">
 								</div>
 							</div>
 							<div class="mb-3 mb-md-0 col-md-3">

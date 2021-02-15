@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/view/include/head.jsp" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8f0a8bf7d90077ec52cc56e4a88c0fcd&libraries=services"></script>
 <script src="/resources/js/jquery-3.3.1.min.js"></script>
 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
@@ -115,22 +116,28 @@
 					<div class="col-md-6 col-lg-6 mb-4"><p class="desc">문 : </p>${requestScope.car.carDoorNum}</div>
 					<div class="col-md-6 col-lg-6 mb-4"><p class="desc">좌석 : </p>${requestScope.car.carSeatNum}</div>
 					<div class="col-md-6 col-lg-6 mb-4"><p class="desc">변속기 : </p>${requestScope.car.carTransmission}</div>
-					<div class="col-md-6 col-lg-6 mb-4"><p class="desc">내비게이션 : </p>${requestScope.car.carNavi}</div>
-					<div class="col-md-6 col-lg-6 mb-4"><p class="desc">후방카메라 : </p>${requestScope.car.carBackCam}</div>
+					<div class="col-md-6 col-lg-6 mb-4"><p class="desc">내비게이션 : </p>
+						<c:if test="${requestScope.car.carNavi eq 'Y'}">있음</c:if>
+						<c:if test="${requestScope.car.carNavi eq 'N'}">없음</c:if>
+					</div>
+					<div class="col-md-6 col-lg-6 mb-4"><p class="desc">후방카메라 :</p>
+						<c:if test="${requestScope.car.carBackCam eq 'Y'}">있음</c:if>
+						<c:if test="${requestScope.car.carBackCam eq 'N'}">없음</c:if>
+					</div>
 					<div class="col-md-6 col-lg-6 mb-4"><p class="desc">참고사항 : </p>${requestScope.car.carNote}</div>
 					<div class="col-md-6 col-lg-6 mb-4"><p class="desc">평점	 : </p>${requestScope.car.carAvgScore}</div>
 				</div>
 			</div>
 			<div class="right">
-				<img alt="" src="">
+				<div class="map" id="map" style="width: 30vw; height: 40vh; border: thin solid;"></div>
 				<form id="frm_reservation" action="/reservation/insert">
 					<input type="hidden" name="car_idx" id="car_idx" value="${requestScope.car.carIdx}">
 					<input type="hidden" name="user_id" id="user_id" value="${requestScope.car.userId}">
 					<div>위치 : <input name="parking" id="parking" style="border: none; width: 300px;" value="${requestScope.car.carParking}" disabled="disabled"></div>
-					<input class="time" type="date" placeholder="픽업날짜" name="pickup_date" id="pickup_date" value="${requestScope.pickup_date}">
-					<input class="time" type="number" min="0" max="23"  placeholder="픽업시각" name="pickup_hour" id="pickup_hour" style="width: 25%;" value="${requestScope.pickup_hour}">
-					<input class="time" type="date" placeholder="반환날짜" name="return_date" id="return_date" value="${requestScope.return_date}">
-					<input class="time" type="number" min="0" max="23" placeholder="반환시각" name="return_hour" id="return_hour" style="width: 25%;" value="${requestScope.return_hour}">
+					<input class="time" type="date" placeholder="픽업날짜" name="pickup_date" id="pickup_date" value="${requestScope.pickup_date}" required="required">
+					<input class="time" type="number" min="0" max="23"  placeholder="픽업시각" name="pickup_hour" id="pickup_hour" style="width: 25%;" value="${requestScope.pickup_hour}" required="required">
+					<input class="time" type="date" placeholder="반환날짜" name="return_date" id="return_date" value="${requestScope.return_date}" required="required">
+					<input class="time" type="number" min="0" max="23" placeholder="반환시각" name="return_hour" id="return_hour" style="width: 25%;" value="${requestScope.return_hour}" required="required">
 					<div>가격 : <input name="price" id="price" style="border: none; width: auto; text-align: right;" disabled="disabled">원</div>
 					<input class="btn btn-primary btn-block py-3" id="btn_res" value="예약하기" type="submit">
 				</form>
@@ -144,7 +151,7 @@
 					<div class="user_id col-md-6 col-lg-2 mb-4">${sessionScope.user.userId}</div>
 					<textarea id="review_content" name="review_content" class="review_content col-md-6 col-lg-5 mb-4"></textarea>
 					<div class="col-md-6 col-lg-3 mb-4">
-						<input id="input-review" name="review_score" class="rating rating-loading" data-min="0" data-max="5" data-step="0.5">
+						<input id="input-review" name="review_score" class="rating rating-loading" data-min="0" data-max="5" data-step="0.5" required="required">
 					</div>
 					<input type="button" id="btn_review" value="등록" class="btn btn-primary" onclick="insertReview()">
 					<input type="button" class="btn_update" value="수정" class="updel btn btn-primary" style="display: none;">
@@ -516,6 +523,47 @@ let deleteLikey = async (carIdx) => {
 		window.location.reload();
 	}
 }
+
+let mapSelect = ()=>{
+	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+		//center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+		center: new kakao.maps.LatLng("${requestScope.car.carParkingLat}", "${requestScope.car.carParkingLng}"), //지도의 중심좌표.
+		level: 3 //지도의 레벨(확대, 축소 정도)
+	};
+
+	//지도 생성 및 객체 리턴
+	var map = new kakao.maps.Map(container, options);
+	
+	// 마커를 표시할 위치와 title 객체 배열입니다 
+	var position = {"latlng": new kakao.maps.LatLng("${requestScope.car.carParkingLat}", "${requestScope.car.carParkingLng}")};
+	var content = {"content": '<div style="padding:5px; text-align:center;">${requestScope.car.carFee}</div>'};
+		
+	// 마커 이미지의 이미지 크기 입니다
+	// var imageSize = new kakao.maps.Size(24, 35); 
+	
+	// 마커 이미지를 생성합니다	
+	//var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+	
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+		"map": map, // 마커를 표시할 지도
+		"position": position.latlng // 마커를 표시할 위치
+		//title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+		//image : markerImage // 마커 이미지 
+	});
+	
+	// 인포윈도우를 생성합니다
+	var infowindow = new kakao.maps.InfoWindow({
+		"position": position.latlng,
+		"content": content.content
+	});
+	
+	// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+	infowindow.open(map, marker);
+}
+
+mapSelect();
 
 //리뷰 페이징 필요하면 사용
 /*

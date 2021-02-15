@@ -97,11 +97,11 @@ a:not([href]):not([tabindex]):focus {
 								<input type="hidden" name="kakaoAddress" id="kakaoAddress">
 								<input type="hidden" name="centerLat" id="centerLat">
 								<input type="hidden" name="centerLng" id="centerLng">
-								<input type="search" placeholder="주소" name="address" id="address">
-								<input type="date" placeholder="픽업날짜" name="pickup_date" id="pickup_date">
-								<input type="number" placeholder="픽업시각" name="pickup_hour" id="pickup_hour" style="width: 10%">
-								<input type="date" placeholder="반환날짜" name="return_date" id="return_date">
-								<input type="number" placeholder="반환시각" name="return_hour" id="return_hour" style="width: 10%">
+								<input type="search" placeholder="주소" name="address" id="address" required="required">
+								<input type="date" placeholder="픽업날짜" name="pickup_date" id="pickup_date" required="required">
+								<input type="number" placeholder="픽업시각" name="pickup_hour" id="pickup_hour" style="width: 10%" required="required">
+								<input type="date" placeholder="반환날짜" name="return_date" id="return_date" required="required">
+								<input type="number" placeholder="반환시각" name="return_hour" id="return_hour" style="width: 10%" required="required">
 								<input type="button" value="검색" onclick="kakaoAddr()">
 							</form>
 						</div>
@@ -113,13 +113,6 @@ a:not([href]):not([tabindex]):focus {
 
 	<div class="site-section bg-light">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-7">
-					<h2 class="section-heading"><strong>Car Listings</strong></h2>
-					<p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>		
-				</div>
-			</div>
-			
 			<div class="row">
 				<c:forEach var="car" items="${requestScope.carList}" varStatus="status">
 					<c:set var="flg" value="no"></c:set>
@@ -161,7 +154,6 @@ a:not([href]):not([tabindex]):focus {
 									</div>
 								</div>
 								<div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem quibusdam.</p>
 									<p><a onclick="rentDetail(${car.carIdx})" class="btn btn-primary btn-sm">Rent Now</a></p>
 								</div>
 							</div>

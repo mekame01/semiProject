@@ -128,4 +128,52 @@ public class CarDao {
 		}
 		return car;
 	}
+	
+	public List<Car> selectByUserId(Connection conn, String userId) {
+		PreparedStatement pstm = null;
+		ResultSet rset = null;
+		List<Car> carList = new ArrayList<Car>();
+	
+		try {
+			String query = "select * from tb_car"
+					+ " where user_id = ?";
+		
+		pstm = conn.prepareStatement(query);
+		
+		pstm.setString(1, userId);
+
+		rset = pstm.executeQuery();
+		
+		while(rset.next()) {
+			Car car = new Car(); 
+			car.setCarIdx(rset.getInt("car_idx"));
+			car.setUserId(rset.getString("user_id"));
+			car.setCarNumber(rset.getString("car_number"));
+			car.setCarModel(rset.getString("car_model"));
+			car.setCarParking(rset.getString("car_parking"));
+			car.setCarParkingLat(rset.getDouble("car_parking_lat"));
+			car.setCarParkingLng(rset.getDouble("car_parking_lng"));
+			car.setCarFuelEffi(rset.getInt("car_fuel_effi"));
+			car.setCarFuelType(rset.getString("car_fuel_type"));
+			car.setCarDoorNum(rset.getInt("car_door_num"));
+			car.setCarSeatNum(rset.getInt("car_seat_num"));
+			car.setCarTransmission(rset.getString("car_transmission"));
+			car.setCarNavi(rset.getString("car_navi"));
+			car.setCarBackCam(rset.getString("car_back_cam"));
+			car.setCarNote(rset.getString("car_note"));
+			car.setCarFee(rset.getInt("car_fee"));
+			car.setCarAvgScore(rset.getDouble("car_avg_score"));
+			car.setCarDate(rset.getDate("car_date"));
+			car.setCarState(rset.getString("car_state"));
+			carList.add(car);
+		}
+		
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.SC01, e); 
+		} finally {
+			jdt.close(rset, pstm);
+		}
+		return carList;
+	}
+
 }

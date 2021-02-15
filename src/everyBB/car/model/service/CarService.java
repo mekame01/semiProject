@@ -41,4 +41,16 @@ public class CarService {
 		return car;
 	}
 
+	public List<Car> selectByUserId(String userId) {
+		Connection conn = jdt.getConnection();
+		List<Car> carList = null;
+		
+		try {
+			carList = carDao.selectByUserId(conn, userId);
+		} finally {
+			jdt.close(conn);
+		}
+		return carList;
+	}
+
 }
