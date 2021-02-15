@@ -18,6 +18,7 @@ import everyBB.likey.model.service.LikeyService;
 import everyBB.likey.model.vo.Likey;
 import everyBB.member.model.service.MemberService;
 import everyBB.member.model.vo.Member;
+import everyBB.reservation.model.vo.Reservation;
 
 /**
  * Servlet implementation class Why
@@ -224,13 +225,25 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 	
 	
 	private void pastTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("user");
+		
+		List<Reservation> pastList = memberService.selectPastTripById(member.getUserId());
+		
+		request.setAttribute("pastList", pastList);
+		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/past_trip.jsp")
 		.forward(request, response);
 	}
 	
 	private void currentTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("user");
+		
+		List<Reservation> currentList = memberService.selectCurrentTripById(member.getUserId());
+		
+		request.setAttribute("currentList", currentList);
+		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/current_trip.jsp")
 		.forward(request, response);
 	}

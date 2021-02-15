@@ -53,10 +53,6 @@
           </div>
         </div>
     
-	<!-- wishlist를 꾸리고 싶은데 어떻게 해야 리스트에 있는 애들이 하나씩 나올수 있을까요 -->    
-	<!-- 등록된 차사진은 어떻게 들고 오나요.. -->
-   
-    
 
     <div class="site-section bg-light">
       <div class="container">

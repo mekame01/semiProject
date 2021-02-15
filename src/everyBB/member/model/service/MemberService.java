@@ -14,6 +14,7 @@ import everyBB.common.template.JDBCTemplate;
 import everyBB.common.util.http.HttpUtil;
 import everyBB.member.model.dao.MemberDao;
 import everyBB.member.model.vo.Member;
+import everyBB.reservation.model.vo.Reservation;
 
 
 public class MemberService {
@@ -138,6 +139,21 @@ public class MemberService {
 		return wishList;
 	}
 	
+	
+	public List<Reservation> selectPastTripById(String userId) {
+		Connection conn = jdt.getConnection();
+		List<Reservation> resPastList = memberDao.selectPastTripById(conn, userId);
+		jdt.close(conn);
+		return resPastList;
+	}
+	
+	
+	public List<Reservation> selectCurrentTripById(String userId) {
+		Connection conn = jdt.getConnection();
+		List<Reservation> resCurrentList = memberDao.selectCurrentTripById(conn, userId);
+		jdt.close(conn);
+		return resCurrentList;
+	}
 	
 	
 	

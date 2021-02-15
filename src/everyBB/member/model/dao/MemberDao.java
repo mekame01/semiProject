@@ -13,6 +13,7 @@ import everyBB.common.exception.DataAccessException;
 import everyBB.common.template.JDBCTemplate;
 import everyBB.likey.model.vo.Likey;
 import everyBB.member.model.vo.Member;
+import everyBB.reservation.model.vo.Reservation;
 
 public class MemberDao {
 
@@ -254,8 +255,74 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 	
 	
 	
+	public List<Reservation> selectPastTripById(Connection conn,String userId) {
+		List<Reservation> resPastList= new ArrayList<>();
+		
+		PreparedStatement pstm = null;
+		ResultSet rset = null;
+		
+		try {
+			
+			String query = "select car_idx, res_parking, res_pickup_date, res_return_date, res_fee from tb_reservation where res_idx in "
+					+ "(select res_idx from tb_reservation_history where user_id = ? and res_state='RH06')";
+			pstm = conn.prepareStatement(query);
+			pstm.setString(1, userId);
+			rset = pstm.executeQuery();
+			
+			while(rset.next()) {
+				Reservation res = new Reservation();
+				
+				res.setCarIdx(rset.getInt("car_idx"));
+				res.setResParking(rset.getString("res_parking"));
+				res.setResPickupDate(rset.getDate("res_pickup_date"));
+				res.setResReturnDate(rset.getDate("res_return_date"));
+				res.setResFee(rset.getInt("res_fee"));
+				
+				resPastList.add(res);
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.SC01, e);
+		}finally {
+			jdt.close(rset, pstm);
+		}
+		return resPastList;
+	}
 	
 	
+	public List<Reservation> selectCurrentTripById(Connection conn,String userId) {
+		List<Reservation> resCurrentList= new ArrayList<>();
+		
+		PreparedStatement pstm = null;
+		ResultSet rset = null;
+		
+		try {
+			
+			String query = "select car_idx, res_parking, res_pickup_date, res_return_date, res_fee from tb_reservation where res_idx in "
+					+ "(select res_idx from tb_reservation_history where user_id = ? and res_state='RH05')";
+			pstm = conn.prepareStatement(query);
+			pstm.setString(1, userId);
+			rset = pstm.executeQuery();
+			
+			while(rset.next()) {
+				Reservation res = new Reservation();
+				
+				res.setCarIdx(rset.getInt("car_idx"));
+				res.setResParking(rset.getString("res_parking"));
+				res.setResPickupDate(rset.getDate("res_pickup_date"));
+				res.setResReturnDate(rset.getDate("res_return_date"));
+				res.setResFee(rset.getInt("res_fee"));
+				
+				resCurrentList.add(res);
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.SC01, e);
+		}finally {
+			jdt.close(rset, pstm);
+		}
+		return resCurrentList;
+	}
 	
 	
 	
