@@ -226,7 +226,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		
 		try {
 			
-			String query = "SELECT CAR_IDX, USER_ID, CAR_MODEL, CAR_FEE, CAR_PARKING, CAR_AVG_SCORE FROM TB_CAR "
+			String query = "SELECT * FROM TB_CAR "
 					+ "WHERE CAR_IDX IN (SELECT CAR_IDX FROM TB_LIKEY WHERE USER_ID = ? )";
 			pstm = conn.prepareStatement(query);
 			pstm.setString(1, userId);
@@ -237,10 +237,23 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 				
 				car.setCarIdx(rset.getInt("car_idx"));
 				car.setUserId(rset.getString("user_id"));
+				car.setCarNumber(rset.getString("car_number"));
 				car.setCarModel(rset.getString("car_model"));
-				car.setCarFee(rset.getInt("car_fee"));
 				car.setCarParking(rset.getString("car_parking"));
-				car.setCarAvgScore(rset.getInt("car_avg_score"));
+				car.setCarParkingLat(rset.getDouble("car_parking_lat"));
+				car.setCarParkingLng(rset.getDouble("car_parking_lng"));
+				car.setCarFuelEffi(rset.getInt("car_fuel_effi"));
+				car.setCarFuelType(rset.getString("car_fuel_type"));
+				car.setCarDoorNum(rset.getInt("car_door_num"));
+				car.setCarSeatNum(rset.getInt("car_seat_num"));
+				car.setCarTransmission(rset.getString("car_transmission"));
+				car.setCarNavi(rset.getString("car_navi"));
+				car.setCarBackCam(rset.getString("car_back_cam"));
+				car.setCarNote(rset.getString("car_note"));
+				car.setCarFee(rset.getInt("car_fee"));
+				car.setCarAvgScore(rset.getDouble("car_avg_score"));
+				car.setCarDate(rset.getDate("car_date"));
+				car.setCarState(rset.getString("car_state"));
 				
 				wishList.add(car);
 			}
