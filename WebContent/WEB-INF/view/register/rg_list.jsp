@@ -43,7 +43,7 @@
          <div class="row">
             <div class="col-lg-7">
                <h2 class="section-heading"><strong>Car Listings</strong></h2>
-               <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>      
+               <p class="mb-5">차량을 등록해 주세요!</p>      
             </div>
          </div>
          
@@ -54,7 +54,7 @@
       
                   <div class="listing d-block   align-items-stretch">
                      <div class="listing-img h-100 mr-4">
-                        <img src="<%= Code.UPLOAD %>/${data.fileList[0].savePath}${data.fileList[0].renameFileName}" alt="이미지" class="img-fluid"/>
+                        <img src="<%= Code.UPLOAD %>${data.fileList[0].savePath}${data.fileList[0].renameFileName}" alt="이미지" class="img-fluid"/>
                      </div>
                      <div class="listing-contents h-100">
                         <h3>${data.register.carModel}</h3> <!-- 모델명 -->
@@ -113,19 +113,13 @@
          location.href = url;
     } 
     
-    function downloadFile(ofname,rfname,savePath){
-      let params = {'ofname':ofname,
-                  'rfname':rfname,
-                  'savePath':savePath};
-      
-         location.href = '${context}' + "/register/download?" + urlEncodedForm(params);
-    }
-
 <!-- 상세보기 버튼 -->
 let registerDetail = (carIdx) => {
    location.href="/register/rg_detail?carIdx=" + carIdx;
    
 }
+
+
 console.dir("${requestScope.dataList}");
 console.dir("${requestScope.dataList[0].car}");
 </script>

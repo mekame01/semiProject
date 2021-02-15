@@ -31,7 +31,7 @@
 
               <div class="intro">
                 <h1><strong>상세정보</strong></h1>
-                <div class="custom-breadcrumbs"><a href="index.jsp">Home</a> <span class="mx-2">/</span> <strong>detail</strong></div>
+                <div class="custom-breadcrumbs"><a href="/">Home</a> <span class="mx-2">/</span> <strong>detail</strong></div>
               </div>
 
             </div>
@@ -56,23 +56,28 @@
                 <tbody>
                   <tr>
                     <td class="product-thumbnail">
-                      <c:forEach var="file" items="${data.fileList}">
+                     <%--   <c:forEach var="file" items="${data.fileList}">
                       <img src="/upload/${file.savePath}${file.renameFileName}" alt="이미지" />
-      				</c:forEach>
+      				</c:forEach>  --%>
+<%--  			<img src="<%= Code.UPLOAD %>${data.fileList[0].savePath}${data.fileList[0].renameFileName}" alt="이미지" class="img-fluid"/>
+ --%>    				
                     </td> 
                 </tbody>
                </table>  
+                <input type="hidden" class="form-control" name="carIdx" value="${data.register.carIdx}" />
                <table class="table table-bordered">
+               
                	<tr>
                     <th class="product-name" style="width:30%">작성자</th>
                     <td class="product-name"><h2 class="h5 text-black">${data.register.userId}</h2></td>
                   </tr>
-                  <!-- 
-                  <tr>
-                    <th class="product-name" style="width:30%">카Idx</th>
+                 
+                  
+                 <%--  <tr>
+                    <th type = "hidden" class="product-name" style="width:30%">카Idx</th>
                     <td class="product-name"><h2 class="h5 text-black">${data.register.carIdx}</h2></td>
-                  </tr>
-                  -->
+                  </tr> --%>
+                  
                   <tr>
                     <th class="product-name" style="width:30%">차량</th>
                     <td class="product-name"><h2 class="h5 text-black">${data.register.carModel}</h2></td>

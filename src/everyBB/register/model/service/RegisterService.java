@@ -100,7 +100,7 @@ public class RegisterService {
 				jdt.commit(conn);
 			}catch (Exception e) {
 				jdt.rollback(conn);
-				throw new DataAccessException(ErrorCode.UW01, e);
+				throw new DataAccessException(ErrorCode.rg04, e);
 			}finally {
 				jdt.close(conn);
 			}

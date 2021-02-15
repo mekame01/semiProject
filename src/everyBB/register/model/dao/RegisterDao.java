@@ -190,7 +190,7 @@ public class RegisterDao {
 			res = pstm.executeUpdate();
 
 		} catch (SQLException e) {
-			throw new DataAccessException(ErrorCode.rg02, e); //
+			throw new DataAccessException(ErrorCode.rg04, e); //
 		} finally {
 			jdt.close(pstm);
 		}
@@ -217,7 +217,7 @@ public class RegisterDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DataAccessException(ErrorCode.rg02, e); // 오류 고쳐야함
+			throw new DataAccessException(ErrorCode.rg05, e); // 오류 고쳐야함
 		} finally {
 			jdt.close(pstm);
 		}
@@ -238,7 +238,7 @@ public class RegisterDao {
 			res = pstm.executeUpdate();
 
 		} catch (SQLException e) {
-			throw new DataAccessException(ErrorCode.rg02, e);
+			throw new DataAccessException(ErrorCode.IF02, e);
 		} finally {
 			jdt.close(pstm);
 		}

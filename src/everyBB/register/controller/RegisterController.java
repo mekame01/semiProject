@@ -126,7 +126,7 @@ public class RegisterController extends HttpServlet {
 		
 		registerService.insertRegister(member.getUserId(), request);
 		
-		request.setAttribute("alertMsg", " 차량 등록이 완료되었습니다.");
+		request.setAttribute("msg", " 차량 등록이 완료되었습니다.");
 		request.setAttribute("url", "/ ");
 		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
 		.forward(request, response);
@@ -214,7 +214,7 @@ public class RegisterController extends HttpServlet {
 		registerService.updateRegister(register);
 	
 		
-		request.setAttribute("alertMsg", " 차량 등록이 완료되었습니다.");
+		request.setAttribute("msg", " 차량 수정이 완료되었습니다.");
 		request.setAttribute("url", "/ ");
 		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
 		.forward(request, response);
@@ -236,14 +236,15 @@ public class RegisterController extends HttpServlet {
 		
 		//파일삭제
 		String typeIdx = request.getParameter("carIdx"); 
-		
 		FileVo fileVo = new FileVo();
-		
-		
 		fileVo.setTypeIdx(typeIdx);
 
 		registerService.deleteFile(fileVo);
 		
+		request.setAttribute("msg", " 차량 삭제가 완료되었습니다.");
+		request.setAttribute("url", "/ ");
+		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
+		.forward(request, response);
 		
 	}
 }
