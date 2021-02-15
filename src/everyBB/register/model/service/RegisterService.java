@@ -1,5 +1,7 @@
 package everyBB.register.model.service;
 
+import java.io.File;
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.HashMap;
@@ -8,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import everyBB.common.code.Code;
 import everyBB.common.code.ErrorCode;
 import everyBB.common.exception.DataAccessException;
 import everyBB.common.exception.ToAlertException;
@@ -32,7 +35,7 @@ public class RegisterService {
 			Map<String,List> registerData = new FileUtil().fileUpload(request);
 			Register register = new Register();
 			register.setUserId(userId);
-			register.setCarIdx(Integer.parseInt(registerData.get("carIdx").get(0).toString()));
+			//register.setCarIdx(Integer.parseInt(registerData.get("carIdx").get(0).toString()));
 			register.setCarParking(registerData.get("carParking").get(0).toString());
 			register.setCarParkingLat(Double.parseDouble(registerData.get("carParkingLat").get(0).toString()));
 			register.setCarParkingLng(Double.parseDouble(registerData.get("carParkingLng").get(0).toString()));
@@ -91,8 +94,8 @@ public class RegisterService {
 			Connection conn = jdt.getConnection();
 			int res = 0;
 			try {
-				res = registerDao.updateRegister(conn, register);
-			
+				registerDao.updateRegister(conn, register);
+				System.out.println(register);
 				jdt.commit(conn);
 			}catch (Exception e) {
 				jdt.rollback(conn);
@@ -103,9 +106,13 @@ public class RegisterService {
 			return res;
 		}
 		//파일도 수정
+	
+		
+		
+		
 		
 //list//////////////////////////////////////////////////////////////////////////////////////		
-		public List<Register> registerList(String userId, int carIdx) {
+		/* public List<Register> registerList(String userId, int carIdx) {
 			Connection conn = jdt.getConnection();
 			List<Register> registerList = null;
 			
@@ -118,7 +125,7 @@ public class RegisterService {
 			return registerList;
 		}
 		
-		
+		*/
 		
 		
 //////삭제////////////////////////////////////////////////////////////////		
@@ -137,7 +144,34 @@ public class RegisterService {
 			}
 			return res;
 		}
-	
-	//파일도 삭제..
-	
+		
+	//파일삭제
+		
+		  public int deleteFile(FileVo fileVo) {
+		      System.out.println(fileVo);
+		      Connection conn = jdt.getConnection();
+		      int res = 0;
+		      List<FileVo> resList = null;
+		      
+		      resList = registerDao.selectFileWithRegister(conn, Integer.parseInt(fileVo.getTypeIdx()));
+		      System.out.println(resList);
+		      for (FileVo fv : resList) {
+		         String path = Code.UPLOAD + fv.getSavePath() + fv.getRenameFileName(); 
+		         File file = new File(path);
+		         file.delete();
+		         System.out.println(path);
+		      }
+		      
+		      try {
+		         registerDao.deleteFile(conn, fileVo);
+		                  
+		         jdt.commit(conn);
+		      }catch (Exception e) {
+		         jdt.rollback(conn);
+		      }finally {
+		         jdt.close(conn);
+		      }
+		      return res;
+		   }
+		
 }

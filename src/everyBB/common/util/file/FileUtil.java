@@ -65,10 +65,13 @@ public class FileUtil {
 		return multiPartMap;
 	}
 	
-	public void deleteFile(String path) {
+	/*
+	 public void deleteFile(String path) {
 		File file = new File(Code.UPLOAD + path);
 		file.delete();		
 	}
+	*/
+	
 	
 	private String getRenameFileName(String originFileName) {
 		//확장자 추출

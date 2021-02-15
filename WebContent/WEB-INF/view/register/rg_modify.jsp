@@ -142,7 +142,7 @@
 				    </datalist>
                 </div>
                  <div class="col-md-6">
-                 <input type="file" name="files" id="contract_file" class="form-control" accept="image/*" multiple required value="${file.originFileName}" /> 
+                 <input type="file" name="files" id="contract_file" class="form-control" accept="image/*" multiple required value="${data.fileList}" ></input>
               </div>
               
               </div>
@@ -158,7 +158,7 @@
               
               <div class="form-group row">
                 <div class="col-md-12">
-                  <textarea  class="form-control" name="carNote" cols="30" rows="10"  value="${data.register.carNote}" ></textarea>
+                  <textarea  class="form-control"  name="carNote" cols="30" rows="10"  >${data.register.carNote}</textarea>
                 </div>
               </div>
               
@@ -278,7 +278,20 @@ $("#price").on("keyup", function() {
     })
 </script> -->
 
+<script type="text/javascript">
+   function submitData(url){
+      location.href = url;
+   } 
+   
+   function downloadFile(ofname,rfname,savePath){
+	  let params = {'ofname':ofname,
+			  		'rfname':rfname,
+			  		'savePath':savePath};
+	  
+      location.href = '${context}' + "/register/download?" + urlEncodedForm(params);
+   }
 
+</script>
 
 
 

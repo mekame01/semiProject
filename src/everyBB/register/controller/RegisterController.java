@@ -150,24 +150,28 @@ public class RegisterController extends HttpServlet {
 	
 	
 	  private void rg_list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
-		  String from = "/register/rg_list";
-		  registerListImpl(request,from);
-	  
+		//  String from = "/register/rg_list";
+		  //registerListImpl(request,from);
+		
+		  int carIdx = Integer.parseInt(request.getParameter("carIdx"));
+		  Map<String,Object> commandMap = registerService.selectRegisterDetail(carIdx);
+		  request.setAttribute("data", commandMap);
+		 
 		  request.getRequestDispatcher("/WEB-INF/view/register/rg_list.jsp")
 		  .forward(request, response);
 	  
 	  
 	  } 
 	  
-	  private void registerListImpl(HttpServletRequest request, String from) throws ServletException, IOException { 
+	 // private void registerListImpl(HttpServletRequest request, String from) throws ServletException, IOException { 
 				
-		 }
+		 //}
 	  
 	  
 	  
 //////////수정///////////////////////////////////////////////////////////////////////////////////////오류남///
 	private void rg_modify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//	String userId = ((Member)request.getSession().getAttribute("user")).getUserId();
+		String userId = ((Member)request.getSession().getAttribute("user")).getUserId();
 		int carIdx = Integer.parseInt(request.getParameter("carIdx")); 
 		
 		Map<String,Object> commandMap = registerService.selectRegisterDetail(carIdx);
@@ -179,9 +183,9 @@ public class RegisterController extends HttpServlet {
 	}
 	
 	private void rg_modifyImpl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String userId = ((Member)request.getSession().getAttribute("user")).getUserId();
-		//int carIdx = Integer.parseInt(request.getParameter("carIdx"));
+		
+		int carIdx = Integer.parseInt(request.getParameter("carIdx"));
 		String carParking = request.getParameter("carParking");
 		Double carParkingLat = Double.parseDouble(request.getParameter("carParkingLat"));
 		Double carParkingLng= Double.parseDouble(request.getParameter("carParkingLng"));
@@ -198,9 +202,9 @@ public class RegisterController extends HttpServlet {
 		String carNote= request.getParameter("carNote");
 		
 		Register register = new Register();
-		
 		register.setUserId(userId);
-		//register.setCarIdx(carIdx);
+		
+		register.setCarIdx(carIdx);
 		register.setCarParking(carParking);
 		register.setCarParkingLat(carParkingLat);
 		register.setCarParkingLng(carParkingLng);
@@ -215,6 +219,17 @@ public class RegisterController extends HttpServlet {
 		register.setCarTransmission(carTransmission);
 		register.setCarFee(carFee);
 		register.setCarNote(carNote);
+		
+		System.out.println("updateRegister register " + register);
+		registerService.updateRegister(register);
+		
+		String typeIdx = request.getParameter("carIdx"); 
+		
+		FileVo fileVo = new FileVo();
+		fileVo.setTypeIdx(typeIdx);
+		
+		//registerService.updateFile(fileVo);
+		
 		
 		request.setAttribute("msg", "차량이 수정되었습니다.");
 		request.setAttribute("url", "/");
@@ -232,9 +247,14 @@ public class RegisterController extends HttpServlet {
 		register.setUserId(userId);
 		register.setCarIdx(carIdx);
 		
-		
 		registerService.deleteRegister(register);
 		
+		String typeIdx = request.getParameter("carIdx"); 
+		
+		FileVo fileVo = new FileVo();
+		fileVo.setTypeIdx(typeIdx);
+
+		registerService.deleteFile(fileVo);
 		//파일 삭제도 해야함
 		
 	}

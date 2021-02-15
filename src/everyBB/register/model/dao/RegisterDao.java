@@ -92,7 +92,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 			PreparedStatement pstm = null;
 			ResultSet rs = null;
 			String sql = "select "
-					+ "car_idx,user_id,car_parking,car_model,car_number,car_fuel_type,car_fuel_effi,car_navi,car_back_cam,car_seat_num,car_door_num,car_transmission,car_fee,car_note "
+					+ "car_idx,user_id,car_parking,car_parking_Lat,car_parking_Lng,car_model,car_number,car_fuel_type,car_fuel_effi,car_navi,car_back_cam,car_seat_num,car_door_num,car_transmission,car_fee,car_note "
 					+ "from tb_car "
 					+ "where car_idx = ? ";
 			try {
@@ -105,17 +105,19 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 					register.setCarIdx(rs.getInt(1));
 					register.setUserId(rs.getString(2));
 					register.setCarParking(rs.getString(3));
-					register.setCarModel(rs.getString(4));
-					register.setCarNumber(rs.getString(5));
-					register.setCarFuelType(rs.getString(6));
-					register.setCarFuelEffi(rs.getInt(7));
-					register.setCarNavi(rs.getString(8));
-					register.setCarBackCam(rs.getString(9));
-					register.setCarSeatNum(rs.getInt(10));
-					register.setCarDoorNum(rs.getInt(11));
-					register.setCarTransmission(rs.getString(12));
-					register.setCarFee(rs.getInt(13));
-					register.setCarNote(rs.getString(14));
+					register.setCarParkingLat(rs.getDouble(4));
+					register.setCarParkingLng(rs.getDouble(5));
+					register.setCarModel(rs.getString(6));
+					register.setCarNumber(rs.getString(7));
+					register.setCarFuelType(rs.getString(8));
+					register.setCarFuelEffi(rs.getInt(9));
+					register.setCarNavi(rs.getString(10));
+					register.setCarBackCam(rs.getString(11));
+					register.setCarSeatNum(rs.getInt(12));
+					register.setCarDoorNum(rs.getInt(13));
+					register.setCarTransmission(rs.getString(14));
+					register.setCarFee(rs.getInt(15));
+					register.setCarNote(rs.getString(16));
 				
 					
 				}
@@ -170,15 +172,14 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 	
 /////////수정/////////////////////////////////////////////////////////////////////////////////////////////////
 		//자동차 수정
-		
 		public int updateRegister(Connection conn, Register register) {
 			int res = 0;
 			PreparedStatement pstm = null;
 			
 			try {
 				String sql = "update tb_car set "
-						+ "(car_parking = ?,car_parking_lat = ?,car_parking_lng = ?,car_model = ?,car_number = ?,car_fuel_type = ?,car_fuel_effi = ?,car_navi = ?,car_back_cam = ?,car_seat_num = ?,car_door_num = ?,car_transmission = ?,car_fee = ?,car_note = ? ) "
-						+ "where car_Idx = ?";
+						+ "(car_parking = ?,car_parking_lat = ?,car_parking_lng = ?,car_model = ?,car_number = ?,car_fuel_type = ?,car_fuel_effi = ?,car_navi = ?,car_back_cam = ?,car_seat_num = ?,car_door_num = ?,car_transmission = ?,car_fee = ?,car_note = ?) "
+						+ "where user_id = ? and car_idx = ?";
 				
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, register.getCarParking());
@@ -195,41 +196,35 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 			pstm.setString(12, register.getCarTransmission());
 			pstm.setInt(13, register.getCarFee());
 			pstm.setString(14, register.getCarNote());
-			pstm.setInt(15, register.getCarIdx());
+			pstm.setString(15, register.getUserId());
+			pstm.setInt(16, register.getCarIdx());
 			
-			res = pstm.executeUpdate();
+			 res = pstm.executeUpdate();
 		
 		} catch (SQLException e) {
 			throw new DataAccessException(ErrorCode.rg02,e); //
 		}finally {
 			jdt.close(pstm);
 		}	
-		return res;
+			return res;
 	}
 	
 	
-	//파일 수정.. 다시.. Map..????????????????
-		public void updateFile(Connection conn, FileVo fileVo) {
-			String typeIdx = "";
-			//1. 새로 등록되는 게시글의 파일정보를 저장
-			// typeIdx의 값이 sequence의 currval
-			if(fileVo.getTypeIdx() == null) {
-				typeIdx = "sc_car_idx.currval"; /////////////////////////////
-			}else {
-				typeIdx = "'" + fileVo.getTypeIdx() + "'"; 
-			}
-			
-			String sql = "update tb_file set "
-		               + "(origin_file_name = ?,rename_file_name = ?,save_path = ?) "
-		               + "where f_idx = ?";
-					
+	//파일 수정 //오류
+		public int updateFile(Connection conn, FileVo fileVo) {
+			int res = 0;
 			PreparedStatement pstm = null;
 			try {
+				
+			String sql = "update tb_file set "
+		               + "(origin_file_name = ?,rename_file_name = ?,save_path = ?) "
+		               + "where type_idx = ?";
+			
 				pstm = conn.prepareStatement(sql);
 				pstm.setString(1,fileVo.getOriginFileName());
 				pstm.setString(2,fileVo.getRenameFileName());
 				pstm.setString(3,fileVo.getSavePath());
-				pstm.setInt(4, fileVo.getfIdx()); /////////??
+				pstm.setString(4, fileVo.getTypeIdx()); 
 				
 				pstm.executeUpdate();
 			} catch (SQLException e) {
@@ -237,13 +232,14 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 			}finally {
 				jdt.close(pstm);
 			}
+			return res;
 		}
 		
 		
 		
 		
 	////list///////////////////////////////////////////////////////////////////////////////////////////
-		public List<Register> registerList(Connection conn, String userId, int carIdx) {
+		/* public List<Register> registerList(Connection conn, String userId, int carIdx) {
 			PreparedStatement pstm = null;
 			ResultSet rset = null;
 			List<Register> registerList = new ArrayList<>();
@@ -279,7 +275,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 			return registerList;
 		}
 		
-		
+		*/
 	////삭제//////////////////////////////////////////////////////////////////////////////////////////	
 		//차량등록 삭제
 		public int deleteRegister(Connection conn, Register register) {
@@ -302,10 +298,9 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		}	
 			return res;
 	}
-
-	//파일삭제 //흠..........아닌거같음 Map..
 		
-public int deleteFile(Connection conn, FileVo fileVo){
+		//파일삭제		
+		public int deleteFile(Connection conn, FileVo fileVo){
 			
 			int res = 0;
 			PreparedStatement pstm = null;

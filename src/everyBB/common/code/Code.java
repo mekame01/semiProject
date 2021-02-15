@@ -6,7 +6,7 @@ public enum Code {
 	DOMAIN("http://localhost:9090"),
 	EMAIL("hksthgml@naver.com"),
 	//UPLOAD("C:\\CODE\\E_SERVLET\\resources\\upload\\");
-	UPLOAD("C:\\CODE\\E_SERVLET\\resources\\upload\\"),
+	UPLOAD("C:\\CODE\\E_SERVLET\\semiProject\\WebContent\\upload\\"),
 	RH01("예약"),
 	RH02("확인"),
 	RH03("결제"),

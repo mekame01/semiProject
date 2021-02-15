@@ -57,10 +57,7 @@
             <div class="listing d-block  align-items-stretch">
               <div class="listing-img h-100 mr-4">
                   <c:forEach var="file" items="${data.fileList}">
-      	 			<button type="button" class="btn_down-file"  
-      	 			onclick="downloadFile('${file.originFileName}','${file.renameFileName}','${file.savePath}')">  
-      	 			${file.originFileName}        
-        			 </button><br>
+      	 			<img src="/upload/${file.savePath}${file.renameFileName}" alt="이미지" class="img-fluid"/>
       				</c:forEach>
               </div>
               <div class="listing-contents h-100">
