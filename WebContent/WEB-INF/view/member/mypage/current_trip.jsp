@@ -49,7 +49,9 @@
         <div class="row">
           <div class="col-lg-7" style="height:10vh">
             <h2 class="section-heading"><strong>미래여행</strong></h2>
-            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>    
+             <c:if test="${empty requestScope.currentList}">
+            <p class="mb-5">현재 예약 중인 여행이 없습니다.</p> 
+            </c:if>    
           </div>
         </div>
     </div>
@@ -61,12 +63,12 @@
          <c:forEach var="res" items="${currentList}">
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="post-entry-1 h-100">
-              <a href="/member/mypage/reservdetail">
+              <a href="/rent/detail?car_idx=${res.carIdx}">
                 <img src="/resources/images/post_1.jpg" alt="Image" class="img-fluid">
               </a>
               <div class="post-entry-1-contents">
-                <h2><a href="/member/mypage/reservdetail">${res.resParking}</a></h2>
-                <span class="meta d-inline-block mb-3">${res.resPickupDate}<span class="mx-2">~</span> ${res.resReturnDate}</a></span>
+                <h2><a href="/rent/detail?car_idx=${res.carIdx}">${res.resParking}</a></h2>
+                <span class="meta d-inline-block mb-3">${res.resPickupDate}<span class="mx-2">~</span> ${res.resReturnDate}</span>
                 <p>이용요금:${res.resFee}원 </p>
               </div>
             </div>

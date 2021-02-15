@@ -49,7 +49,7 @@
         <div class="row">
           <div class="col-lg-7" style="height:10vh">
             <h2 class="section-heading"><strong>찜한 붕붕이</strong></h2>
-            <c:if test="${empty sessionScope.car.carIdx}">
+              <c:if test="${empty requestScope.wishList}">
             <p class="mb-5">찜한 붕붕이가 없습니다.</p> 
             </c:if>   
           </div>
@@ -64,12 +64,12 @@
           <div class="col-lg-4 col-md-6 mb-4">
           
             <div class="post-entry-1 h-100">
-              <a href="/rent/detail">
+              <a href="/rent/detail?car_idx=${car.carIdx}">
                 <img src="/resources/images/post_1.jpg" alt="Image" class="img-fluid">
               </a>
               <div class="post-entry-1-contents">
-                <h2><a href="/rent/detail">${car.carParking}</a></h2>
-                <span class="meta d-inline-block mb-3">${car.carModel}<span class="mx-2">by</span> <a href="#">${car.userId}</a></span>
+                <h2><a href="/rent/detail?car_idx=${car.carIdx}">${car.carParking}</a></h2>
+                <span class="meta d-inline-block mb-3">${car.carModel}<span class="mx-2">by</span> ${car.userId}</span>
                 <p>이용요금:${car.carFee}원 / 평점 : ${car.carAvgScore}</p>
               </div>
             </div>

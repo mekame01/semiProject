@@ -63,8 +63,8 @@ public class MemberController extends HttpServlet {
 				break;
 			case "current" : currentTrip(request, response);
 				break;
-			case "reservdetail" : reservDetail(request, response);
-				break;
+			//case "reservdetail" : reservDetail(request, response);
+				//break;
 			case "wishlist" : wishList(request, response);
 				break;
 			case "userinfo" : userInfo(request, response);
@@ -248,11 +248,12 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		.forward(request, response);
 	}
 	
+	/*
 	private void reservDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/reserv_detail.jsp")
 		.forward(request, response);
-	}
+	}*/
 	
 	private void wishList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
