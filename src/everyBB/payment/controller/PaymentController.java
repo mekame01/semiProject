@@ -108,7 +108,7 @@ public class PaymentController extends HttpServlet {
 		int resIdx = Integer.parseInt(request.getParameter("resIdx"));
 		String payReTid = request.getParameter("payReTid");
 		int payReFee = Integer.parseInt(request.getParameter("payReFee"));
-		Date payReDate = Date.valueOf(request.getParameter("payReDate"));
+		Date payReDate = new Date(Long.parseLong(request.getParameter("payReDate"))*1000);
 		String payReStatus = request.getParameter("payReStatus");
 		String payReErrorCd = request.getParameter("payReErrorCd");
 		String payReErrorMsg = request.getParameter("payReErrorMsg");

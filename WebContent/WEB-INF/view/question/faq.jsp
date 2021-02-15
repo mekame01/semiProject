@@ -81,7 +81,8 @@
 	                            <div class="bg-light p-4">
 									결제는 예약을 먼저 진행한 후에 이루어집니다.<br>
 									예약 과정에서 금액이 정해지며, 시간당 계산됩니다.<br>
-									
+									예약 신청을 하고 나면 메일을 통해 차주에게 수락 여부를 묻게 됩니다.<br>
+									예약 확정이 되면 마이페이지에서 결제가 가능합니다.<br>
 	                            </div>
 	                        </div>
 	                        <div class="tab-pane fade" id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-4-tab">
