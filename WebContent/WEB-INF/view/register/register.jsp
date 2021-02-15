@@ -163,7 +163,7 @@
                
               <div class="form-group row">
                 <div class="col-md-6 mr-auto">
-                  <button class="btn btn-primary" >등록하기</button>
+                  <button class="btn btn-block btn-primary text-white py-3 px-5" >등록하기</button>
                 </div>
               </div>
               
@@ -265,16 +265,6 @@ $("#price").on("keyup", function() {
 
 </script> -->
 
-
-<!-- 사진업로드 -->
-<script>
-    var upload = document.querySelector('#contract_file');
- 
-    upload.addEventListener('change',function (e) {
-        var get_file = e.target.files;
-        console.log(get_file)
-    })
-</script> 
 
 
 

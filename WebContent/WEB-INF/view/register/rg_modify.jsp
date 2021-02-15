@@ -157,7 +157,7 @@
                
               <div class="form-group row">
                 <div class="col-md-6 mr-auto">
-                  <button class="btn btn-primary" >수정하기</button>
+                  <button class="btn btn-block btn-primary text-white py-3 px-5" >수정하기</button>
                 </div>
               </div>
               
@@ -262,25 +262,6 @@ $("#price").on("keyup", function() {
 
 
 
-<script type="text/javascript">
-   function submitData(url){
-      location.href = url;
-   } 
-   console.dir("${data.register}");
-   document.querySelector("#register").addEventListener("submit",(e)=>{
-	  // e.preventDefault();
-   }
-   )
-   /*  
- console.dir("${data.fileList}");
-   document.querySelector("#file").addEventListener("submit",(e)=>{
-	  // e.preventDefault();
-   }
-   
-   )
-  */
-
-</script>
 
 
 

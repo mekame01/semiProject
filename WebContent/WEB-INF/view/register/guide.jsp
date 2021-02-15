@@ -72,7 +72,7 @@
                 <span>3</span>
                 <div class="step-inner">
                   <span class="number text-primary">03.</span>
-                  <h3>FAQ</h3>
+                  <h3><a href="/question/faq">FAQ</h3>
                   <p>자주 묻는 질문으로 가기!</p>
                 </div>
               </div>

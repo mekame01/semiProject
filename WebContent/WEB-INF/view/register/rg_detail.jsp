@@ -45,7 +45,7 @@
       <div class="container">
       
        <div class="row mb-5">
-             <form class="col-md-12" method="post">
+             <form action="${context}/register/rg_delete" class="col-md-12" method="post">
               <div class="site-blocks-table">
                   <table class="table table-bordered">
                  <thead>
@@ -131,12 +131,12 @@
             
             <div class="form-group row">
                 <div class="col-md-6 mr-auto">
-                  <p><a onclick="registerModify(${data.register.carIdx})" class="btn btn-primary btn-sm">수정하기</a></p>
+                   <p><a onclick="registerModify(${data.register.carIdx})" class="btn btn-primary">수정하기</a></p>
                 </div>
               </div>
             <div class="form-group row">
                 <div class="col-md-6 mr-auto">
-                 <button class="btn btn-primary" onclick="registerDelete('${data.register.carIdx}','${file.typeIdx}' )">삭제하기</button>
+                 <button class="btn btn-primary" >삭제하기</button>
 	             </div>
               </div> 
           </form>
@@ -192,39 +192,14 @@
 
 
 
-
-
-
-<script type="text/javascript">
-   function submitData(url){
-      location.href = url;
-   } 
-   
-
-</script>
-
-<!-- 수정하기 페이지로 가기 -->
 <script>
+<!-- 수정하기 페이지로 가기 -->
 let registerModify = (carIdx) => {
 	location.href="/register/rg_modify?carIdx=" + carIdx;
 	
 }
 
-/* 삭제 후 */
-let registerDelete = async (carIdx) => {
-	let url = "/register/rg_delete?carIdx=" + carIdx;
-	
-	let response = await fetch(url,{
-		"mehtod":"get"
-	});
-	
-	console.dir(response);
-	
-	if(response.ok){
-		//화면 다시 로딩
-		window.location.reload();
-	}
-}
+
 
 </script>
 

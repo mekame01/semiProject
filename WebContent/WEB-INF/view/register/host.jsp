@@ -49,29 +49,22 @@
           </div>
           <div class="col-lg-4 mr-auto">
             <h2>host</h2><br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit suscipit, repudiandae similique accusantium eius nulla quam laudantium sequi.</p>
-            <p>Debitis voluptates corporis saepe molestias tenetur ab quae, quo earum commodi, laborum dolore, fuga aliquid delectus cum ipsa?</p>
+            <p>1. 자동차 등록 <br>
+            	차량 등록 페이지에서 등록을 해주세요.
+            </p>
+             <p>2. 자동차 관리 <br>
+            	평점제도가 있으니 차량 관리를 해주세요.
+            </p>
+             <p>3. 게스트와 체크인 <br>
+            	게스트와의 체크인은 직접 연락을 통해 이루어집니다.
+            </p>
           </div>
         </div>
       </div>
     </div>
 
    
-
-    <div class="site-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 mb-5 mb-lg-0">
-            <img src="<%= request.getContextPath() %>/resources/images/hero_1.jpg" alt="Image" class="img-fluid rounded">
-          </div>
-          <div class="col-lg-4 ml-auto">
-            <h2>Our History</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit suscipit, repudiandae similique accusantium eius nulla quam laudantium sequi.</p>
-            <p>Debitis voluptates corporis saepe molestias tenetur ab quae, quo earum commodi, laborum dolore, fuga aliquid delectus cum ipsa?</p>
-          </div>
-        </div>
-      </div>
-    </div>
+   
 
 
     <div class="site-section bg-primary py-5">
