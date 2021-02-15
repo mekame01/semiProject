@@ -49,17 +49,20 @@
         <div class="row">
           <div class="col-lg-7" style="height:10vh">
             <h2 class="section-heading"><strong>찜한 붕붕이</strong></h2>
-            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>    
+            <c:if test="${empty sessionScope.car.carIdx}">
+            <p class="mb-5">찜한 붕붕이가 없습니다.</p> 
+            </c:if>   
           </div>
         </div>
     </div>
     </div>
-
+	
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
          <c:forEach var="car" items="${wishList}">
           <div class="col-lg-4 col-md-6 mb-4">
+          
             <div class="post-entry-1 h-100">
               <a href="/rent/detail">
                 <img src="/resources/images/post_1.jpg" alt="Image" class="img-fluid">
@@ -72,8 +75,8 @@
             </div>
           </div>
           </c:forEach>
-
-        
+	
+       
       </div>
     </div>
 
@@ -81,11 +84,11 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-7 mb-4 mb-md-0">
-            <h2 class="mb-0 text-white">What are you waiting for?</h2>
-            <p class="mb-0 opa-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, laboriosam.</p>
+             <h2 class="mb-0 text-white">떠나고 싶으신가요?</h2>
+            <p class="mb-0 opa-7">지금 바로 출발하세요!</p>
           </div>
           <div class="col-lg-5 text-md-right">
-            <a href="#" class="btn btn-primary btn-white">Rent a car now</a>
+            <a href="/index" class="btn btn-primary btn-white">예약하러가기</a>
           </div>
         </div>
       </div>

@@ -61,23 +61,17 @@
                 <img src="/resources/images/car_6.jpg" alt="Image" class="img-fluid">
               </div>
               <div class="listing-contents h-100">
-                <h3>Mitsubishi Pajero</h3>
+                <h3>${resMap.carModel}</h3>
                 <div class="rent-price">
-                  <strong>$389.00</strong><span class="mx-1">/</span>day
+                  <strong>${resMap.resFee}</strong>
                 </div>
                 <div class="d-block d-md-flex mb-3 border-bottom pb-3">
-                  <div class="listing-feature pr-4">
-                    <span class="caption">Luggage:</span>
-                    <span class="number">8</span>
-                  </div>
-                  <div class="listing-feature pr-4">
-                    <span class="caption">Doors:</span>
-                    <span class="number">4</span>
-                  </div>
-                  <div class="listing-feature pr-4">
-                    <span class="caption">Passenger:</span>
-                    <span class="number">4</span>
-                  </div>
+                  <span>${resMap.userId}</span>
+                  <span>${resMap.resDate}</span>
+                  <span>${resMap.resPickupDate} ~ ${resMap.resReturnDate}</span>
+                  <span>${resMap.resParking}</span>
+                  <span>${resMap.carAvgScore}</span>
+                  <span></span>
                 </div>
                 <div>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem quibusdam.</p>

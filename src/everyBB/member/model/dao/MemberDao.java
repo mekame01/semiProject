@@ -338,7 +338,39 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 	}
 	
 	
-	
+	/* commandMap으로 해야함..
+	public Reservation selectResDetail(Connection conn, int resIdx) {
+		Reservation res = null;
+		Car car = null;
+		PreparedStatement pstm = null;
+		ResultSet rset = null;
+		
+		try { 
+			 
+			
+			String query = "select car_idx, c.user_id, car_model, car_avg_score, res_parking, "
+					+ "res_date, res_pickup_date, res_return_date, res_fee "
+					+ "from tb_car c inner join tb_reservation using(car_idx) where res_idx = ?";
+			pstm = conn.prepareStatement(query);
+			pstm.setInt(1, resIdx);
+			rset = pstm.executeQuery();
+			
+			if(rset.next()) {
+				res = new Reservation(); 
+				
+				res.setCarIdx(rset.getInt("car_idx"));
+				res.setUserId(rset.getString("c.user_id"));
+				
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.SM01, e);
+		}finally {
+			jdt.close(rset, pstm);
+		}
+		return res;
+	} */
+
 	
 	
 }

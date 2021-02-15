@@ -75,9 +75,9 @@ public class MemberController extends HttpServlet {
 				break;
 			
 			default : response.setStatus(404);
-			}
-			/*case "logout" : logout(request, response);
-			break;*/
+			} break;
+			case "logout" : logout(request, response);
+			break;
 		default : response.setStatus(404);
 		}
 	}
@@ -263,6 +263,7 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		request.setAttribute("wishList", wishList);
 		
 		
+		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/wishlist.jsp")
 		.forward(request, response);
 	}
@@ -304,13 +305,13 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		.forward(request, response);
 	}
 	
-	/*
+	
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getSession().removeAttribute("user");
 		response.sendRedirect("/");  
 		
-	}*/
+	}
 	
 	
 	
