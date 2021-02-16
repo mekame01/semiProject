@@ -20,15 +20,30 @@
  
 <!-- optionally if you need translation for your language then include locale file as mentioned below -->
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="/resources/css/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/resources/css/slick-theme.css"/>
+<script type="text/javascript" src="/resources/js/slick.min.js"></script>
+
 <style type="text/css">
-.body_split {
-	display: flex;
+.single-item>.slick-prev {
+  left: 10px;
+  z-index: 1;
+}
+
+.single-item>.slick-next {
+  right: 10px;
+  z-index: 1;
 }
 
 .heart {
 	margin: 0;
 	padding: 0;
 	cursor: pointer;
+}
+
+.body_split {
+	display: flex;
 }
 
 .left {
@@ -91,19 +106,27 @@
 	</div>
 
 	<%@ include file="/WEB-INF/view/include/header.jsp"%>
-	
-	<div class="hero inner-page" style="background-image: url('/resources/images/hero_1_a.jpg');">
-		<c:if test="${not empty sessionScope.user.userId}">
-			<c:if test="${not empty requestScope.likey.userId}">
-				<div class="heart" style="z-index: 10; position: absolute; right: 1.5%; top: 18%; color: rgba(255,0,0,0.5); font-size: 4em;" onclick="deleteLikey(${requestScope.car.carIdx})">♥</div>
-			</c:if>
-			<c:if test="${empty requestScope.likey.userId}">
-				<div class="heart" style="z-index: 10; position: absolute; right: 1%; top: 20%; color: rgba(255,0,0,0.5); font-size: 3em;" onclick="insertLikey(${requestScope.car.carIdx})">♡</div>
-			</c:if>
-		</c:if>
-		<div class="container">
-		</div>
+	<div class="slider single-item">
+		<c:forEach var="image" items="${requestScope.fileList}">
+			<div class="hero inner-page" style="background-image: url('/upload/${image.savePath}${image.renameFileName}'); background-repeat: no-repeat; background-size: 100% 100%;">
+				<div class="container"></div>
+			</div>
+		</c:forEach>
 	</div>
+	<c:if test="${empty requestScope.fileList}">
+		<div class="hero inner-page" style="background-image: url('/resources/images/hero_1_a.jpg');">
+			<div class="container"></div>
+		</div>
+	</c:if>
+	
+	<c:if test="${not empty sessionScope.user.userId}">
+		<c:if test="${not empty requestScope.likey.userId}">
+			<div class="heart" style="z-index: 10; position: absolute; right: 1.5%; top: 10%; color: rgba(255,0,0,0.5); font-size: 4em;" onclick="deleteLikey(${requestScope.car.carIdx})">♥</div>
+		</c:if>
+		<c:if test="${empty requestScope.likey.userId}">
+			<div class="heart" style="z-index: 10; position: absolute; right: 1%; top: 6%; color: rgba(255,0,0,0.5); font-size: 3em; width: auto;" onclick="insertLikey(${requestScope.car.carIdx})">♡</div>
+		</c:if>
+	</c:if>
 	
 	<div class="site-section bg-light">
 		<div class="container body_split">
@@ -203,6 +226,17 @@ console.dir("${fn:length(requestScope.reviewList)}");
 console.dir("${requestScope.reviewList}");
 console.dir("${requestScope.reviewList[0]}");
 console.dir("${requestScope.reviewList[0].reviewScore}");
+
+$(document).ready(function(){
+	$('.single-item').slick({
+	    infinite: true,
+	    speed: 300,
+	    slidesToShow: 1,
+		slidesToScroll: 1,
+	    arrows: true,
+	    dots: false
+	});
+});
 
 <%--
 //평점 변경에 따른 값 세팅

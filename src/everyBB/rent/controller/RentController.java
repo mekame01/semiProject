@@ -74,8 +74,13 @@ public class RentController extends HttpServlet {
 	private void rentDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int carIdx = Integer.parseInt(request.getParameter("car_idx"));
 		System.out.println("carIdx : " + carIdx);
+		
+		//자동차 상세정보 조회
 		Car car = carService.selectByCarIdx(carIdx);
 		System.out.println("car : " + car);
+		
+		//자동차 이미지 정보 검색
+		List<FileVo> fileList = registerService.selectFileList(car.getCarIdx());
 		
 		List<ReservationHistory> reservationHistoryList = null;
 		
@@ -104,6 +109,7 @@ public class RentController extends HttpServlet {
 		request.setAttribute("reservationHistoryList", reservationHistoryList);
 		//리뷰 화면에 출력용 값 세팅
 		request.setAttribute("reviewList", reviewList);
+		request.setAttribute("fileList", fileList);
 		
 		request.setAttribute("pickup_date", request.getParameter("pickup_date"));
 		request.setAttribute("pickup_hour", request.getParameter("pickup_hour"));
@@ -165,6 +171,7 @@ public class RentController extends HttpServlet {
 			
 			//카카오 주소로 찾은 자동차들 정보 세팅
 			List<Car> carList = carService.selectByAddress(kakaoAddress, pickupDate, returnDate);
+			//이미지 파일 정보를 검색
 			for (Car car : carList) {
 				List<FileVo> tempFileList = registerService.selectFileList(car.getCarIdx());
 				fileList.add(tempFileList);
