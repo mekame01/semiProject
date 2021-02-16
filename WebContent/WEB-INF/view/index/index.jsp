@@ -128,6 +128,7 @@
 							</div>
 							<div class="listing-contents h-100">
 								<h3>${car.carModel}</h3>
+								<div>${car.carParking}</div>
 								<div class="rent-price">
 									<strong>${car.carFee} 원</strong><span class="mx-1">/</span>시간
 								</div>
@@ -158,7 +159,7 @@
 					<h2 class="section-heading">
 						<strong>Share your car, earn extra cash</strong>
 					</h2>
-					<p class="mb-5"> 차 쓰지 않는 날, 당신의 차를 쉐어하고 작은 수익을 창출하세요</p>
+					<p class="mb-5"> 차 사용하지 않는 날, 당신의 차를 쉐어하고 작은 수익을 창출하세요</p>
 				</div>
 			</div>
 
