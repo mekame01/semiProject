@@ -34,6 +34,7 @@ public class PaymentController extends HttpServlet {
 	private ReservationHistoryService reservationHistoryService = new ReservationHistoryService();
 	private ReservationService reservationService = new ReservationService();
 	private RegisterService registerService = new RegisterService();
+	private CarService carService = new CarService();
 	/**
      * @see HttpServlet#HttpServlet()
      */
@@ -71,12 +72,21 @@ public class PaymentController extends HttpServlet {
 	
 	private void payment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//int resIdx = Integer.parseInt(request.getParameter("resIdx"));
+		int resIdx = Integer.parseInt(request.getParameter("resIdx"));
 		//List<Reservation> resList = null;
 		//resList = paymentSendService.selectPayWithReserv(resIdx);
 		//System.out.println(resList);
 		//request.setAttribute("resList", resList);
 		//insertPayment(request, response);
+		
+		Reservation reservation = reservationService.selectReservationByResIdx(resIdx);
+		Car car = carService.selectByCarIdx(reservation.getCarIdx());
+		
+		List<FileVo> fileList = registerService.selectFileList(car.getCarIdx());
+
+		request.setAttribute("car", car);
+		request.setAttribute("resIdx", resIdx);
+		request.setAttribute("fileList", fileList);
 		
 		request.getRequestDispatcher("/WEB-INF/view/payment/payment.jsp")
 		.forward(request, response);

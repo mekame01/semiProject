@@ -51,14 +51,14 @@
                 <tbody>
                   <tr>
                     <td class="product-thumbnail">
-                      <img src="<%= request.getContextPath() %>/resources/images/car_2.jpg" alt="Image" class="img-fluid">
+                      <img src="/upload/${requestScope.fileList[0].savePath}${requestScope.fileList[0].renameFileName}" alt="Image" class="img-fluid">
                     </td> 
                 </tbody>
                </table>  
                <table class="table table-bordered">
                   <tr>
                     <th class="product-name" style="width:30%">차량</th>
-                    <td class="product-name"><h2 class="h5 text-black">Sonata</h2></td>
+                    <td class="product-name"><h2 class="h5 text-black">${requestScope.car.carModel}</h2></td>
                   </tr>
                   <tr>
                     <th class="product-price">가격</th>
@@ -259,7 +259,7 @@
 	let paymentSend = async () => {
 		//이값은 전 화면에서 request.setAttribute("")로 받은 값
 		//임시 하드코딩
-		let url = "/payment/insertPaymentSend?resIdx="+${param.resIdx}
+		let url = "/payment/insertPaymentSend?resIdx="+${requestScope.resIdx}
 			//위에서 변수로 받은 값
 			+"&paySendTid=" + paySendTid
 			+"&payMethod=" + payMethod
@@ -275,7 +275,7 @@
 	}
 	
 	let paymentReceive = async (rsp) => {
-		let url = "/payment/insertPaymentReceive?resIdx="+${param.resIdx}
+		let url = "/payment/insertPaymentReceive?resIdx="+${requestScope.resIdx}
 			+"&payReTid=" + payReTid
 			+"&payReFee=" + payReFee
 			+"&payReDate=" + payReDate
