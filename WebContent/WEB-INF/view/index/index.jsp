@@ -65,83 +65,45 @@
 	<div class="site-section">
 		<div class="container">
 			<h2 class="section-heading">
-				<strong>How it works?</strong>
+				<strong>Every붕붕이 처음이신가요?</strong>
 			</h2>
-			<p class="mb-5">Easy steps to get you started</p>
+			<p class="mb-5">당신의 차를 쉐어하고 싶으시다면 호스트 안내를, 차가 필요하시다면 게스트 안내를 참고해주세요</p>
 
 			<div class="row mb-5">
-				<div class="col-lg-4 mb-4 mb-lg-0">
-					<div class="step">
-						<span>1</span>
-						<div class="step-inner">
-							<span class="number text-primary">01.</span>
-							<h3>Select a car</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Vero, laboriosam!</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 mb-4 mb-lg-0">
-					<div class="step">
-						<span>2</span>
-						<div class="step-inner">
-							<span class="number text-primary">02.</span>
-							<h3>Fill up form</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Vero, laboriosam!</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 mb-4 mb-lg-0">
-					<div class="step">
-						<span>3</span>
-						<div class="step-inner">
-							<span class="number text-primary">03.</span>
-							<h3>Payment</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Vero, laboriosam!</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 mx-auto">
-					<a href="#" class="d-flex align-items-center play-now mx-auto">
-						<span class="icon">
-							<span class="icon-play"></span>
-						</span>
-						<span class="caption">Video how it works</span>
-					</a>
-				</div>
-			</div>
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <div class="step">
+                <span>1</span>
+                <div class="step-inner">
+                  <span class="number text-primary">01.</span>
+                  <h3><a href="/register/host">호스트 안내</a></h3>
+                  <p>호스트 안내입니다. 참고해 주세요!</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <div class="step">
+                <span>2</span>
+                <div class="step-inner">
+                  <span class="number text-primary">02.</span>
+                  <h3><a href="/register/guest">게스트 안내</a></h3>
+                  <p>게스트 안내입니다. 참고해 주세요!</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <div class="step">
+                <span>3</span>
+                <div class="step-inner">
+                  <span class="number text-primary">03.</span>
+                  <h3><a href="/question/faq">FAQ</h3>
+                  <p>자주 묻는 질문으로 가기!</p>
+                </div>
+              </div>
+            </div>
+          </div>
 		</div>
 	</div>
 
-	<div class="site-section">
-		<div class="container">
-			<div class="row align-items-center">
-				<div class="col-lg-7 text-center order-lg-2">
-					<div class="img-wrap-1 mb-5">
-						<img src="resources/images/feature_01.png" alt="Image" class="img-fluid">
-					</div>
-				</div>
-				<div class="col-lg-4 ml-auto order-lg-1">
-					<h3 class="mb-4 section-heading">
-						<strong>You can easily avail our promo for renting a car.</strong>
-					</h3>
-					<p class="mb-5">Lorem ipsum dolor sit amet, consectetur
-						adipisicing elit. Repudiandae, explicabo iste a labore id est
-						quas, doloremque veritatis! Provident odit pariatur dolorem
-						quisquam, voluptatibus voluptates optio accusamus, vel quasi
-						quidem!</p>
-
-					<p>
-						<a href="#" class="btn btn-primary">Meet them now</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<div class="site-section bg-light">
 		<div class="container">
@@ -371,105 +333,12 @@
 			<div class="row">
 				<div class="col-lg-7">
 					<h2 class="section-heading">
-						<strong>Features</strong>
+						<strong>Share your car, earn extra cash</strong>
 					</h2>
-					<p class="mb-5">Lorem ipsum dolor sit amet, consectetur
-						adipisicing elit.</p>
+					<p class="mb-5"> 차 쓰지 않는 날, 당신의 차를 쉐어하고 작은 수익을 창출하세요</p>
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-lg-4 mb-5">
-					<div class="service-1 dark">
-						<span class="service-1-icon"> <span class="icon-home"></span>
-						</span>
-						<div class="service-1-contents">
-							<h3>Lorem ipsum dolor</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Obcaecati, laboriosam.</p>
-							<p class="mb-0">
-								<a href="#">Learn more</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 mb-5">
-					<div class="service-1 dark">
-						<span class="service-1-icon"> <span class="icon-gear"></span>
-						</span>
-						<div class="service-1-contents">
-							<h3>Lorem ipsum dolor</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Obcaecati, laboriosam.</p>
-							<p class="mb-0">
-								<a href="#">Learn more</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 mb-5">
-					<div class="service-1 dark">
-						<span class="service-1-icon"> 
-							<span class="icon-watch_later"></span>
-						</span>
-						<div class="service-1-contents">
-							<h3>Lorem ipsum dolor</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Obcaecati, laboriosam.</p>
-							<p class="mb-0">
-								<a href="#">Learn more</a>
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 mb-5">
-					<div class="service-1 dark">
-						<span class="service-1-icon">
-							<span	class="icon-verified_user"></span>
-						</span>
-						<div class="service-1-contents">
-							<h3>Lorem ipsum dolor</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Obcaecati, laboriosam.</p>
-							<p class="mb-0">
-								<a href="#">Learn more</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 mb-5">
-					<div class="service-1 dark">
-						<span class="service-1-icon">
-							<span class="icon-video_library"></span>
-						</span>
-						<div class="service-1-contents">
-							<h3>Lorem ipsum dolor</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Obcaecati, laboriosam.</p>
-							<p class="mb-0">
-								<a href="#">Learn more</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 mb-5">
-					<div class="service-1 dark">
-						<span class="service-1-icon">
-							<span class="icon-vpn_key"></span>
-						</span>
-						<div class="service-1-contents">
-							<h3>Lorem ipsum dolor</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Obcaecati, laboriosam.</p>
-							<p class="mb-0">
-								<a href="#">Learn more</a>
-							</p>
-						</div>
-					</div>
-				</div>
-
-			</div>
 		</div>
 	</div>
 
@@ -480,8 +349,6 @@
 					<h2 class="section-heading">
 						<strong>Testimonials</strong>
 					</h2>
-					<p class="mb-5">Lorem ipsum dolor sit amet, consectetur
-						adipisicing elit.</p>
 				</div>
 			</div>
 			<div class="row">
@@ -505,9 +372,8 @@
 				<div class="col-lg-4 mb-4 mb-lg-0">
 					<div class="testimonial-2">
 						<blockquote class="mb-4">
-							<p>"Lorem ipsum dolor sit amet, consectetur adipisicing
-								elit. Voluptatem, deserunt eveniet veniam. Ipsam, nam,
-								voluptatum"</p>
+							<p>"Owners can completely cover the cost of their lease agreements...
+							for as few as nine days per month"</p>
 						</blockquote>
 						<div class="d-flex v-card align-items-center">
 							<img src="/resources/images/person_2.jpg" alt="Image" class="img-fluid mr-3">
@@ -520,9 +386,8 @@
 				<div class="col-lg-4 mb-4 mb-lg-0">
 					<div class="testimonial-2">
 						<blockquote class="mb-4">
-							<p>"Lorem ipsum dolor sit amet, consectetur adipisicing
-								elit. Voluptatem, deserunt eveniet veniam. Ipsam, nam,
-								voluptatum"</p>
+							<p>"Cover your monthly car payments or simply earn some extra cash 
+							by sharing your car whenever you're not using it."</p>
 						</blockquote>
 						<div class="d-flex v-card align-items-center">
 							<img src="/resources/images/person_3.jpg" alt="Image"
@@ -541,12 +406,11 @@
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-lg-7 mb-4 mb-md-0">
-					<h2 class="mb-0 text-white">What are you waiting for?</h2>
-					<p class="mb-0 opa-7">Lorem ipsum dolor sit amet, consectetur
-						adipisicing elit. Obcaecati, laboriosam.</p>
-				</div>
+             <h2 class="mb-0 text-white">떠나고 싶으신가요?</h2>
+            <p class="mb-0 opa-7">지금 바로 출발하세요!</p>
+          </div>
 				<div class="col-lg-5 text-md-right">
-					<a href="#" class="btn btn-primary btn-white">Rent a car now</a>
+					<a href="/index" class="btn btn-primary btn-white">예약하러 가기</a>
 				</div>
 			</div>
 		</div>
