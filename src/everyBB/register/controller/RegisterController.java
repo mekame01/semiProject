@@ -164,8 +164,12 @@ public class RegisterController extends HttpServlet {
 			      for (Car car : carList) {
 			         Map<String, Object> commandMap = new HashMap<>();
 			         Map<String, Object> tempMap = registerService.selectRegisterDetail(car.getCarIdx());
+				      
+				      System.out.println("tempMap : " + tempMap);
+				      
 			         dataList.add(tempMap);
 			      }
+			      System.out.println("dataList : " + dataList);
 			      
 			      request.setAttribute("dataList", dataList);
 			      request.getRequestDispatcher("/WEB-INF/view/register/rg_list.jsp")

@@ -56,12 +56,9 @@
                 <tbody>
                   <tr>
                     <td class="product-thumbnail">
-                     <%--   <c:forEach var="file" items="${data.fileList}">
-                      <img src="/upload/${file.savePath}${file.renameFileName}" alt="이미지" />
-      				</c:forEach>  --%>
-<%--  			<img src="<%= Code.UPLOAD %>${data.fileList[0].savePath}${data.fileList[0].renameFileName}" alt="이미지" class="img-fluid"/>
- --%>    				
-                    </td> 
+				<img src="/upload/${data.fileList[0].savePath}${data.fileList[0].renameFileName}" alt="Image" class="img-fluid">
+					                
+					</td> 
                 </tbody>
                </table>  
                 <input type="hidden" class="form-control" name="carIdx" value="${data.register.carIdx}" />

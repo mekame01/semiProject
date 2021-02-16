@@ -50,11 +50,13 @@
    
          <div class="row">
             <c:forEach var="data" items="${requestScope.dataList}" varStatus="i">
+         
                <div class="col-md-6 col-lg-4 mb-4">
       
                   <div class="listing d-block   align-items-stretch">
                      <div class="listing-img h-100 mr-4">
-                        <img src="<%= Code.UPLOAD %>${data.fileList[0].savePath}${data.fileList[0].renameFileName}" alt="이미지" class="img-fluid"/>
+                   
+                    <img src="/upload/${data.fileList[0].savePath}${data.fileList[0].renameFileName}" alt="이미지" class="img-fluid"/>
                      </div>
                      <div class="listing-contents h-100">
                         <h3>${data.register.carModel}</h3> <!-- 모델명 -->
@@ -79,6 +81,7 @@
                   </div>
                </div>
             </c:forEach>
+          
             <div class="col-md-6 col-lg-4 mb-4">
                <a href="/register/register"><p class="icon-plus-square"></p></a>
             </div>
