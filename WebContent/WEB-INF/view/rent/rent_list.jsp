@@ -65,8 +65,8 @@ a:not([href]):not([tabindex]):focus {
 .map{
 	position: fixed;
 	width: 35%;
-	height: 75vh;
-	top: 25vh;
+	height: 67vh;
+	top: 30vh;
 	right: 0;
 	z-index: 10;
 }
