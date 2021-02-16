@@ -15,10 +15,12 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import everyBB.car.model.vo.Car;
+import everyBB.common.util.file.FileVo;
 import everyBB.likey.model.service.LikeyService;
 import everyBB.likey.model.vo.Likey;
 import everyBB.member.model.service.MemberService;
 import everyBB.member.model.vo.Member;
+import everyBB.register.model.service.RegisterService;
 import everyBB.reservation.model.vo.Reservation;
 import everyBB.reservationHistory.model.service.ReservationHistoryService;
 import everyBB.reservationHistory.model.vo.ReservationHistory;
@@ -33,6 +35,7 @@ public class MemberController extends HttpServlet {
 	MemberService memberService = new MemberService();
 	LikeyService likeyService = new LikeyService();
 	ReservationHistoryService reservationHistoryService = new ReservationHistoryService();
+	private RegisterService registerService = new RegisterService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -231,12 +234,18 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 	private void pastTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("user");
+		List<List<FileVo>> fileList = new ArrayList<>();
 		
 		List<Reservation> pastList = memberService.selectPastTripById(member.getUserId());
-		
-		
+		//이미지 파일 정보를 검색
+		for (Reservation reservation : pastList) {
+			List<FileVo> tempFileList = registerService.selectFileList(reservation.getCarIdx());
+			fileList.add(tempFileList);
+		}
+
 		request.setAttribute("pastList", pastList);
-		
+		request.setAttribute("fileList", fileList);
+
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/past_trip.jsp")
 		.forward(request, response);
 	}
@@ -245,15 +254,25 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("user");
 		List<String> resStateList = new ArrayList<>();
-		
+		List<List<FileVo>> fileList = new ArrayList<>();
+
 		List<Reservation> currentList = memberService.selectCurrentTripById(member.getUserId());
 		for (Reservation reservation : currentList) {
 			String temp = reservationHistoryService.selectReservationByResIdx(reservation.getResIdx());
 			resStateList.add(temp);
+			List<FileVo> tempFileList = registerService.selectFileList(reservation.getCarIdx());
+			fileList.add(tempFileList);
 		}
+		System.out.println("currentList");
+		System.out.println(currentList);
+		System.out.println("resStateList");
+		System.out.println(resStateList);
+		System.out.println("fileList");
+		System.out.println(fileList);
 		
 		request.setAttribute("currentList", currentList);
 		request.setAttribute("resStateList", resStateList);
+		request.setAttribute("fileList", fileList);
 		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/current_trip.jsp")
 		.forward(request, response);
@@ -269,12 +288,16 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 	private void wishList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("user");
-		
+		List<List<FileVo>> fileList = new ArrayList<>();
+
 		List<Car> wishList = memberService.wishListById(member.getUserId());
-		
+		for (Car car : wishList) {
+			List<FileVo> tempFileList = registerService.selectFileList(car.getCarIdx());
+			fileList.add(tempFileList);
+		}
+
 		request.setAttribute("wishList", wishList);
-		
-		
+		request.setAttribute("fileList", fileList);
 		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/wishlist.jsp")
 		.forward(request, response);

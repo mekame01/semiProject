@@ -60,7 +60,7 @@
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
-         <c:forEach var="res" items="${pastList}">
+         <c:forEach var="res" items="${pastList}" varStatus="status">
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="post-entry-1 h-100">
              <a href="/rent/detail?car_idx=${res.carIdx}">

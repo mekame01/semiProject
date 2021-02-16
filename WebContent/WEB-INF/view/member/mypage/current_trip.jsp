@@ -64,6 +64,10 @@
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="post-entry-1 h-100">
               <a href="/rent/detail?car_idx=${res.carIdx}">
+              <script type="text/javascript">
+              console.dir("${requestScope.fileList}");
+              console.dir("/upload/${requestScope.fileList[status.index][0].savePath}${requestScope.fileList[status.index][0].renameFileName}");
+              </script>
                 <img src="/upload/${requestScope.fileList[status.index][0].savePath}${requestScope.fileList[status.index][0].renameFileName}" alt="Image" class="img-fluid">
               </a>
               <div class="post-entry-1-contents">
