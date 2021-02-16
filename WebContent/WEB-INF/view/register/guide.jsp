@@ -92,17 +92,7 @@
         <div class="row align-items-stretch">
 
           <div class="col-lg-4 col-md-6 mb-5">
-            <div class="post-entry-1 h-100 person-1">
-              
-                <img src="<%= request.getContextPath() %>/resources/images/person_1.jpg" alt="Image"
-                 class="img-fluid">
-            
-              <div class="post-entry-1-contents">
-                <span class="meta">Founder</span>
-                <h2>James Doe</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, sapiente.</p>
-              </div>
-            </div>
+   
           </div>
           <div class="col-lg-4 col-md-6 mb-5">
             <div class="post-entry-1 h-100 person-1">
@@ -111,22 +101,26 @@
                  class="img-fluid">
             
               <div class="post-entry-1-contents">
-                <span class="meta">Founder</span>
-                <h2>James Doe</h2>
+                <span class="meta">조장</span>
+                <h2>왕상준</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, sapiente.</p>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 mb-5">
+          
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-5">
             <div class="post-entry-1 h-100 person-1">
               
-                <img src="<%= request.getContextPath() %>/resources/images/person_3.jpg" alt="Image"
+                <img src="<%= request.getContextPath() %>/resources/images/person_5.jpg" alt="Image"
                  class="img-fluid">
             
               <div class="post-entry-1-contents">
-                <span class="meta">Founder</span>
-                <h2>James Doe</h2>
+                <span class="meta">조원</span>
+                <h2>이혜령</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, sapiente.</p>
               </div>
             </div>
@@ -139,22 +133,8 @@
                  class="img-fluid">
             
               <div class="post-entry-1-contents">
-                <span class="meta">Founder</span>
-                <h2>James Doe</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, sapiente.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-5">
-            <div class="post-entry-1 h-100 person-1">
-              
-                <img src="<%= request.getContextPath() %>/resources/images/person_5.jpg" alt="Image"
-                 class="img-fluid">
-            
-              <div class="post-entry-1-contents">
-                <span class="meta">Founder</span>
-                <h2>James Doe</h2>
+                <span class="meta">조원</span>
+                <h2>하은지</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, sapiente.</p>
               </div>
             </div>
@@ -167,8 +147,8 @@
                  class="img-fluid">
             
               <div class="post-entry-1-contents">
-                <span class="meta">Founder</span>
-                <h2>James Doe</h2>
+                <span class="meta">조원</span>
+                <h2>한소희</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, sapiente.</p>
               </div>
             </div>
@@ -179,31 +159,17 @@
       </div>
     </div>
 
-    <div class="site-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 mb-5 mb-lg-0">
-            <img src="<%= request.getContextPath() %>/resources/images/hero_1.jpg" alt="Image" class="img-fluid rounded">
-          </div>
-          <div class="col-lg-4 ml-auto">
-            <h2>Our History</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit suscipit, repudiandae similique accusantium eius nulla quam laudantium sequi.</p>
-            <p>Debitis voluptates corporis saepe molestias tenetur ab quae, quo earum commodi, laborum dolore, fuga aliquid delectus cum ipsa?</p>
-          </div>
-        </div>
-      </div>
-    </div>
 
 
-    <div class="site-section bg-primary py-5">
+   <div class="site-section bg-primary py-5">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-7 mb-4 mb-md-0">
-            <h2 class="mb-0 text-white">What are you waiting for?</h2>
-            <p class="mb-0 opa-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, laboriosam.</p>
+             <h2 class="mb-0 text-white">떠나고 싶으신가요?</h2>
+            <p class="mb-0 opa-7">지금 바로 출발하세요!</p>
           </div>
           <div class="col-lg-5 text-md-right">
-            <a href="#" class="btn btn-primary btn-white">Rent a car now</a>
+            <a href="/index" class="btn btn-primary btn-white">예약하러가기</a>
           </div>
         </div>
       </div>

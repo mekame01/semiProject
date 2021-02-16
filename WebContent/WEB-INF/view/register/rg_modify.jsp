@@ -38,7 +38,7 @@
 
               <div class="intro">
                 <h1><strong>차량등록</strong></h1>
-                <div class="custom-breadcrumbs"><a href="/index.jsp">Home</a> <span class="mx-2">/</span> <strong>About</strong></div>
+                <div class="custom-breadcrumbs"><a href="/index.jsp">Home</a> <span class="mx-2">/</span> <strong>Modify</strong></div>
               </div>
 
             </div>
@@ -52,8 +52,8 @@
       <div class="container">
         <div class="row justify-content-center text-center">
         <div class="col-7 text-center mb-5">
-          <h2>Contact Us Or Use This Form To Rent A Car</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo assumenda, dolorum necessitatibus eius earum voluptates sed!</p>
+          <h2>차량 정보를 수정해 주세요!</h2>
+          <p>차량등록 후 게스트의 예약을 기다려주세요.</p>
         </div>
       </div>
         <div class="row justify-content-center text-center">

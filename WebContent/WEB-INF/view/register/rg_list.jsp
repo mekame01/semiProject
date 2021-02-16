@@ -5,9 +5,10 @@
 <body>
 <head>
 <style type="text/css">
+
 .icon-plus-square:before {
    cursor: pointer;
-   font-size: 20em;
+   font-size: 15em;
 }
 </style>
 </head>
