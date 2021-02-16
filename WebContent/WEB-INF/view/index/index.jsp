@@ -269,7 +269,7 @@ function getTomorrow(){
 	let year = date.getFullYear();
 	let month = ("0" + (1 + date.getMonth())).slice(-2);
 	let day = ("0" + (date.getDate())).slice(-2);
-
+ 
 	return month + "/" + day + "/" + year;
 }
 
