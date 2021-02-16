@@ -335,6 +335,27 @@ let calculatePrice = (event,i) => {
 	console.dir(returnDate);
 	console.dir(now);
 	
+	prevPickupDate = document.querySelector("#pickup_date").value;
+	prevPickupHour = document.querySelector("#pickup_hour").value;
+	prevReturnDate = document.querySelector("#return_date").value;
+	prevReturnHour = document.querySelector("#return_hour").value;
+	
+	let hours = (returnDate.getTime()-pickupDate.getTime()) /1000 /60 /60;
+	console.dir("==========hours시작==========");
+	console.dir(pickupDateArr);
+	console.dir(pickupDate);
+	console.dir(returnDateArr);
+	console.dir(returnDate);
+	console.dir(hours); 
+	console.dir("==========hours끝==========");
+	
+	console.dir(hours);
+	console.dir("${requestScope.car.carFee}");
+	console.dir(hours*"${requestScope.car.carFee}");
+	console.dir(hours * Number("${requestScope.car.carFee}"));
+	document.querySelector("#price").value = hours * "${requestScope.car.carFee}";
+	
+	/*
 	if(pickupDate >= returnDate){
 		alert("픽업시간이 반납시간보다 빠르거나 같습니다.");
 		setPrevValue(event,i);
@@ -345,26 +366,8 @@ let calculatePrice = (event,i) => {
 		alert("반납시간이 현재시간보다 빠르거나 같습니다.");
 		setPrevValue(event,i);
 	}else{
-		prevPickupDate = document.querySelector("#pickup_date").value;
-		prevPickupHour = document.querySelector("#pickup_hour").value;
-		prevReturnDate = document.querySelector("#return_date").value;
-		prevReturnHour = document.querySelector("#return_hour").value;
-		
-		let hours = (returnDate.getTime()-pickupDate.getTime()) /1000 /60 /60;
-		console.dir("==========hours시작==========");
-		console.dir(pickupDateArr);
-		console.dir(pickupDate);
-		console.dir(returnDateArr);
-		console.dir(returnDate);
-		console.dir(hours); 
-		console.dir("==========hours끝==========");
-		
-		console.dir(hours);
-		console.dir("${requestScope.car.carFee}");
-		console.dir(hours*"${requestScope.car.carFee}");
-		console.dir(hours * Number("${requestScope.car.carFee}"));
-		document.querySelector("#price").value = hours * "${requestScope.car.carFee}";
 	}
+	*/
 }
 
 //가격세팅 초기화
@@ -412,7 +415,7 @@ document.querySelector("#frm_reservation").addEventListener("submit",(e)=>{
 	let pickupDateHour = new Date(document.querySelector("#pickup_date").value);
 	pickupDateHour.setHours(document.querySelector("#pickup_hour").value);
 	if(pickupDateHour < now){
-		alert("픽업시일을 지금보다 빠르게 설정할 수 없습니다.");
+		alert("픽업시일을 현재보다 빠르게 설정할 수 없습니다.");
 		e.preventDefault();
 		return;
 	}
