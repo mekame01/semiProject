@@ -139,7 +139,7 @@
 								</div>
 								<div>
 									<p>
-										<a href="/rent/detail?${car.carIdx}" class="btn btn-primary btn-sm">Rent Now</a>
+										<a href="/rent/detail?car_idx=${car.carIdx}" class="btn btn-primary btn-sm">Rent Now</a>
 									</p>
 								</div>
 							</div>
