@@ -45,11 +45,11 @@
 							</div>
 							<div class="mb-3 mb-md-0 col-md-3">
 								<div class="form-control-wrap">
-									<input type="text" name="return_date" id="return_date" placeholder="반환 날짜" class="form-control datepicker px-3" required="required">
+									<input type="text" name="return_date" id="return_date" placeholder="반납 날짜" class="form-control datepicker px-3" required="required">
 									<span class="icon icon-date_range"> </span>
 								</div>
 								<div>
-									<input type="number" min="0" max="23" name="return_hour" id="return_hour" placeholder="반환 시각" class="form-control px-3" required="required">
+									<input type="number" min="0" max="23" name="return_hour" id="return_hour" placeholder="반납 시각" class="form-control px-3" required="required">
 								</div>
 							</div>
 							<div class="mb-3 mb-md-0 col-md-3">
@@ -476,12 +476,12 @@ let kakaoAddr = async (e)=>{
 	}
 	
 	if(!regDate.test(document.querySelector("#return_date").value)){
-		alert("반환날짜가 형식에 맞지 않습니다.");
+		alert("반납날짜가 형식에 맞지 않습니다.");
 		return;
 	}
 	
 	if(!regHour.test(document.querySelector("#return_hour").value)){
-		alert("반환시각이 형식에 맞지 않습니다.");
+		alert("반납시각이 형식에 맞지 않습니다.");
 		return;
 	}
 	
@@ -497,12 +497,12 @@ let kakaoAddr = async (e)=>{
 	let returnDateHour = new Date(document.querySelector("#return_date").value);
 	returnDateHour.setHours(document.querySelector("#return_hour").value);
 	if(returnDateHour < now){
-		alert("반환시일을 현재보다 빠르게 설정할 수 없습니다.");
+		alert("반납시일을 현재보다 빠르게 설정할 수 없습니다.");
 		return;
 	}
 	
 	if(returnDateHour <= pickupDateHour){
-		alert("반환시일을 픽업시일보다 빠르거나 같도록 설정할 수 없습니다.");
+		alert("반납시일을 픽업시일보다 빠르거나 같도록 설정할 수 없습니다.");
 		return;
 	}
 	

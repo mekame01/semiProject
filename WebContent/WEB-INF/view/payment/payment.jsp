@@ -62,19 +62,23 @@
                   </tr>
                   <tr>
                     <th class="product-price">가격</th>
-                    <td class="product-price">$55.00</td>
+                    <td class="product-price">${param.resFee}원</td>
                   </tr>
                   <tr>
                     <th class="product-regDate">예약날짜</th>
-                    <td class="product-regDate">2021.02.02</td>
+                    <td class="product-regDate">${param.resDate}</td>
                   </tr>
                   <tr>
                     <th class="product-pickDate">픽업날짜</th>
-                    <td class="product-pickDate">2021.02.05</td>
+                    <td class="product-pickDate">${param.resPickupDate}</td>
+                  </tr>
+                  <tr>
+                    <th class="product-returnDate">반납날짜</th>
+                    <td class="product-returnDate">${param.resReturnDate}</td>
                   </tr>
                   <tr>
                     <th class="product-total">총가격</th>
-                    <td class="product-total">$57.00</td>
+                    <td class="product-total">${param.resFee}원</td>
                   </tr>
                </table>
             </div>
@@ -85,7 +89,7 @@
           <div class="col-md-6">
             <div class="row mb-5">
               <div class="col-md-6">
-                <button class="btn btn-outline-primary btn-md btn-block">예약내역으로 돌아가기</button>
+                <%-- <button class="btn btn-outline-primary btn-md btn-block">예약내역으로 돌아가기</button> --%>
               </div>
             </div>
             <div class="row">
@@ -114,15 +118,7 @@
                     <span class="text-black">Subtotal</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">$55.00</strong>
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="col-md-6">
-                    <span class="text-black">fee</span>
-                  </div>
-                  <div class="col-md-6 text-right">
-                    <strong class="text-black">$2.00</strong>
+                    <strong class="text-black">${param.resFee}원</strong>
                   </div>
                 </div>
                 <div class="row mb-5">
@@ -130,7 +126,7 @@
                     <span class="text-black">Total</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">$57.00</strong>
+                    <strong class="text-black">${param.resFee}원</strong>
                   </div>
                 </div>
     
@@ -170,9 +166,10 @@
 	       
 	       paySendTid = 'merchant_' + new Date().getTime();
 	       payMethod = 'card';
-	       payFee = 100;
-	       payUserPhone = '010-0000-0000';
-	       
+	       payFee = ${param.resFee};
+	       payUserPhone = "${sessionScope.user.userPhone}";
+	       console.dir("payUserPhone");
+	       console.dir(payUserPhone);
 	       //여기가 통신 시작이니 이 전에 통신을 쏘겠습니다.
 	       //통신을 호출
 		   paymentSend();
@@ -185,8 +182,9 @@
 	           amount : payFee,
 	           buyer_tel : payUserPhone
 	       }, function(rsp) {
+	    	   console.dir("rsp");
+	    	   
 	    	   //receive호출
-	    	   console.dir(rsp);
 	    	   payReTid = rsp.imp_uid;
 	           payReFee = rsp.paid_amount;
 	           payReDate = rsp.paid_at;
@@ -194,14 +192,20 @@
 	           payReErrorCd = rsp.error_code;
 	           payReErrorMsg = rsp.error_msg;
 	           payReYn = rsp.success;
-	    	   paymentReceive();
-	           if ( rsp.success ) {
-	               //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-	               jQuery.ajax({
-	                   url: "/payDetail", //cross-domain error가 발생하지 않도록 주의
+	           
+	    	   console.dir("payReYn");
+	    	   console.dir(payReYn);
+	    	   //paymentReceive();
+	           if (rsp.success) {
+	        	   
+	        	   paymentReceive(rsp);
+            		<%--
+            	   $.ajax({
+	                   url: "/payment/insertPaymentReceive", //cross-domain error가 발생하지 않도록 주의
 	                   type: 'POST',
 	                   dataType: 'json',
 	                   data: {
+	                	   resIdx : ${param.resIdx},
 	                	   payReTid : rsp.imp_uid, //필요한 데이터 전달
 	                	   payReFee : rsp.paid_amount,
 	                	   payReDate : rsp.paid_at,
@@ -210,15 +214,23 @@
 	                	   payReErrorMsg : rsp.error_msg,
 	                	   payReYn : rsp.success
 	                   }
+            	   
 	               }).done(function(data) {
+	            	   console.dir("data");
+	            	   console.dir(data);
 	                   //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
 	                   if ( everythings_fine ) {
+		            	   console.dir("everythings_fine");
+		            	   console.dir(everythings_fine);
+		            	   console.dir("rsp");
+		            	   console.dir(rsp);
+		            	   
 	                       msg = '결제가 완료되었습니다.';
 	                       msg += '\n고유ID : ' + rsp.imp_uid;
 	                       msg += '\n상점 거래ID : ' + rsp.merchant_uid;
 	                       msg += '\결제 금액 : ' + rsp.paid_amount;
 	                       msg += '카드 승인번호 : ' + rsp.apply_num;
-	                       console.dir(msg); <%-- undefined 뜸 --%>
+	                       console.dir(msg);
 	                       alert(msg);              
 	                   } else {
 	                	   
@@ -226,8 +238,11 @@
 	                       //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
 	                   }
 	               });
+	               
+            	   -->
+            	   
 	               //성공시 이동할 페이지
-           		   location.href='<%=request.getContextPath()%>/payment/payDetail?resIdx=?' + 1;
+           		   <%--location.href='<%=request.getContextPath()%>/payment/payDetail?resIdx=?' + 1;--%>
 	           	} else {
 	               	msg = '결제에 실패하였습니다.';
 	               	msg += ' 에러내용 : ' + rsp.error_msg;
@@ -243,24 +258,23 @@
 	let paymentSend = async () => {
 		//이값은 전 화면에서 request.setAttribute("")로 받은 값
 		//임시 하드코딩
-		let url = "/payment/insertPaymentSend?resIdx="+1
+		let url = "/payment/insertPaymentSend?resIdx="+${param.resIdx}
 			//위에서 변수로 받은 값
 			+"&paySendTid=" + paySendTid
 			+"&payMethod=" + payMethod
 			+"&payFee=" + payFee
 			+"&payUserPhone=" + payUserPhone;
 		console.dir(url);
-		alert("여기서 잠깐1");
+		//alert("여기서 잠깐1");
 		//이렇게만 해주면 알아서 통신을 쏨
 		let response = await fetch(url,{
 			"method": "get"
 		});
-		alert("여기서 잠깐2");
+		//alert("여기서 잠깐2");
 	}
 	
-	let paymentReceive = async () => {
-		let url = "/payment/insertPaymentReceive?resIdx="+1
-				//이렇게 하셔도 되구요
+	let paymentReceive = async (rsp) => {
+		let url = "/payment/insertPaymentReceive?resIdx="+${param.resIdx}
 			+"&payReTid=" + payReTid
 			+"&payReFee=" + payReFee
 			+"&payReDate=" + payReDate
@@ -269,12 +283,21 @@
 			+"&payReErrorMsg=" + payReErrorMsg
 			+"&payReYn=" + payReYn;
 		console.dir(url);
-		alert("여기서 잠깐1");
+		//alert("여기서 잠깐1");
 
 		let response = await fetch(url,{
 			"method": "get"
 		});
-		alert("여기서 잠깐2");
+		//alert("여기서 잠깐2");
+		console.dir("everythings_fine");
+		
+        msg = '결제가 완료되었습니다.';
+        msg += '\n고유ID : ' + rsp.imp_uid;
+        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+        msg += '\결제 금액 : ' + rsp.paid_amount;
+        msg += '카드 승인번호 : ' + rsp.apply_num;
+        console.dir(msg);
+        alert(msg);              
 	}
 	
    </script>

@@ -101,8 +101,8 @@ a:not([href]):not([tabindex]):focus {
 								<input type="search" placeholder="주소" name="address" id="address" required="required">
 								<input type="date" placeholder="픽업날짜" name="pickup_date" id="pickup_date" required="required">
 								<input type="number" placeholder="픽업시각" name="pickup_hour" id="pickup_hour" style="width: 10%" required="required">
-								<input type="date" placeholder="반환날짜" name="return_date" id="return_date" required="required">
-								<input type="number" placeholder="반환시각" name="return_hour" id="return_hour" style="width: 10%" required="required">
+								<input type="date" placeholder="반납날짜" name="return_date" id="return_date" required="required">
+								<input type="number" placeholder="반납시각" name="return_hour" id="return_hour" style="width: 10%" required="required">
 								<input type="button" value="검색" onclick="kakaoAddr()">
 							</form>
 						</div>
@@ -442,12 +442,12 @@ let kakaoAddr = async (e)=>{
 	}
 	
 	if(!regDate.test(document.querySelector("#return_date").value)){
-		alert("반환날짜가 형식에 맞지 않습니다.");
+		alert("반납날짜가 형식에 맞지 않습니다.");
 		return;
 	}
 	
 	if(!regHour.test(document.querySelector("#return_hour").value)){
-		alert("반환시각이 형식에 맞지 않습니다.");
+		alert("반납시각이 형식에 맞지 않습니다.");
 		return;
 	}
 	
@@ -463,12 +463,12 @@ let kakaoAddr = async (e)=>{
 	let returnDateHour = new Date(document.querySelector("#return_date").value);
 	returnDateHour.setHours(document.querySelector("#return_hour").value);
 	if(returnDateHour < now){
-		alert("반환시일을 현재보다 빠르게 설정할 수 없습니다.");
+		alert("반납시일을 현재보다 빠르게 설정할 수 없습니다.");
 		return;
 	}
 	
 	if(returnDateHour <= pickupDateHour){
-		alert("반환시일을 픽업시일보다 빠르거나 같도록 설정할 수 없습니다.");
+		alert("반납시일을 픽업시일보다 빠르거나 같도록 설정할 수 없습니다.");
 		return;
 	}
 	

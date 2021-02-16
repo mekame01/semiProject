@@ -71,7 +71,11 @@
                 <span class="meta d-inline-block mb-3">${res.resPickupDate}<span class="mx-2">~</span> ${res.resReturnDate}</span>
                 <p>이용요금:${res.resFee}원 </p>
                 <c:if test="${requestScope.resStateList[status.index] eq 'RH02'}">
-                <p><a href="/payment/payment?resIdx=${res.resIdx}&resFee=${res.resFee}&resDate=${res.resDate}&resPickupDate=${res.resPickupDate}" class="btn btn-primary btn-sm" style="color: white;">결제하기</a></p>
+                <script type="text/javascript">
+               	console.dir("res");
+               	console.dir("${res}");
+                </script>
+                <p><a href="/payment/payment?resIdx=${res.resIdx}&resFee=${res.resFee}&resDate=${res.resDate}&resPickupDate=${res.resPickupDate}&resReturnDate=${res.resReturnDate}" class="btn btn-primary btn-sm" style="color: white;">결제하기</a></p>
                 </c:if>
               </div>
             </div>

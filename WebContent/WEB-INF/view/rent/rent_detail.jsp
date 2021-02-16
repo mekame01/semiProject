@@ -159,8 +159,8 @@
 					<div>위치 : <input name="parking" id="parking" style="border: none; width: 300px;" value="${requestScope.car.carParking}" readonly="readonly"></div>
 					<input class="time" type="date" placeholder="픽업날짜" name="pickup_date" id="pickup_date" value="${requestScope.pickup_date}" required="required">
 					<input class="time" type="number" min="0" max="23"  placeholder="픽업시각" name="pickup_hour" id="pickup_hour" style="width: 25%;" value="${requestScope.pickup_hour}" required="required">
-					<input class="time" type="date" placeholder="반환날짜" name="return_date" id="return_date" value="${requestScope.return_date}" required="required">
-					<input class="time" type="number" min="0" max="23" placeholder="반환시각" name="return_hour" id="return_hour" style="width: 25%;" value="${requestScope.return_hour}" required="required">
+					<input class="time" type="date" placeholder="반납날짜" name="return_date" id="return_date" value="${requestScope.return_date}" required="required">
+					<input class="time" type="number" min="0" max="23" placeholder="반납시각" name="return_hour" id="return_hour" style="width: 25%;" value="${requestScope.return_hour}" required="required">
 					<div>가격 : <input name="price" id="price" style="border: none; width: auto; text-align: right;" readonly="readonly">원</div>
 					<input class="btn btn-primary btn-block py-3" id="btn_res" value="예약하기" type="submit">
 				</form>
@@ -320,13 +320,13 @@ let calculatePrice = (event,i) => {
 	console.dir(now);
 	
 	if(pickupDate >= returnDate){
-		alert("픽업시간이 반환시간보다 빠르거나 같습니다.");
+		alert("픽업시간이 반납시간보다 빠르거나 같습니다.");
 		setPrevValue(event,i);
 	}else if(pickupDate <= now){
 		alert("픽업시간이 현재시간보다 빠르거나 같습니다.");
 		setPrevValue(event,i);
 	}else if(returnDate <= now){
-		alert("반환시간이 현재시간보다 빠르거나 같습니다.");
+		alert("반납시간이 현재시간보다 빠르거나 같습니다.");
 		setPrevValue(event,i);
 	}else{
 		prevPickupDate = document.querySelector("#pickup_date").value;
@@ -380,13 +380,13 @@ document.querySelector("#frm_reservation").addEventListener("submit",(e)=>{
 	}
 	
 	if(!regDate.test(document.querySelector("#return_date").value)){
-		alert("반환날짜가 형식에 맞지 않습니다.");
+		alert("반납날짜가 형식에 맞지 않습니다.");
 		e.preventDefault();
 		return;
 	}
 	
 	if(!regHour.test(document.querySelector("#return_hour").value)){
-		alert("반환시각이 형식에 맞지 않습니다.");
+		alert("반납시각이 형식에 맞지 않습니다.");
 		e.preventDefault();
 		return;
 	}
@@ -404,13 +404,13 @@ document.querySelector("#frm_reservation").addEventListener("submit",(e)=>{
 	let returnDateHour = new Date(document.querySelector("#return_date").value);
 	returnDateHour.setHours(document.querySelector("#return_hour").value);
 	if(returnDateHour < now){
-		alert("반환시일을 현재보다 빠르게 설정할 수 없습니다.");
+		alert("반납시일을 현재보다 빠르게 설정할 수 없습니다.");
 		e.preventDefault();
 		return;
 	}
 	
 	if(returnDateHour <= pickupDateHour){
-		alert("반환시일을 픽업시일보다 빠르거나 같도록 설정할 수 없습니다.");
+		alert("반납시일을 픽업시일보다 빠르거나 같도록 설정할 수 없습니다.");
 		e.preventDefault();
 		return;
 	}

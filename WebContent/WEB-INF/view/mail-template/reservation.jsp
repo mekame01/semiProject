@@ -14,7 +14,7 @@
 	<h1>아래의 링크를 클릭해 예약을 수락하거나 거절해주세요.</h1>
 	<h2>위치 : ${param.resParking}</h2>
 	<h2>픽업시간 : ${param.resPickupDate}</h2>
-	<h2>반환시간 : ${param.resReturnDate}</h2>
+	<h2>반납시간 : ${param.resReturnDate}</h2>
 	<h2>가격 : ${param.resFee}원</h2>
 	<h1><a href="<%= Code.DOMAIN %>/reservationHistory/insert?res_state=RH02&res_idx=${param.resIdx}&user_id=${param.userId}&car_idx=${param.carIdx}">수락</a></h1>  
 	<h1><a href="<%= Code.DOMAIN %>/reservationHistory/insert?res_state=RH09&res_idx=${param.resIdx}&user_id=${param.userId}&car_idx=${param.carIdx}">거절</a></h1>
