@@ -65,7 +65,7 @@
           
             <div class="post-entry-1 h-100">
               <a href="/rent/detail?car_idx=${car.carIdx}">
-                <img src="/resources/images/post_1.jpg" alt="Image" class="img-fluid">
+                <img src="/upload/${requestScope.fileList[status.index][0].savePath}${requestScope.fileList[status.index][0].renameFileName}" alt="Image" class="img-fluid">
               </a>
               <div class="post-entry-1-contents">
                 <h2><a href="/rent/detail?car_idx=${car.carIdx}">${car.carParking}</a></h2>
