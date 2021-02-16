@@ -156,5 +156,21 @@ public class RegisterService {
 		      }
 		      return res;
 		   }
+		  
+			public List<FileVo> selectFileList(int carIdx){
+				List<FileVo> fileList = null;
+				Connection conn = jdt.getConnection();
+
+				try {
+					fileList = registerDao.selectFileWithRegister(conn, carIdx);
+				}
+				catch (Exception e) {
+					throw new DataAccessException(ErrorCode.rg03, e);
+				}finally {
+					jdt.close(conn);
+				}
+				
+				return fileList;
+			}
 		
 }

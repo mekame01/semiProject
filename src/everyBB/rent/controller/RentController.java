@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,9 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import everyBB.car.model.service.CarService;
 import everyBB.car.model.vo.Car;
+import everyBB.common.util.file.FileVo;
 import everyBB.likey.model.service.LikeyService;
 import everyBB.likey.model.vo.Likey;
 import everyBB.member.model.vo.Member;
+import everyBB.register.model.service.RegisterService;
 import everyBB.reservationHistory.model.service.ReservationHistoryService;
 import everyBB.reservationHistory.model.vo.ReservationHistory;
 import everyBB.review.model.service.ReviewService;
@@ -30,6 +33,7 @@ public class RentController extends HttpServlet {
 	private ReservationHistoryService reservationHistoryService = new ReservationHistoryService();
 	private ReviewService reviewService = new ReviewService();
 	private LikeyService likeyService = new LikeyService();
+	private RegisterService registerService = new RegisterService();
 	
     public RentController() {
         super();
@@ -111,6 +115,7 @@ public class RentController extends HttpServlet {
 	
 	private void selectRentList(HttpServletRequest request, String from) throws ServletException, IOException {
 		try {
+			List<List<FileVo>> fileList = new ArrayList<>();
 			String tempDate1 = request.getParameter("pickup_date");
 			String tempDate2 = request.getParameter("return_date");
 			if(from.equals("/index")) {
@@ -160,8 +165,14 @@ public class RentController extends HttpServlet {
 			
 			//카카오 주소로 찾은 자동차들 정보 세팅
 			List<Car> carList = carService.selectByAddress(kakaoAddress, pickupDate, returnDate);
+			for (Car car : carList) {
+				List<FileVo> tempFileList = registerService.selectFileList(car.getCarIdx());
+				fileList.add(tempFileList);
+			}
+			
 			System.out.println(carList);
 			request.setAttribute("carList", carList);
+			request.setAttribute("fileList", fileList);
 			
 			//화면에서 필요한 값 초기화용
 			request.setAttribute("address", address);

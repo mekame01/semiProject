@@ -1,3 +1,4 @@
+<%@page import="everyBB.common.code.Code"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/include/head.jsp" %>
@@ -115,11 +116,21 @@ a:not([href]):not([tabindex]):focus {
 		<div class="container">
 			<div class="row">
 				<c:forEach var="car" items="${requestScope.carList}" varStatus="status">
+				
+					<script type="text/javascript">
+					console.dir("requestScope.fileList");
+					console.dir("${requestScope.fileList}");
+					console.dir("${requestScope.fileList[status.index]}");
+					console.dir("${requestScope.fileList[status.index][0]}");
+					console.dir("${requestScope.fileList[status.index][0]}");
+					<%--console.dir("<%=Code.UPLOAD%>${requestScope.fileList[status.index][0].savePath}${requestScope.fileList[status.index][0].renameFileName}");--%>
+					</script>
+				
 					<c:set var="flg" value="no"></c:set>
 					<div class="cars col-md-6 col-lg-4 mb-4">
 						<div class="listing d-block  align-items-stretch">
 							<div class="listing-img h-100 mr-4">
-								<img src="/resources/images/car_4.jpg" alt="Image" class="img-fluid">
+								<img src="/upload/${requestScope.fileList[status.index][0].savePath}${requestScope.fileList[status.index][0].renameFileName}" alt="Image" class="img-fluid">
 								<c:if test="${not empty sessionScope.user.userId}">
 									<c:forEach var="likey" items="${requestScope.likeyList}">
 										<c:if test="${car.carIdx eq likey.carIdx}">
@@ -170,7 +181,6 @@ a:not([href]):not([tabindex]):focus {
 
 <%@ include file="/WEB-INF/view/include/script.jsp" %>
 <script type="text/javascript">
-
 
 //입력값 초기화
 $("#address").val("${requestScope.address}");
@@ -288,10 +298,10 @@ let mapSelect = ()=>{
 	<c:forEach items="${requestScope.carList}" var="car" varStatus="status">
 		positions["${status.index}"] = {"latlng": new kakao.maps.LatLng("${car.carParkingLat}", "${car.carParkingLng}")};
 		contents["${status.index}"] = {"content": '<div style="padding:5px; text-align:center;">${car.carFee}</div>'};
-		//console.dir("${status.index}");
-		//console.dir("${car}");
+		<%--console.dir("${status.index}");--%>
+		<%--console.dir("${car}");--%>
 	</c:forEach>
-	//console.dir("${requestScope.carList}");
+	<%--console.dir("${requestScope.carList}");--%>
 	console.dir(positions);
 	for (var i = 0; i < positions.length; i ++) {
 		
