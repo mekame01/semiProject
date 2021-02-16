@@ -47,7 +47,7 @@
                   	</ul>
                 </div>
                 <div class="col-lg-3">
-                  	<h2 class="footer-heading mb-4">UJ Ha</h2>
+                  	<h2 class="footer-heading mb-4">EJ Ha</h2>
                   	<ul class="list-unstyled">
                   		<li><a href="#">J-query</a></li>
                   		<li><a href="#">are</a></li>
