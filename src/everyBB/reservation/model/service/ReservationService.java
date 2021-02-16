@@ -61,7 +61,7 @@ public class ReservationService {
 			resIdx = reservationDao.selectReservationResIdx(conn, reservation);
 			System.out.println("resIdx : " + resIdx);
 		} catch (Exception e) {
-			throw new DataAccessException(ErrorCode.SW01, e);
+			throw new DataAccessException(ErrorCode.SR01, e);
 		} finally {
 			jdt.close(conn);
 		}
@@ -102,10 +102,24 @@ public class ReservationService {
 		try {
 			reservationList = reservationDao.selectReservationByCarIdxDate(conn, carIdx, resPickupDate, resReturnDate);
 		} catch (Exception e) {
-			throw new DataAccessException(ErrorCode.SW01, e);
+			throw new DataAccessException(ErrorCode.SR01, e);
 		} finally {
 			jdt.close(conn);
 		}
 		return reservationList;
+	}
+	
+	public Reservation selectReservationByResIdx(int resIdx) {
+		Connection conn = jdt.getConnection();
+		Reservation reservation = null;
+		
+		try {
+			reservation = reservationDao.selectReservationByResIdx(conn, resIdx);
+		} catch (Exception e) {
+			throw new DataAccessException(ErrorCode.SR01, e);
+		} finally {
+			jdt.close(conn);
+		}
+		return reservation;
 	}
 }

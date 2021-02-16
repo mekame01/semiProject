@@ -96,7 +96,7 @@ public class ReservationDao {
 			
 			rset = pstm.executeQuery();
 			
-			if(rset.next()) {
+			while(rset.next()) {
 				Reservation reservation = new Reservation();
 				reservation.setResIdx(rset.getInt("res_idx"));
 				reservation.setUserId(rset.getString("user_id"));
@@ -115,6 +115,42 @@ public class ReservationDao {
 			jdt.close(rset, pstm);
 		}
 		return reservationList;
+	}
+	
+	public Reservation selectReservationByResIdx(Connection conn, int resIdx) {
+		Reservation reservation = null;
+		PreparedStatement pstm = null;
+		ResultSet rset = null;
+		
+		try {
+			String query = "select *"
+					+ "  from tb_reservation "
+					+ " where res_idx = ?";
+			
+			pstm = conn.prepareStatement(query);
+			
+			pstm.setInt(1, resIdx);
+			
+			rset = pstm.executeQuery();
+			
+			if(rset.next()) {
+				reservation = new Reservation();
+				reservation.setResIdx(rset.getInt("res_idx"));
+				reservation.setUserId(rset.getString("user_id"));
+				reservation.setCarIdx(rset.getInt("car_idx"));
+				reservation.setResParking(rset.getString("res_parking"));
+				reservation.setResDate(rset.getDate("res_date"));
+				reservation.setResPickupDate(rset.getDate("res_pickup_date"));
+				reservation.setResReturnDate(rset.getDate("res_return_date"));
+				reservation.setResFee(rset.getInt("res_fee"));
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.SR01, e);
+		} finally {
+			jdt.close(rset, pstm);
+		}
+		return reservation;
 	}
 	
 }

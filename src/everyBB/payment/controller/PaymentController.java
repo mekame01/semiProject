@@ -15,7 +15,10 @@ import everyBB.paymentReceive.model.service.PaymentReceiveService;
 import everyBB.paymentReceive.model.vo.PaymentReceive;
 import everyBB.paymentSend.model.service.PaymentSendService;
 import everyBB.paymentSend.model.vo.PaymentSend;
+import everyBB.reservation.model.service.ReservationService;
 import everyBB.reservation.model.vo.Reservation;
+import everyBB.reservationHistory.model.service.ReservationHistoryService;
+import everyBB.reservationHistory.model.vo.ReservationHistory;
 
 /**
  * Servlet implementation class PaymentController
@@ -25,7 +28,8 @@ public class PaymentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	PaymentSendService paymentSendService = new PaymentSendService();
 	PaymentReceiveService paymentReceiveService = new PaymentReceiveService();
-       
+	private ReservationHistoryService reservationHistoryService = new ReservationHistoryService();
+	private ReservationService reservationService = new ReservationService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -75,7 +79,6 @@ public class PaymentController extends HttpServlet {
 	}
 	
 	private void insertPaymentSend(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("PaymentController.insertPaymentSend 1");
 		int resIdx = Integer.parseInt(request.getParameter("resIdx"));
 		String paySendTid = request.getParameter("paySendTid");
 		String payMethod = request.getParameter("payMethod");
@@ -90,11 +93,7 @@ public class PaymentController extends HttpServlet {
 		paymentSend.setPayFee(payFee);
 		paymentSend.setPayUserPhone(payUserPhone);
 		
-		System.out.println("PaymentController.insertPaymentSend 2");
-
 		paymentSendService.insertPaymentSend(paymentSend);
-		
-		System.out.println("PaymentController.insertPaymentSend 3");
 	}
 	
 	private void payDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -104,7 +103,6 @@ public class PaymentController extends HttpServlet {
 	}
 	
 	private void insertPaymentReceive(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("PaymentController.insertPaymentReceive 1");
 		int resIdx = Integer.parseInt(request.getParameter("resIdx"));
 		String payReTid = request.getParameter("payReTid");
 		int payReFee = Integer.parseInt(request.getParameter("payReFee"));
@@ -128,11 +126,17 @@ public class PaymentController extends HttpServlet {
 			paymentReceive.setPayReYn("N");
 		}
 		
-		System.out.println("PaymentController.insertPaymentReceive 2");
-
 		paymentReceiveService.insertPaymentReceive(paymentReceive);
 		
-		System.out.println("PaymentController.insertPaymentReceive 3");
+		Reservation reservation = reservationService.selectReservationByResIdx(resIdx);
+		
+		ReservationHistory reservationHistory = new ReservationHistory();
+		reservationHistory.setResIdx(reservation.getResIdx());
+		reservationHistory.setUserId(reservation.getUserId());
+		reservationHistory.setCarIdx(reservation.getCarIdx());
+		reservationHistory.setResState("RH05");	//바로 반납되도록 처리
+		
+		reservationHistoryService.insertReservationHistory(reservationHistory);
 	}
 
 }

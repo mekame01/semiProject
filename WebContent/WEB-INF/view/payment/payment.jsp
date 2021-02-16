@@ -166,7 +166,8 @@
 	       
 	       paySendTid = 'merchant_' + new Date().getTime();
 	       payMethod = 'card';
-	       payFee = ${param.resFee};
+	       payFee = "${param.resFee}";
+	       //payFee = 100;
 	       payUserPhone = "${sessionScope.user.userPhone}";
 	       console.dir("payUserPhone");
 	       console.dir(payUserPhone);
@@ -297,7 +298,9 @@
         msg += '\결제 금액 : ' + rsp.paid_amount;
         msg += '카드 승인번호 : ' + rsp.apply_num;
         console.dir(msg);
-        alert(msg);              
+        alert(msg);
+        
+        location.href="/member/mypage/current";
 	}
 	
    </script>
