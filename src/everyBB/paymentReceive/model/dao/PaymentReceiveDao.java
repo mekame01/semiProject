@@ -46,7 +46,7 @@ public class PaymentReceiveDao {
 		try {
 			String sql = "select "
 					+ "(pay_re_idx, res_idx, pay_re_tid, pay_re_fee, pay_re_date, pay_re_status, pay_re_error_msg, pay_re_error_cd, pay_re_yn) "
-					+ "from tb_payment_receive where pay_re_tid = ?";
+					+ "from tb_payment_receive where res_idx = ?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, payReTid);
 			rset = pstm.executeQuery();

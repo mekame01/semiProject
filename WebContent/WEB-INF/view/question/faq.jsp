@@ -32,7 +32,7 @@
 	    <div class="row">
           <div class="col-lg-7">
             <h2 class="section-heading"><strong>FAQ</strong></h2>
-            <p class="mb-5">Frequently Asked Questions</p>  
+            <p class="mb-5">자주 묻는 질문들</p>  
           </div>
         </div>
         <div class="card mb-4">
@@ -65,7 +65,9 @@
 	                            	차량을 이용하려면 먼저 에브리붕붕 사이트의 회원이 되어야 합니다.<br>
 	                            	회원가입을 하고 난 후에 로그인을 하시고 원하는 차량을 골라 예약하시면 됩니다.<br>
 	                            	저희 사이트는 차량을 공유하는 사이트이므로 운전면허증이 있어야 예약이 가능합니다.<br>
-	                            	특별히 원하시는 지역이 있을 경우 차량 검색을 통해 찾으실 수 있습니다.
+	                            	특별히 원하시는 지역이 있을 경우 차량 검색을 통해 찾으실 수 있습니다.<br>
+	                            	원하시는 날짜와 시간에 맞춰서 예약을 진행하실 수 있습니다.<br>
+	                            	예약을 진행하신 후 소유주가 수락하면 결제가 진행됩니다.<br>
 	                            </div>
 	                        </div>
 	                        <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab">
@@ -73,7 +75,7 @@
 	                            <div class="bg-light p-4">
 	                            	저희 사이트에 등록된 차량은 전부 개인의 소유입니다.<br>
 	                            	다른 사람의 차량을 이용하는 만큼 자신의 차량처럼 깔끔하게 이용해주시길 바랍니다.<br>
-	                            	특별히 주의할 사항은 차량을 등록하시는 회원분이 작성해주신 내용을 참고하시길 바랍니다.
+	                            	특별히 주의할 사항은 차량을 등록하시는 차량의 소유주 분이 작성해주신 내용을 참고하시길 바랍니다.
 	                            </div>
 	                        </div>
 	                        <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab">
@@ -127,13 +129,13 @@
 	                            <div class="bg-light p-4">
 	                            	차량 등록 페이지에서 등록하면 됩니다.<br>
 	                            	차량의 사진이 필요하고, 차량에 대한 기본적인 정보와<br>
-	                            	추가적으로 적어야 하는 사항을 적어주면 됩니다.
+	                            	추가적으로 주의해야 하는 사항이나 필요한 사항을 적어주면 됩니다.
 	                            </div>
 	                        </div>
 	                        <div class="tab-pane fade" id="v-pills-6" role="tabpanel" aria-labelledby="v-pills-6-tab">
 	                            <h3 class="mb-4">차량 관리는 어떻게 이루어져야 하나요?</h3>
 	                            <div class="bg-light p-4">
-	                            	차량 관리는 차주에 의해 이루어지며, 관리가 잘되지 않는<br>
+	                            	차량 관리는 차량 소유주에 의해 이루어지며, 관리가 잘되지 않는<br>
 	                            	문제점이 생길 것을 대비하여 평점제도를 도입하고 있습니다.<br>
 	                            	차량을 공유하는 것이므로 서로 서로 조심해야 합니다.
 	                            </div>
@@ -167,11 +169,11 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-7 mb-4 mb-md-0">
-            <h2 class="mb-0 text-white">What are you waiting for?</h2>
-            <p class="mb-0 opa-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, laboriosam.</p>
+            <h2 class="mb-0 text-white">떠나고 싶으신가요?</h2>
+            <p class="mb-0 opa-7">지금 바로 출발하세요!</p>
           </div>
           <div class="col-lg-5 text-md-right">
-            <a href="#" class="btn btn-primary btn-white">Rent a car now</a>
+            <a href="/" class="btn btn-primary btn-white">예약하러 가기</a>
           </div>
         </div>
       </div>

@@ -10,11 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import everyBB.member.model.vo.Member;
+import everyBB.car.model.service.CarService;
+import everyBB.car.model.vo.Car;
+import everyBB.common.util.file.FileVo;
 import everyBB.paymentReceive.model.service.PaymentReceiveService;
 import everyBB.paymentReceive.model.vo.PaymentReceive;
 import everyBB.paymentSend.model.service.PaymentSendService;
 import everyBB.paymentSend.model.vo.PaymentSend;
+import everyBB.register.model.service.RegisterService;
 import everyBB.reservation.model.service.ReservationService;
 import everyBB.reservation.model.vo.Reservation;
 import everyBB.reservationHistory.model.service.ReservationHistoryService;
@@ -30,7 +33,8 @@ public class PaymentController extends HttpServlet {
 	PaymentReceiveService paymentReceiveService = new PaymentReceiveService();
 	private ReservationHistoryService reservationHistoryService = new ReservationHistoryService();
 	private ReservationService reservationService = new ReservationService();
-    /**
+	private RegisterService registerService = new RegisterService();
+	/**
      * @see HttpServlet#HttpServlet()
      */
     public PaymentController() {
