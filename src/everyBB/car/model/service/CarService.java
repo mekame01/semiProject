@@ -53,4 +53,16 @@ public class CarService {
 		return carList;
 	}
 
+	public List<Car> selectCarOrderByAvgScore() {
+		Connection conn = jdt.getConnection();
+		List<Car> carList = null;
+		
+		try {
+			carList = carDao.selectCarOrderByAvgScore(conn);
+		} finally {
+			jdt.close(conn);
+		}
+		return carList;
+	}
+
 }
