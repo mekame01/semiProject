@@ -14,6 +14,7 @@ public enum Code {
 	RH05("반납(리뷰가능)"),
 	RH06("리뷰남김"),
 	RH07("리뷰삭제"),
+	RH08("취소"),
 	RH09("거절");
 	
 	public String desc;

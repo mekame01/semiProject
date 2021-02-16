@@ -255,13 +255,20 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		Member member = (Member) session.getAttribute("user");
 		List<String> resStateList = new ArrayList<>();
 		List<List<FileVo>> fileList = new ArrayList<>();
+		List<Reservation> currentList = new ArrayList<>();
 
-		List<Reservation> currentList = memberService.selectCurrentTripById(member.getUserId());
-		for (Reservation reservation : currentList) {
+		List<Reservation> tempReservationList = memberService.selectCurrentTripById(member.getUserId());
+		
+		for (Reservation reservation : tempReservationList) {
+			
 			String temp = reservationHistoryService.selectReservationByResIdx(reservation.getResIdx());
-			resStateList.add(temp);
-			List<FileVo> tempFileList = registerService.selectFileList(reservation.getCarIdx());
-			fileList.add(tempFileList);
+			
+			if(!temp.equals("RH08") && !temp.equals("RH09")) {
+				currentList.add(reservation);
+				resStateList.add(temp);
+				List<FileVo> tempFileList = registerService.selectFileList(reservation.getCarIdx());
+				fileList.add(tempFileList);
+			}
 		}
 		System.out.println("currentList");
 		System.out.println(currentList);

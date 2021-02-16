@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import everyBB.common.code.ErrorCode;
 import everyBB.common.exception.ToAlertException;
+import everyBB.reservation.model.service.ReservationService;
+import everyBB.reservation.model.vo.Reservation;
 import everyBB.reservationHistory.model.service.ReservationHistoryService;
 import everyBB.reservationHistory.model.vo.ReservationHistory;
 
@@ -19,6 +21,7 @@ import everyBB.reservationHistory.model.vo.ReservationHistory;
 public class ReservationHistoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ReservationHistoryService reservationHistoryService = new ReservationHistoryService();
+	private ReservationService reservationService = new ReservationService();
 	
     public ReservationHistoryController() {
         super();
@@ -28,6 +31,8 @@ public class ReservationHistoryController extends HttpServlet {
 		String[] uriArr = request.getRequestURI().split("/");
 		switch (uriArr[uriArr.length-1]) {
 			case "insert" : insertReservationHistory(request, response);
+				break;
+			case "cancel" : insertReservationHistoryCancel(request, response);
 				break;
 			default: response.setStatus(404);
 		}
@@ -77,4 +82,23 @@ public class ReservationHistoryController extends HttpServlet {
 		.forward(request, response);
 	}
 
+	private void insertReservationHistoryCancel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int resIdx = Integer.parseInt(request.getParameter("resIdx"));
+		
+		Reservation reservation = reservationService.selectReservationByResIdx(resIdx);
+		
+		ReservationHistory reservationHistory = new ReservationHistory();
+		reservationHistory.setResIdx(reservation.getResIdx());
+		reservationHistory.setUserId(reservation.getUserId());
+		reservationHistory.setCarIdx(reservation.getCarIdx());
+		reservationHistory.setResState("RH08");	//취소
+		
+		reservationHistoryService.insertReservationHistory(reservationHistory);
+		
+		request.setAttribute("msg", "예약이 취소되었습니다.");
+		request.setAttribute("url", "/member/mypage/current");
+		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
+		.forward(request, response);
+	}
 }
