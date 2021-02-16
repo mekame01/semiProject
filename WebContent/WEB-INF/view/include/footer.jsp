@@ -14,7 +14,7 @@
 			<div class="row">
 							
                 <div class="col-lg-3">
-                  	<h2 class="footer-heading mb-4">SH Wang</h2>
+                  	<h2 class="footer-heading mb-4">SJ Wang</h2>
                   	<ul class="list-unstyled">
                   		<li><a href="#">Java</a></li>
                   		<li><a href="#">css</a></li>
