@@ -276,7 +276,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		
 		try {
 			
-			String query = "select car_idx, res_parking, res_pickup_date, res_return_date, res_fee from tb_reservation where res_idx in "
+			String query = "select * from tb_reservation where res_idx in "
 					+ "(select res_idx from tb_reservation_history where user_id = ? and res_state in ('RH05', 'RH06', 'RH07'))";
 			pstm = conn.prepareStatement(query);
 			pstm.setString(1, userId);
@@ -285,8 +285,11 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 			while(rset.next()) {
 				Reservation res = new Reservation();
 				
+				res.setResIdx(rset.getInt("res_idx"));
+				res.setUserId(rset.getString("user_id"));
 				res.setCarIdx(rset.getInt("car_idx"));
 				res.setResParking(rset.getString("res_parking"));
+				res.setResDate(rset.getDate("res_date"));
 				res.setResPickupDate(rset.getDate("res_pickup_date"));
 				res.setResReturnDate(rset.getDate("res_return_date"));
 				res.setResFee(rset.getInt("res_fee"));
@@ -311,7 +314,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		
 		try {
 			
-			String query = "select res_idx, car_idx, res_parking, res_pickup_date, res_return_date, res_fee from tb_reservation where res_idx in "
+			String query = "select * from tb_reservation where res_idx in "
 					+ "(select res_idx from tb_reservation_history where user_id = ? and res_pickup_date >= sysdate and res_state in ('RH01', 'RH02', 'RH03'))";
 			pstm = conn.prepareStatement(query);
 			pstm.setString(1, userId);
@@ -320,8 +323,10 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 			while(rset.next()) {
 				Reservation res = new Reservation();
 				res.setResIdx(rset.getInt("res_idx"));
+				res.setUserId(rset.getString("user_id"));
 				res.setCarIdx(rset.getInt("car_idx"));
 				res.setResParking(rset.getString("res_parking"));
+				res.setResDate(rset.getDate("res_date"));
 				res.setResPickupDate(rset.getDate("res_pickup_date"));
 				res.setResReturnDate(rset.getDate("res_return_date"));
 				res.setResFee(rset.getInt("res_fee"));
