@@ -8,7 +8,7 @@ public enum Code {
 	//UPLOAD("C:\\CODE\\E_SERVLET\\resources\\upload\\");
 	UPLOAD("C:\\CODE\\E_SERVLET\\semiProject\\WebContent\\upload\\"),
 	RH01("예약"),
-	RH02("확인"),
+	RH02("수락"),
 	RH03("결제"),
 	RH04("픽업"),
 	RH05("반납(리뷰가능)"),
