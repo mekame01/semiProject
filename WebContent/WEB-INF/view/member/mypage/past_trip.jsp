@@ -54,11 +54,7 @@
             </c:if>   
           </div>
         </div>
-    </div>
-    </div>
-
-    <div class="site-section bg-light">
-      <div class="container">
+   
         <div class="row">
          <c:forEach var="res" items="${pastList}" varStatus="status">
           <div class="col-lg-4 col-md-6 mb-4">
