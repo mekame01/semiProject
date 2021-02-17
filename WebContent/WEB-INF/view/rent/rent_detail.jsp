@@ -107,46 +107,37 @@
 
 	<%@ include file="/WEB-INF/view/include/header.jsp"%>
 	
-	 <div class="hero inner-page" style="background-image: url('/resources/images/hero_1_a.jpg');">
-        
-        <div class="container">
-          <div class="row align-items-end ">
-            <div class="col-lg-5">
+	<div class="hero inner-page" style="background-image: url('/resources/images/hero_1_a.jpg');">
+		<div class="container">
+			<div class="row align-items-end ">
+				<div class="col-lg-5">
 
-              <div class="intro" style="width:500px">
-                <h1><strong>차량 상세</strong></h1>
-                <div class="custom-breadcrumbs">
-                	 
-                	
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
+					<div class="intro" style="width:500px">
+						<h1><strong>차량 상세</strong></h1>
+						<div class="custom-breadcrumbs"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	<div class="site-section bg-light">
 		<div class="container body_split">
 			<div class="left">
 				<div class="row">
-				
-				
-					
-		<c:forEach var="image" items="${requestScope.fileList}">
-				<img src="/upload/${image.savePath}${image.renameFileName}" style="width:40vw; height:50vh;">
-				<div class="container"></div>
-		</c:forEach>
-		<c:if test="${not empty sessionScope.user.userId}">
-		<c:if test="${not empty requestScope.likey.userId}">
-			<div class="heart" style="z-index: 999; position: absolute; left: 13.5%; top: 50%; color: rgba(255,0,0,0.5); font-size: 4em;" onclick="deleteLikey(${requestScope.car.carIdx})">♥</div>
-		</c:if>
-		<c:if test="${empty requestScope.likey.userId}">
-			<div class="heart" style="z-index: 999; position: absolute; left: 13.5%; top: 50%; color: rgba(255,0,0,0.5); font-size: 3em; width: auto;" onclick="insertLikey(${requestScope.car.carIdx})">♡</div>
-		</c:if>
-	</c:if>
-	
-	
+					<div class="single-item" style="width:40vw; height:50vh;">
+						<c:forEach var="image" items="${requestScope.fileList}">
+							<div style="background-image: url(/upload/${image.savePath}${image.renameFileName}); width:40vw; height:50vh; background-position: center center; background-repeat: no-repeat; background-size:100% 100%;"></div>
+						</c:forEach>
+					</div>
+					<c:if test="${not empty sessionScope.user.userId}">
+						<c:if test="${not empty requestScope.likey.userId}">
+							<div class="heart" style="z-index: 999; position: absolute; left: 13.5%; top: 50%; color: rgba(255,0,0,0.5); font-size: 4em;" onclick="deleteLikey(${requestScope.car.carIdx})">♥</div>
+						</c:if>
+						<c:if test="${empty requestScope.likey.userId}">
+							<div class="heart" style="z-index: 999; position: absolute; left: 13.5%; top: 50%; color: rgba(255,0,0,0.5); font-size: 3em; width: auto;" onclick="insertLikey(${requestScope.car.carIdx})">♡</div>
+						</c:if>
+					</c:if>
 	
 					<h1 class="col-md-6 col-lg-12 mb-4"><strong>${requestScope.car.carModel}</strong></h1>
 					<div class="col-md-6 col-lg-6 mb-4"><p class="desc">아이디 : </p>${requestScope.car.userId}</div>
