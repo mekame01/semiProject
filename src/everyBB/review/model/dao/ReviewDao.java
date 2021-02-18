@@ -86,7 +86,7 @@ public class ReviewDao {
 		
 		try {
 			String query = "UPDATE tb_car c"
-					+ " SET c.car_avg_score = (SELECT ROUND(AVG(r.review_score),2)"
+					+ " SET c.car_avg_score = (SELECT ROUND(AVG(r.review_score), 2)"
 					+ "                          FROM tb_review r "
 					+ "                         WHERE r.car_idx = ?"
 					+ "                      GROUP BY r.car_idx)"

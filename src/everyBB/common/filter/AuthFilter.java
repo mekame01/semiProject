@@ -49,11 +49,11 @@ public class AuthFilter implements Filter {
 			switch (uriArr[1]) {
 				case "member": 
 					switch (uriArr[2]) {
-						//case "mypage":
-							//if(session.getAttribute("user") == null) {
-								//throw new ToAlertException(ErrorCode.AUTH01);
-							//}
-							//break;
+						case "mypage":
+							if(session.getAttribute("user") == null) {
+								throw new ToAlertException(ErrorCode.AUTH01);
+							}
+							break;
 						case "joinimpl" : 
 							if(session.getAttribute("persistUser") == null) {
 								throw new ToAlertException(ErrorCode.AUTH02);
@@ -61,9 +61,9 @@ public class AuthFilter implements Filter {
 							break;
 					}
 				
-				case "board": 
+				case "register": 
 					switch (uriArr[2]) {
-						case "form":
+						case "register":
 							if(session.getAttribute("user") == null) {
 								throw new ToAlertException(ErrorCode.AUTH01);
 							}

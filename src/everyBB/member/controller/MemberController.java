@@ -1,6 +1,8 @@
 package everyBB.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -8,11 +10,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import everyBB.car.model.vo.Car;
+import everyBB.common.util.file.FileVo;
+import everyBB.likey.model.service.LikeyService;
+import everyBB.likey.model.vo.Likey;
 import everyBB.member.model.service.MemberService;
 import everyBB.member.model.vo.Member;
+import everyBB.register.model.service.RegisterService;
+import everyBB.reservation.model.vo.Reservation;
+import everyBB.reservationHistory.model.service.ReservationHistoryService;
+import everyBB.reservationHistory.model.vo.ReservationHistory;
 
 /**
  * Servlet implementation class Why
@@ -22,7 +33,9 @@ public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	MemberService memberService = new MemberService();
-	
+	LikeyService likeyService = new LikeyService();
+	ReservationHistoryService reservationHistoryService = new ReservationHistoryService();
+	private RegisterService registerService = new RegisterService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -49,14 +62,16 @@ public class MemberController extends HttpServlet {
 			break;
 		case "loginimpl" : loginImpl(request, response);
 			break;
+		case "kakao" : kakaoLogin(request, response);
+			break;
 		case "mypage" : 
 			switch(uriArr[uriArr.length-1]) {
 			case "past" : pastTrip(request, response);
 				break;
 			case "current" : currentTrip(request, response);
 				break;
-			case "reservdetail" : reservDetail(request, response);
-				break;
+			//case "reservdetail" : reservDetail(request, response);
+				//break;
 			case "wishlist" : wishList(request, response);
 				break;
 			case "userinfo" : userInfo(request, response);
@@ -67,9 +82,9 @@ public class MemberController extends HttpServlet {
 				break;
 			
 			default : response.setStatus(404);
-			}
-			/*case "logout" : logout(request, response);
-			break;*/
+			} break;
+			case "logout" : logout(request, response);
+			break;
 		default : response.setStatus(404);
 		}
 	}
@@ -174,7 +189,6 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		Member member = memberService.memberAuthenticate(userId, userPwd);
 		
 				if(member != null) {
-					
 					request.getSession().setAttribute("user", member);
 					response.getWriter().print("success");
 				}else {
@@ -183,30 +197,120 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 			
 	} 
 	
+	private void kakaoLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String jsonData = request.getParameter("data"); 
+		Gson gson = new Gson();
+	      Map<String, Object> jsonMap = gson.fromJson(jsonData, Map.class);
+	      
+	      String userId = Double.toString((double)jsonMap.get("id"));
+	      String userName = (String) jsonMap.get("name");
+	      String userEmail = (String) jsonMap.get("email");
+		
+	      Member member = memberService.kakaoMemberAuthenticate(userId, userEmail);
+			
+			if(member != null) {
+				
+				request.getSession().setAttribute("user", member);
+				response.getWriter().print("success");
+			}else {
+				
+				member = new Member();
+				member.setUserId(userId);
+				member.setUserName(userName);
+				member.setUserEmail(userEmail);
+				
+				memberService.insertKakaoMember(member);
+				request.getSession().setAttribute("user", member);
+				response.getWriter().print("success");
+
+			}
+	      
+	      
+		
+	}
+	
 	
 	private void pastTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("user");
+		List<List<FileVo>> fileList = new ArrayList<>();
+		
+		List<Reservation> pastList = memberService.selectPastTripById(member.getUserId());
+		//이미지 파일 정보를 검색
+		for (Reservation reservation : pastList) {
+			List<FileVo> tempFileList = registerService.selectFileList(reservation.getCarIdx());
+			fileList.add(tempFileList);
+		}
+
+		request.setAttribute("pastList", pastList);
+		request.setAttribute("fileList", fileList);
+
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/past_trip.jsp")
 		.forward(request, response);
 	}
 	
 	private void currentTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("user");
+		List<String> resStateList = new ArrayList<>();
+		List<List<FileVo>> fileList = new ArrayList<>();
+		List<Reservation> currentList = new ArrayList<>();
+
+		List<Reservation> tempReservationList = memberService.selectCurrentTripById(member.getUserId());
+		
+		for (Reservation reservation : tempReservationList) {
+			
+			String temp = reservationHistoryService.selectReservationByResIdx(reservation.getResIdx());
+			
+			if(!temp.equals("RH08") && !temp.equals("RH09")) {
+				currentList.add(reservation);
+				resStateList.add(temp);
+				List<FileVo> tempFileList = registerService.selectFileList(reservation.getCarIdx());
+				fileList.add(tempFileList);
+			}
+		}
+		System.out.println("currentList");
+		System.out.println(currentList);
+		System.out.println("resStateList");
+		System.out.println(resStateList);
+		System.out.println("fileList");
+		System.out.println(fileList);
+		
+		request.setAttribute("currentList", currentList);
+		request.setAttribute("resStateList", resStateList);
+		request.setAttribute("fileList", fileList);
+		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/current_trip.jsp")
 		.forward(request, response);
 	}
 	
+	/*
 	private void reservDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/reserv_detail.jsp")
 		.forward(request, response);
-	}
+	}*/
 	
 	private void wishList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("user");
+		List<List<FileVo>> fileList = new ArrayList<>();
+
+		List<Car> wishList = memberService.wishListById(member.getUserId());
+		for (Car car : wishList) {
+			List<FileVo> tempFileList = registerService.selectFileList(car.getCarIdx());
+			fileList.add(tempFileList);
+		}
+
+		request.setAttribute("wishList", wishList);
+		request.setAttribute("fileList", fileList);
+		
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage/wishlist.jsp")
 		.forward(request, response);
 	}
+	
+	
 	
 	private void userInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -243,13 +347,13 @@ private void authenticateEmail(HttpServletRequest request, HttpServletResponse r
 		.forward(request, response);
 	}
 	
-	/*
+	
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getSession().removeAttribute("user");
 		response.sendRedirect("/");  
 		
-	}*/
+	}
 	
 	
 	

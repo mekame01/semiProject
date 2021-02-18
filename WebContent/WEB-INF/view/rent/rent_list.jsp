@@ -1,3 +1,4 @@
+<%@page import="everyBB.common.code.Code"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/include/head.jsp" %>
@@ -35,6 +36,12 @@ body {
 	z-index: 8;
 }
 
+.heart {
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
 .col-lg-4 {
 	-webkit-box-flex: 0;
 	-ms-flex: 0 0 34%;
@@ -58,8 +65,8 @@ a:not([href]):not([tabindex]):focus {
 .map{
 	position: fixed;
 	width: 35%;
-	height: 75vh;
-	top: 25vh;
+	height: 67vh;
+	top: 30vh;
 	right: 0;
 	z-index: 10;
 }
@@ -91,12 +98,12 @@ a:not([href]):not([tabindex]):focus {
 								<input type="hidden" name="kakaoAddress" id="kakaoAddress">
 								<input type="hidden" name="centerLat" id="centerLat">
 								<input type="hidden" name="centerLng" id="centerLng">
-								<input type="search" placeholder="주소" name="address" id="address">
-								<input type="date" placeholder="픽업날짜" name="pickup_date" id="pickup_date">
-								<input type="number" placeholder="픽업시각" name="pickup_hour" id="pickup_hour" style="width: 10%">
-								<input type="date" placeholder="반환날짜" name="return_date" id="return_date">
-								<input type="number" placeholder="반환시각" name="return_hour" id="return_hour" style="width: 10%">
-								<button onclick="kakaoAddr()">검색</button>
+								<input type="search" placeholder="주소" name="address" id="address" required="required">
+								<input type="date" placeholder="픽업날짜" name="pickup_date" id="pickup_date" required="required">
+								<input type="number" placeholder="픽업시각" name="pickup_hour" id="pickup_hour" style="width: 10%" required="required">
+								<input type="date" placeholder="반납날짜" name="return_date" id="return_date" required="required">
+								<input type="number" placeholder="반납시각" name="return_hour" id="return_hour" style="width: 10%" required="required">
+								<input type="button" value="검색" onclick="kakaoAddr()">
 							</form>
 						</div>
 					</div>
@@ -108,18 +115,35 @@ a:not([href]):not([tabindex]):focus {
 	<div class="site-section bg-light">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-7">
-					<h2 class="section-heading"><strong>Car Listings</strong></h2>
-					<p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>		
-				</div>
-			</div>
-			
-			<div class="row">
 				<c:forEach var="car" items="${requestScope.carList}" varStatus="status">
+				
+					<script type="text/javascript">
+					console.dir("requestScope.fileList");
+					console.dir("${requestScope.fileList}");
+					console.dir("${requestScope.fileList[status.index]}");
+					console.dir("${requestScope.fileList[status.index][0]}");
+					console.dir("${requestScope.fileList[status.index][0]}");
+					<%--console.dir("<%=Code.UPLOAD%>${requestScope.fileList[status.index][0].savePath}${requestScope.fileList[status.index][0].renameFileName}");--%>
+					</script>
+				
+					<c:set var="flg" value="no"></c:set>
 					<div class="cars col-md-6 col-lg-4 mb-4">
 						<div class="listing d-block  align-items-stretch">
 							<div class="listing-img h-100 mr-4">
-								<img src="/resources/images/car_4.jpg" alt="Image" class="img-fluid">
+								<img src="/upload/${requestScope.fileList[status.index][0].savePath}${requestScope.fileList[status.index][0].renameFileName}" alt="Image" class="img-fluid">
+								<c:if test="${not empty sessionScope.user.userId}">
+									<c:forEach var="likey" items="${requestScope.likeyList}">
+										<c:if test="${car.carIdx eq likey.carIdx}">
+											<c:set var="flg" value="yes"></c:set>
+										</c:if>
+									</c:forEach>
+									<c:if test="${flg eq 'yes'}">
+													<div class="heart" style="position: absolute; right: 13%; top: -7%; color: rgba(255,0,0,0.5); font-size: 3em;" onclick="deleteLikey(${car.carIdx})">♥</div>
+									</c:if>
+									<c:if test="${flg ne 'yes'}">
+										<div class="heart" style="position: absolute; right: 13%; top: -7%; color: rgba(255,0,0,0.5); font-size: 3em;" onclick="insertLikey(${car.carIdx})">♡</div>
+									</c:if>
+								</c:if>
 							</div>
 							<div class="listing-contents h-100">
 								<h3>${car.carModel}</h3>
@@ -141,7 +165,6 @@ a:not([href]):not([tabindex]):focus {
 									</div>
 								</div>
 								<div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem quibusdam.</p>
 									<p><a onclick="rentDetail(${car.carIdx})" class="btn btn-primary btn-sm">Rent Now</a></p>
 								</div>
 							</div>
@@ -158,7 +181,6 @@ a:not([href]):not([tabindex]):focus {
 
 <%@ include file="/WEB-INF/view/include/script.jsp" %>
 <script type="text/javascript">
-
 
 //입력값 초기화
 $("#address").val("${requestScope.address}");
@@ -261,7 +283,7 @@ let mapSelect = ()=>{
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		//center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
 		center: new kakao.maps.LatLng($("#centerLat").val(), $("#centerLng").val()), //지도의 중심좌표.
-		level: 3 //지도의 레벨(확대, 축소 정도)
+		level: 5 //지도의 레벨(확대, 축소 정도)
 	};
 
 	//지도 생성 및 객체 리턴
@@ -275,11 +297,11 @@ let mapSelect = ()=>{
 	var infowindows = [];
 	<c:forEach items="${requestScope.carList}" var="car" varStatus="status">
 		positions["${status.index}"] = {"latlng": new kakao.maps.LatLng("${car.carParkingLat}", "${car.carParkingLng}")};
-		contents["${status.index}"] = {"content": '<div style="padding:5px; width:auto;">${car.carFee}</div>'};
-		//console.dir("${status.index}");
-		//console.dir("${car}");
+		contents["${status.index}"] = {"content": '<div style="padding:5px; text-align:center;">${car.carFee}</div>'};
+		<%--console.dir("${status.index}");--%>
+		<%--console.dir("${car}");--%>
 	</c:forEach>
-	//console.dir("${requestScope.carList}");
+	<%--console.dir("${requestScope.carList}");--%>
 	console.dir(positions);
 	for (var i = 0; i < positions.length; i ++) {
 		
@@ -400,6 +422,56 @@ let mapSelect = ()=>{
 mapSelect();
 
 let kakaoAddr = async (e)=>{
+	//입력값 검증
+	let regDate = /^[0-9]{4}-([1-9]|0[1-9]|1[0-2])-([1-9]|0[1-9]|[1-2][0-9]|3[0-1])$/;
+	let regHour = /^([0-9]|[0-1][0-9]|2[0-3])$/;
+	
+	if(!document.querySelector("#address").value.trim()){
+		alert("주소를 입력하지 않았습니다.");
+		return;
+	}
+	
+	if(!regDate.test(document.querySelector("#pickup_date").value)){
+		alert("픽업날짜가 형식에 맞지 않습니다.");
+		return;
+	}
+	
+	if(!regHour.test(document.querySelector("#pickup_hour").value)){
+		alert("픽업시각이 형식에 맞지 않습니다.");
+		return;
+	}
+	
+	if(!regDate.test(document.querySelector("#return_date").value)){
+		alert("반납날짜가 형식에 맞지 않습니다.");
+		return;
+	}
+	
+	if(!regHour.test(document.querySelector("#return_hour").value)){
+		alert("반납시각이 형식에 맞지 않습니다.");
+		return;
+	}
+	
+	const now = new Date();
+	
+	let pickupDateHour = new Date(document.querySelector("#pickup_date").value);
+	pickupDateHour.setHours(document.querySelector("#pickup_hour").value);
+	if(pickupDateHour < now){
+		alert("픽업시일을 지금보다 빠르게 설정할 수 없습니다.");
+		return;
+	}
+	
+	let returnDateHour = new Date(document.querySelector("#return_date").value);
+	returnDateHour.setHours(document.querySelector("#return_hour").value);
+	if(returnDateHour < now){
+		alert("반납시일을 현재보다 빠르게 설정할 수 없습니다.");
+		return;
+	}
+	
+	if(returnDateHour <= pickupDateHour){
+		alert("반납시일을 픽업시일보다 빠르거나 같도록 설정할 수 없습니다.");
+		return;
+	}
+	
 	//e.preventDefault();
 	let keyword = $("#address").val();
 	console.dir($("#address").val());
@@ -431,6 +503,36 @@ let kakaoAddr = async (e)=>{
 	//document.forms[0].submit();
 	document.querySelector("#frm_select").submit();
 };
+
+let insertLikey = async (carIdx) => {
+	let url = "/likey/insert?car_idx="+carIdx;
+	
+	let response = await fetch(url,{
+		"mehtod":"get"
+	});
+	
+	console.dir(response);
+	
+	if(response.ok){
+		//화면 다시 로딩
+		window.location.reload();
+	}
+}
+
+let deleteLikey = async (carIdx) => {
+	let url = "/likey/delete?car_idx="+carIdx;
+	
+	let response = await fetch(url,{
+		"mehtod":"get"
+	});
+	
+	console.dir(response);
+	
+	if(response.ok){
+		//화면 다시 로딩
+		window.location.reload();
+	}
+}
 
 /*
 var ps = new kakao.maps.services.Places(); 

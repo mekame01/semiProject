@@ -19,13 +19,16 @@ public class PaymentSendDao {
 		PreparedStatement pstm = null;
 		try {
 			String sql = "insert into tb_payment_send "
-					+ "(pay_send_idx, res_idx, pay_send_tid, pay_send_date, payment_yn) "
-					+ "values(sc_pay_send_idx.nextval ?, ?, ?, ?)";
+					+ "(pay_send_idx, res_idx, pay_send_tid, pay_method, pay_fee, pay_user_phone) "
+					+ "values(sc_pay_send_idx.nextval, ?, ?, ?, ?, ?)";
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, paymentSend.getResIdx());
 			pstm.setString(2, paymentSend.getPaySendTid());
-			pstm.setDate(3, paymentSend.getPaySendDate());
-			pstm.setString(4, paymentSend.getPaymentYn());
+			pstm.setString(3, paymentSend.getPayMethod());
+			pstm.setInt(4, paymentSend.getPayFee());
+			pstm.setString(5, paymentSend.getPayUserPhone());
+			
+			res = pstm.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,7 +44,7 @@ public class PaymentSendDao {
 		ResultSet rset = null;
 		try {
 			String sql = "select "
-					+ "(res_idx, car_idx, user_id, res_date, res_pickup_date, res_return_date) "
+					+ "(res_idx, car_idx, user_id, res_parking, res_date, res_pickup_date, res_return_date) "
 					+ "from tb_reservation where resIdx = ?";
 			res = new ArrayList<Reservation>();
 			pstm = conn.prepareStatement(sql);
@@ -53,9 +56,10 @@ public class PaymentSendDao {
 				reservation.setResIdx(rset.getInt(1));
 				reservation.setCarIdx(rset.getInt(2));
 				reservation.setUserId(rset.getString(3));
-				reservation.setResDate(rset.getDate(4));
-				reservation.setResPickupDate(rset.getDate(5));
-				reservation.setResReturnDate(rset.getDate(6));
+				reservation.setResParking(rset.getString(4));
+				reservation.setResDate(rset.getDate(5));
+				reservation.setResPickupDate(rset.getDate(6));
+				reservation.setResReturnDate(rset.getDate(7));
 				res.add(reservation);
 			}
 		} catch (SQLException e) {

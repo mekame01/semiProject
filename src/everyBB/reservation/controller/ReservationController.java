@@ -48,7 +48,19 @@ public class ReservationController extends HttpServlet {
 		Reservation reservation = new Reservation();
 		int carIdx = Integer.parseInt(request.getParameter("car_idx"));
 		System.out.println("carIdx : " + carIdx);
-		String userId = ((Member)request.getSession().getAttribute("user")).getUserId();
+		Member user = (Member)request.getSession().getAttribute("user");
+		
+		//면허정보가 없으면 에러를 발생
+		if (user.getUserLicense() == null) {
+			throw new ToAlertException(ErrorCode.RSRV02);
+		}
+		
+		//전화번호가 없으면 에러를 발생
+		if (user.getUserPhone() == null) {
+			throw new ToAlertException(ErrorCode.RSRV03);
+		}
+		
+		String userId = user.getUserId();
 		String resParking = request.getParameter("parking");
 		Date resDate = new Date(new java.util.Date().getTime());
 		

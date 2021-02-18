@@ -3,6 +3,7 @@ package everyBB.likey.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import everyBB.common.code.ErrorCode;
 import everyBB.common.exception.DataAccessException;
 import everyBB.common.exception.ToAlertException;
 import everyBB.common.template.JDBCTemplate;
@@ -16,11 +17,35 @@ public class LikeyService {
 		
 		public ArrayList<Likey> likeyListById(String userId){
 			Connection conn = jdt.getConnection();
-			ArrayList<Likey> likeyList = likeyDao.LikeyListById(conn, userId);
-			jdt.close(conn);
+			
+			ArrayList<Likey> likeyList  = null;
+			
+			try {
+				likeyList = likeyDao.LikeyListById(conn, userId);
+			} catch (Exception e) {
+				throw new DataAccessException(ErrorCode.SM01, e);
+			}finally {
+				jdt.close(conn);
+			}
+			
 			return likeyList;
 		}
 	
+		public Likey selectLikeyById(String userId, int carIdx){
+			Connection conn = jdt.getConnection();
+			
+			Likey likey = null;
+			
+			try {
+				likey = likeyDao.selectLikeyById(conn, userId, carIdx);
+			} catch (Exception e) {
+				throw new DataAccessException(ErrorCode.SM01, e);
+			}finally {
+				jdt.close(conn);
+			}
+			
+			return likey;
+		}
 	
 		public int insertLikey(Likey likey) {
 			Connection conn = jdt.getConnection();
@@ -40,25 +65,18 @@ public class LikeyService {
 			
 		}
 	
-	
-		public int deleteLikey(String userId) {
+		public int deleteLikey(Likey likey) {
 			Connection conn = jdt.getConnection();
 			int res = 0;
 			try {
-				res = likeyDao.deleteLikey(conn, userId);
+				res = likeyDao.deleteLikey(conn, likey);
 				 jdt.commit(conn);
 			} catch (DataAccessException e) {
 				jdt.rollback(conn);
 			} finally {
 				jdt.close(conn);
 			}
-			
 			return res;
 		}
-	
-	
-	
-	
-	
 	
 }

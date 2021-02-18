@@ -1,3 +1,6 @@
+
+
+<%@page import="everyBB.common.code.Code"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ include file="/WEB-INF/view/include/head.jsp" %>    
@@ -35,7 +38,7 @@
 
               <div class="intro">
                 <h1><strong>차량등록</strong></h1>
-                <div class="custom-breadcrumbs"><a href="/index.jsp">Home</a> <span class="mx-2">/</span> <strong>About</strong></div>
+                <div class="custom-breadcrumbs"><a href="/index.jsp">Home</a> <span class="mx-2">/</span> <strong>Modify</strong></div>
               </div>
 
             </div>
@@ -49,38 +52,50 @@
       <div class="container">
         <div class="row justify-content-center text-center">
         <div class="col-7 text-center mb-5">
-          <h2>Contact Us Or Use This Form To Rent A Car</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo assumenda, dolorum necessitatibus eius earum voluptates sed!</p>
+          <h2>차량 정보를 수정해 주세요!</h2>
+          <p>차량등록 후 게스트의 예약을 기다려주세요.</p>
         </div>
       </div>
         <div class="row justify-content-center text-center">
           <div class="col-lg-8 mb-5"  >
-            <form action="${fffffff}/register/rg_list" method="post" id="register">
-                 
-               <div class="form-group row" >
+            <form action="./rg_modifyImpl" method="post" enctype="multipart/form-data" id="register">
+                
+             <div class="form-group row" >
                 <div class="col-md-12">
-              		<input type="text" id="address" class="form-control" placeholder="주소" required readonly >
+                <input type="hidden" class="form-control" name="carIdx" value="${data.register.carIdx}" />
+              		<input type="text" id="address" name="carParking" class="form-control"  required readonly value="${data.register.carParking}" >
               		
               		<div class="d-flex justify-content-end">
+              		
 					<input type="button"  class="btn btn-info" onclick="execDaumPostcode()" value="주소 검색"><br>
 					</div>
 					<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 					
               </div>
               </div> 
+             
+     		<div class="form-group row">
+                 <div class="col-md-6 mb-4 mb-lg-0">
+                  <input type="hidden" id="search_lat"class="form-control" name="carParkingLat"  required readonly value="${data.register.carParkingLat}">
+                </div>
+                <div class="col-md-6">
+                  <input type="hidden" id="search_lng"class="form-control" name="carParkingLng"  required readonly value="${data.register.carParkingLng}">
+                </div>
+              </div>
+             
                      
               <div class="form-group row">
                  <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="차종" required >
+                  <input type="text" class="form-control" name="carModel" required value="${data.register.carModel}">
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" placeholder="차 번호" required >
+                  <input type="text" class="form-control" name="carNumber" required value="${data.register.carNumber}">
                 </div>
               </div>
               
                <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" list="depListFt" placeholder="연료" required >
+                  <input type="text" class="form-control" list="depListFt" name="carFuelType" required value="${data.register.carFuelType}">
                		<datalist id="depListFt">
        					 <option value="휘발유"></option>
        					 <option value="경유"></option>
@@ -90,23 +105,23 @@
 				    </datalist>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" placeholder=" km/ℓ 연비" required >
+                  <input type="text" id="onlyNumber" class="form-control" name="carFuelEffi" required value="${data.register.carFuelEffi}">
                 </div>
               </div>
               
                <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" list="depListNv" placeholder="내비게이션 유무" required >
+                  <input type="text" class="form-control" list="depListNv" name="carNavi" required value="${data.register.carNavi}">
                   	<datalist id="depListNv">
-       					 <option value="내비게이션 있음"></option>
-       					 <option value="내비게이션 없음"></option>
+       					 <option value="Y"></option>
+       					 <option value="N"></option>
 				    </datalist>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" list="depListBc" placeholder="후방카메라 유무" required >
+                  <input type="text" class="form-control" list="depListBc" name="carBackCam" required value="${data.register.carBackCam}">
                		 <datalist id="depListBc">
-       					 <option value="후방카메라 있음"></option>
-       					 <option value="후방카메라 없음"></option>
+       					 <option value="Y"></option>
+       					 <option value="N"></option>
 				    </datalist>
                 
                 </div>
@@ -114,46 +129,35 @@
               
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="number" class="form-control" placeholder="좌석 개수" required >
+                  <input type="number" class="form-control" name="carSeatNum" required value="${data.register.carSeatNum}">
                 </div>
                 <div class="col-md-6">
-                  <input type="number" class="form-control" placeholder="문 개수" required >
+                  <input type="number" class="form-control" name="carDoorNum" required value="${data.register.carDoorNum}">
                 </div>
               </div>
               
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" list="depListTm" placeholder="자동/수동" required >
+                  <input type="text" class="form-control" name="carTransmission"list="depListTm"  required value="${data.register.carTransmission}">
                   	<datalist id="depListTm">
        					 <option value="자동"></option>
        					 <option value="수동"></option>
 				    </datalist>
                 </div>
                  <div class="col-md-6">
-                 <input type="file" id="image" class="form-control" accept="image/*" onchange="setThumbnail(event);" required /> 
+              <input type="text" id="price" class="form-control" name="carFee" required value="${data.register.carFee}">
               </div>
-              
-              </div>
-                
-              
-               <div class="form-group row">
-                <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="가격" required >
-                </div>
-               
-                
-              </div>
-              
+             </div>
               <div class="form-group row">
                 <div class="col-md-12">
-                  <textarea name="" id="" class="form-control" placeholder="참고사항" cols="30" rows="10"></textarea>
+                  <textarea  class="form-control"  name="carNote" cols="30" rows="10"  >${data.register.carNote}</textarea>
                 </div>
               </div>
               
                
               <div class="form-group row">
                 <div class="col-md-6 mr-auto">
-                  <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="등록하기">
+                  <button class="btn btn-block btn-primary text-white py-3 px-5" >수정하기</button>
                 </div>
               </div>
               
@@ -212,7 +216,10 @@
                         // 해당 주소에 대한 좌표를 받아서  //***위도경도!!!!!!!!!!
                         var coords = new daum.maps.LatLng(result.y, result.x);
                         console.log(coords);
-                    
+                    	
+                        document.getElementById('search_lat').value=result.y;
+                        document.getElementById('search_lng').value=result.x;
+                        
                         // 지도를 보여준다.
                         mapContainer.style.display = "block";
                         map.relayout();
@@ -229,23 +236,33 @@
     }
 </script>
 
-<!-- 사진업로드 일단 대충한거....... -->
-<script> 
-function setThumbnail(event) { 
-	var reader = new FileReader();
-	reader.onload = function(event) {
-		var img = document.createElement("img");
-		img.setAttribute("src", event.target.result);
-	//document.querySelector("div#image_container").appendChild(img);};reader.readAsDataURL(event.target.files[0]);}
-</script> 
 
-
-<!-- 등혹하기 submit -->
+<!--연비 : 오직 숫자만 -->
 <script>
-  
+$("#onlyNumber").keyup(function(event){
+    var inputVal = $(this).val();
+    $(this).val(inputVal.replace(/[^0-9]/gi,''));
+});
+</script>
 
 
- </script>
+<!-- 가격 :3자리 단위마다 콤마 생성-->
+<!-- <script>
+function addCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+
+$("#price").on("keyup", function() {
+    $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));
+});
+
+</script> -->
+
+
+
+
+
 
 
 

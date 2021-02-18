@@ -1,11 +1,14 @@
 package everyBB.paymentSend.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 import everyBB.common.exception.DataAccessException;
 import everyBB.common.template.JDBCTemplate;
 import everyBB.paymentSend.model.dao.PaymentSendDao;
 import everyBB.paymentSend.model.vo.PaymentSend;
+import everyBB.reservation.model.vo.Reservation;
 
 public class PaymentSendService {
 	JDBCTemplate jdt = JDBCTemplate.getInstance();
@@ -24,4 +27,12 @@ public class PaymentSendService {
 		}
 		return res;
 	}
+	
+	public List<Reservation> selectPayWithReserv(int resIdx) {
+		Connection conn = jdt.getConnection();
+		List<Reservation> resList = paymentSendDao.selectPayWithReserv(conn, resIdx);
+		System.out.println(resList);
+		return resList;
+	}
+	
 }

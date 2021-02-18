@@ -10,7 +10,6 @@ import everyBB.common.code.ErrorCode;
 import everyBB.common.exception.DataAccessException;
 import everyBB.common.template.JDBCTemplate;
 import everyBB.likey.model.vo.Likey;
-import everyBB.member.model.vo.Member;
 
 public class LikeyDao {
 
@@ -52,14 +51,33 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		return likeyList;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	public Likey selectLikeyById(Connection conn, String userId, int carIdx) {
+		Likey likey = new Likey();
+		
+		PreparedStatement pstm = null;
+		ResultSet rset = null;
+		
+		try {
+			
+			String query = "select * from tb_likey where user_id = ? and car_idx = ?";
+			pstm = conn.prepareStatement(query);
+			pstm.setString(1, userId);
+			pstm.setInt(2, carIdx);
+			rset = pstm.executeQuery();
+			
+			if(rset.next()) {
+				likey.setUserId(rset.getString("user_id"));
+				likey.setLikeyIdx(rset.getInt("likey_idx"));
+				likey.setCarIdx(rset.getInt("car_idx"));
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException(ErrorCode.SM01, e);
+		}finally {
+			jdt.close(rset, pstm);
+		}
+		return likey;
+	}
 	
 	public int insertLikey(Connection conn, Likey likey){
 		
@@ -68,7 +86,7 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		
 		try {
 			String query = "insert into tb_likey(likey_idx, user_id, car_idx) "
-					+"values(sc_likey_idx.nextVal,?,?)";
+					+"values(sc_likey_idx.nextVal, ?, ?)";
 			pstm = conn.prepareStatement(query);
 			pstm.setString(1, likey.getUserId()); //로그인하고 있는 사용자 id
 			pstm.setInt(2, likey.getCarIdx()); //클릭한 차 idx
@@ -83,21 +101,18 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		return res;
 	}
 	
-	
-	public int deleteLikey(Connection conn, String userId) {
+	public int deleteLikey(Connection conn, Likey likey) {
 		int res = 0;
 		PreparedStatement pstm = null;
 		
 		try {
-			String query = "delete from tb_likey where user_id = ?";
+			String query = "delete from tb_likey where user_id = ? and car_idx = ?";
 			pstm = conn.prepareStatement(query);
-			pstm.setString(1, userId);
+			pstm.setString(1, likey.getUserId());
+			pstm.setInt(2, likey.getCarIdx());
 			
 			res = pstm.executeUpdate();
-			//jdt.commit(conn);
 		} catch (SQLException e) {
-			//jdt.rollback(conn);
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw new DataAccessException(ErrorCode.DM01, e);
 		}finally {
@@ -105,7 +120,5 @@ JDBCTemplate jdt = JDBCTemplate.getInstance();
 		}
 		return res;
 	}
-	
-	
 	
 }
